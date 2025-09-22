@@ -1,10 +1,10 @@
 ---
 theme: dashboard
-title: Example dashboard
+title: Draft Dashboard
 toc: false
 ---
 
-# Rocket launches 🚀
+# Laws against Atrocity Crimes Criminalization: At a Glance
 
 <!-- Load and transform the data -->
 

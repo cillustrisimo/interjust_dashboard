@@ -1,24 +1,8 @@
 # Interjust Dashboard Draft
 
-This is an [Observable Framework](https://observablehq.com/framework/) app. To install the required dependencies, run:
-
-```
-npm install
-```
-
-Then, to start the local preview server, run:
-
-```
-npm run dev
-```
-
-Then visit <http://localhost:3000> to preview your app.
-
-For more, see <https://observablehq.com/framework/getting-started>.
+This is the early draft of a project for the Responsibility Lab, building data visualization tools for InterJust. We are utilizing the Observable Framework
 
 ## Project structure
-
-A typical Framework project looks like this:
 
 ```ini
 .
@@ -37,6 +21,7 @@ A typical Framework project looks like this:
 └─ README.md
 ```
 
+## Reference from the framework devs
 **`src`** - This is the “source root” — where your source files live. Pages go here. Each page is a Markdown file. Observable Framework uses [file-based routing](https://observablehq.com/framework/project-structure#routing), which means that the name of the file controls where the page is served. You can create as many pages as you like. Use folders to organize your pages.
 
 **`src/index.md`** - This is the home page for your app. You can have as many additional pages as you’d like, but you should always have a home page, too.
