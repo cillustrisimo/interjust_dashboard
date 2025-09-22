@@ -140,6 +140,7 @@ const color = Plot.scale({
     marginTop: 70,
     marginBottom: 20,
     title: "UN Member States which have criminalized all four atrocity crimes",
+    subtitle: "41 have criminalized all, 152 have not",
     width,
     marks:[
     Plot.waffleY([42, 151], {x: ["Criminalized", "Not Criminalized"],
