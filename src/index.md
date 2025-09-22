@@ -1,69 +1,203 @@
 ---
+theme: dashboard
+title: Draft Dashboard
 toc: false
 ---
 
 <div class="hero">
   <h1>Interjust Dashboard Draft</h1>
-  <h2>Welcome to your new app! Edit&nbsp;<code style="font-size: 90%;">src/index.md</code> to change this page.</h2>
-  <a href="https://observablehq.com/framework/getting-started">Get started<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a>
 </div>
 
+<!-- LOAD RELEVANT DATA -->
+```js
+const launches = FileAttachment("data/launches.csv").csv({typed: true});
+```
+<script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
+
+<!-- TOY UJ COUNT DATA -->
+```js
+const rawMap = new Map([ 
+  [1945,10],
+  [1946,22],
+  [1947,21],
+  [1948,21],
+  [1949,26],
+  [1950,22],
+  [1951,28],
+  [1952,52],
+  [1953,37],
+  [1954,42],
+  [1955,46],
+  [1956,94],
+  [1957,47],
+  [1958,42],
+  [1959,47],
+  [1960,40],
+  [1961,78],
+  [1962,92],
+  [1963,101],
+  [1964,116],
+  [1965,85],
+  [1966,58],
+  [1967,81],
+  [1968,100],
+  [1969,91],
+  [1970,99],
+  [1971,71],
+  [1972,76],
+  [1973,57],
+  [1974,162],
+  [1975,68],
+  [1976,55],
+  [1977,69],
+  [1978,104],
+  [1979,146],
+  [1980,66],
+  [1981,44],
+  [1982,56],
+  [1983,121],
+  [1984,96],
+  [1985,79],
+  [1986,131],
+  [1987,156],
+  [1988,252],
+  [1989,207],
+  [1990,546],
+  [1991,218],
+  [1992,436],
+  [1993,141],
+  [1994,232],
+  [1995,269],
+  [1996,414],
+  [1997,539],
+  [1998,426],
+  [1999,798],
+  [2000,1172],
+  [2001,1087],
+  [2002,1273],
+  [2003,2619],
+  [2004,2549],
+  [2005,4126],
+  [2006,3922],
+  [2007,2525],
+  [2008,3305]
+]);
+
+const uj_counts = Array.from(rawMap, ([key, value]) => ({ Years: key, y: value }));
+```
+
+<!-- A shared color scale for consistency, sorted by the number of launches -->
+
+```js
+const color = Plot.scale({
+  color: {
+    type: "categorical",
+    domain: d3.groupSort(launches, (D) => -D.length, (d) => d.state).filter((d) => d !== "Other"),
+    unknown: "var(--theme-foreground-muted)"
+  }
+});
+```
+
+<!-- Cards with big numbers -->
+<p style="font-family: Arial, Helvetica, sans-serif;"> Of 193 UN Member States </p>
+<div class="grid grid-cols-4">
+  <div class="card">
+    <span class="big">142</span>
+    <h2>have criminalized war crimes</h2>
+  </div>
+  <div class="card">
+    <span class="big">134</span>
+    <h2>have criminalized genocide</h2>
+  </div>
+  <div class="card">
+    <span class="big">99</span>
+    <h2>have criminalized crimes against humanity</h2>
+  </div>
+  <div class="card">
+    <span class="big">51</span>
+    <h2>have criminalized war crimes</h2>
+  </div>
+</div>
+
+<!-- Dual Charts (NEED TO NORMALIZE COUNT) -->
 <div class="grid grid-cols-2" style="grid-auto-rows: 504px;">
   <div class="card">${
     resize((width) => Plot.plot({
-      title: "Your awesomeness over time 🚀",
-      subtitle: "Up and to the right!",
+      title: "Mentions of universal jurisdiction over time",
+      subtitle: "Charting growth of the legal principle",
       width,
-      y: {grid: true, label: "Awesomeness"},
+      y: {grid: true, label: "Non-Normalized Count"},
       marks: [
-        Plot.ruleY([0]),
-        Plot.lineY(aapl, {x: "Date", y: "Close", tip: true})
+        Plot.line(uj_counts, { x: "Years", y: "y" })
       ]
     }))
   }</div>
-  <div class="card">${
+
+   <div class="card">${
     resize((width) => Plot.plot({
-      title: "How big are penguins, anyway? 🐧",
-      width,
-      grid: true,
-      x: {label: "Body mass (g)"},
-      y: {label: "Flipper length (mm)"},
-      color: {legend: true},
-      marks: [
-        Plot.linearRegressionY(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species"}),
-        Plot.dot(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species", tip: true})
-      ]
-    }))
-  }</div>
+    grid: true,
+    height: 400,
+    marginTop: 70,
+    marginBottom: 20,
+    title: "UN Member States which have criminalized all four atrocity crimes",
+    width,
+    marks:[
+    Plot.waffleY([42, 151], {x: ["Criminalized", "Not Criminalized"],
+    fill: ["#2563eb", "#dc2626"] })
+    ]
+  }))
+  }
+</div>
 </div>
 
----
+<!-- Plot of launch history -->
 
-## Next steps
+```js
+function launchTimeline(data, {width} = {}) {
+  return Plot.plot({
+    title: "PLACEHOLDER",
+    width,
+    height: 300,
+    y: {grid: true, label: "PLACEHOLDER"},
+    color: {...color, legend: true},
+    marks: [
+      Plot.rectY(data, Plot.binX({y: "count"}, {x: "date", fill: "state", interval: "year", tip: true})),
+      Plot.ruleY([0])
+    ]
+  });
+}
+```
 
-Here are some ideas of things you could try…
+<div class="grid grid-cols-1">
+  <div class="card">
+    ${resize((width) => launchTimeline(launches, {width}))}
+  </div>
+</div>
 
-<div class="grid grid-cols-4">
+<!-- Plot of launch vehicles -->
+
+```js
+function vehicleChart(data, {width}) {
+  return Plot.plot({
+    title: "PLACEHOLDER",
+    width,
+    height: 300,
+    marginTop: 0,
+    marginLeft: 50,
+    x: {grid: true, label: "PLACEHOLDER"},
+    y: {label: null},
+    color: {...color, legend: true},
+    marks: [
+      Plot.rectX(data, Plot.groupY({x: "count"}, {y: "family", fill: "state", tip: true, sort: {y: "-x"}})),
+      Plot.ruleX([0])
+    ]
+  });
+}
+```
+
+<div class="grid grid-cols-1">
   <div class="card">
-    Chart your own data using <a href="https://observablehq.com/framework/lib/plot"><code>Plot</code></a> and <a href="https://observablehq.com/framework/files"><code>FileAttachment</code></a>. Make it responsive using <a href="https://observablehq.com/framework/javascript#resize(render)"><code>resize</code></a>.
-  </div>
-  <div class="card">
-    Create a <a href="https://observablehq.com/framework/project-structure">new page</a> by adding a Markdown file (<code>whatever.md</code>) to the <code>src</code> folder.
-  </div>
-  <div class="card">
-    Add a drop-down menu using <a href="https://observablehq.com/framework/inputs/select"><code>Inputs.select</code></a> and use it to filter the data shown in a chart.
-  </div>
-  <div class="card">
-    Write a <a href="https://observablehq.com/framework/loaders">data loader</a> that queries a local database or API, generating a data snapshot on build.
-  </div>
-  <div class="card">
-    Import a <a href="https://observablehq.com/framework/imports">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb">DuckDB</a>.
-  </div>
-  <div class="card">
-    Ask for help, or share your work or ideas, on our <a href="https://github.com/observablehq/framework/discussions">GitHub discussions</a>.
-  </div>
-  <div class="card">
-    Visit <a href="https://github.com/observablehq/framework">Framework on GitHub</a> and give us a star. Or file an issue if you’ve found a bug!
+    ${resize((width) => vehicleChart(launches, {width}))}
   </div>
 </div>
 
@@ -72,11 +206,8 @@ Here are some ideas of things you could try…
 .hero {
   display: flex;
   flex-direction: column;
-  align-items: center;
   font-family: var(--sans-serif);
-  margin: 4rem 0 8rem;
   text-wrap: balance;
-  text-align: center;
 }
 
 .hero h1 {
