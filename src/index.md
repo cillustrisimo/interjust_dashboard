@@ -99,7 +99,8 @@ const color = Plot.scale({
 ```
 
 <!-- Cards with big numbers -->
-<p style="font-family: Arial, Helvetica, sans-serif;"> Of 193 UN Member States </p>
+<!-- This is the plot to sho key findings -->
+<h2><p style="font-family: Arial, Helvetica, sans-serif;"> Of 193 UN Member States </p></h2>
 <div class="grid grid-cols-4">
   <div class="card">
     <span class="big">142</span>
@@ -120,6 +121,7 @@ const color = Plot.scale({
 </div>
 
 <!-- Dual Charts (NEED TO NORMALIZE COUNT) -->
+<!-- One plot is word count timeline, other is waffle chart -->
 <div class="grid grid-cols-2" style="grid-auto-rows: 504px;">
   <div class="card">${
     resize((width) => Plot.plot({
@@ -151,7 +153,7 @@ const color = Plot.scale({
 </div>
 </div>
 
-<!-- Plot of launch history -->
+<!-- PLACE HOLDER PLOT -->
 
 ```js
 function launchTimeline(data, {width} = {}) {
