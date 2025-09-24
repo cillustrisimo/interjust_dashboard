@@ -3,10 +3,19 @@ theme: dashboard
 title: Draft Dashboard
 toc: false
 ---
+<!-- Interjust Logo -->
+<!-- <div class="logo-container">
+    <img src="/images/InterJust-logo.png" 
+          alt="Interjust Logo" 
+          class="logo">
+</div> -->
 
+<!-- Landing Page Title -->
 <div class="hero">
   <h1>Interjust Dashboard Draft</h1>
 </div>
+
+
 
 <!-- LOAD RELEVANT DATA -->
 ```js
@@ -153,8 +162,9 @@ const color = Plot.scale({
 </div>
 </div>
 
-<!-- PLACE HOLDER PLOT -->
 
+
+<!-- PLACE HOLDER PLOT -->
 ```js
 function launchTimeline(data, {width} = {}) {
   return Plot.plot({
@@ -220,7 +230,7 @@ function vehicleChart(data, {width}) {
   font-size: 14vw;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(30deg, var(--theme-foreground-focus), currentColor);
+  background: linear-gradient(30deg, #1c53ae, #1c53ae);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -234,6 +244,49 @@ function vehicleChart(data, {width}) {
   font-weight: 500;
   line-height: 1.5;
   color: var(--theme-foreground-muted);
+}
+
+/* logo container */
+.logo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 10px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Logo image styling */
+.logo {
+    display: block;
+    max-width: 150px;
+    height: auto;
+    width: auto;
+}
+
+/* Responsive adjustments for logo */
+@media (max-width: 768px) {
+    .logo-container {
+        padding: 10px;
+    }
+    
+    .logo {
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-container {
+        padding: 8px;
+    }
+    
+    .logo {
+        max-width: 100px;
+    }
 }
 
 @media (min-width: 640px) {
