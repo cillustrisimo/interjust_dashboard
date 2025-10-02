@@ -201,37 +201,6 @@ function implementationChart(data, region, width) {
 </div>
 </div>
 
-
-
-
-
-<!-- Plot of launch vehicles -->
-
-```js
-function vehicleChart(data, {width}) {
-  return Plot.plot({
-    title: "PLACEHOLDER",
-    width,
-    height: 300,
-    marginTop: 0,
-    marginLeft: 50,
-    x: {grid: true, label: "PLACEHOLDER"},
-    y: {label: null},
-    color: {...color, legend: true},
-    marks: [
-      Plot.rectX(data, Plot.groupY({x: "count"}, {y: "family", fill: "state", tip: true, sort: {y: "-x"}})),
-      Plot.ruleX([0])
-    ]
-  });
-}
-```
-
-<div class="grid grid-cols-1">
-  <div class="card">
-    ${resize((width) => vehicleChart(launches, {width}))}
-  </div>
-</div>
-
 <style>
 
 .hero {
