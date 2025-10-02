@@ -19,7 +19,6 @@ toc: false
 
 <!-- LOAD RELEVANT DATA -->
 ```js
-const launches = FileAttachment("data/launches.csv").csv({typed: true});
 const uj_counts_py = FileAttachment("data/uj_counts.csv").csv({typed: true});
 ```
 
@@ -29,20 +28,6 @@ const uj_counts = uj_counts_py.map(d => ({
   year: +d.year,       // The '+' converts the string '1945' to the number 1945
   count: +d.count      // The '+' converts the count string to a floating-point number
 }));
-```
-
-<!-- A shared color scale for consistency, sorted by the number of launches -->
-
-```js
-const color = Plot.scale({
-  color: {
-    type: "categorical",
-    domain: d3.groupSort(launches, (D) => -D.length, (d) => d.state).filter((d) => d !== "Other"),
-    unknown: "var(--theme-foreground-muted)"
-  }
-});
-
-console.log(uj_counts);
 ```
 
 <!-- Cards with big numbers -->
