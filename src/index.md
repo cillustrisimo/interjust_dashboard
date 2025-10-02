@@ -201,6 +201,148 @@ function implementationChart(data, region, width) {
 </div>
 </div>
 
+
+<!-- MARCO Chloropleth Init -->
+
+<!-- Calling in the relevant data -->
+```js
+const rawDataChloro = FileAttachment("data/Data_Interjust@2.csv").csv({typed: true});
+const worldISO = d3.json("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson");
+```
+
+<!-- Defining the chart -->
+```js
+function chloroplethChart(rawData, worldISO, width) {
+
+  // 1. HELPER FUNCTIONS AND DATA PROCESSING
+  // ==========================================
+
+  // Helper to convert varied string inputs ("Yes", "1", "true") to a 1 or 0.
+  function to01(v) {
+    const s = String(v ?? "").trim().toLowerCase();
+    return s === "yes" || s === "true" || s === "1" || s === "y" || s === "sí" || s === "si" ? 1 : 0;
+  }
+
+  // Define the specific columns in the CSV that correspond to each crime.
+  const crimeColumns = {
+    genocide: "Genocide - Does the country criminalize genocide?",
+    war: "War Crimes - Does the country criminalize war crimes?",
+    cah: "Crimes Against Humanity - Does the country criminalize crimes against humanity?",
+    aggression: "Aggression - Does the country criminalize the international crime of aggression or the crimes against peace?"
+  };
+
+  // Process the raw data to count how many of the four crimes are criminalized per country.
+  const crimeRows = rawData.map(d => {
+    const iso3 = String(d["ISO 3166-1 alpha-3"] || "").trim();
+    const genocide   = to01(d[crimeColumns.genocide]);
+    const war        = to01(d[crimeColumns.war]);
+    const cah        = to01(d[crimeColumns.cah]);
+    const aggression = to01(d[crimeColumns.aggression]);
+    const criminalized_count = genocide + war + cah + aggression;
+    return { iso3, criminalized_count, Country: d.Country };
+  });
+  
+  // Create a Map for quick lookup of a country's crime count by its ISO code.
+  const countByISO = new Map(crimeRows.map(d => [d.iso3, d.criminalized_count]));
+
+  // Dark Mode Color scale: A sequential scale from deep blue to bright yellow.
+  const colorScale = d3.scaleLinear()
+    .domain([0, 4])
+    .range(["#081d58", "#ffffd9"]);
+
+  // Function to generate a discrete color legend, styled for dark mode.
+  function DiscreteLegend({ scale, title = "", steps = [0,1,2,3,4], sw = 22, sh = 12, pad = 10 }) {
+    const g = d3.create("svg:g");
+    const textColor = "#f3f4f6"; // Light gray for text
+    const bgColor = "#1f2937";   // Dark background for legend
+    const brdColor = "#4b5563"; // Border color
+
+    if (title) {
+      g.append("text").attr("y", 0).attr("dy", "0.8em").attr("font-size", 13).attr("font-weight", 600).attr("fill", textColor).text(title);
+    }
+    const y0 = title ? 18 : 0;
+
+    const row = g.append("g").attr("transform", `translate(0,${y0})`);
+    steps.forEach((s, i) => {
+      const x = i * (sw + 32);
+      row.append("rect").attr("x", x).attr("y", 0).attr("width", sw).attr("height", sh).attr("rx", 2).attr("fill", scale(s) ?? "#374151").attr("stroke", brdColor);
+      row.append("text").attr("x", x + sw + 6).attr("y", sh / 2).attr("dominant-baseline", "middle").attr("font-size", 12).attr("fill", textColor).text(String(s));
+    });
+
+    const bbox = g.node().getBBox();
+    g.insert("rect", ":first-child").attr("x", bbox.x - pad).attr("y", bbox.y - pad).attr("width", bbox.width + pad * 2).attr("height", bbox.height + pad * 2).attr("fill", bgColor).attr("stroke", brdColor).attr("rx", 6).attr("opacity", 0.9);
+
+    return g.node();
+  }
+
+  // 2. SVG MAP CREATION
+  // ==========================================
+
+  const height = width * 0.6; // Maintain aspect ratio
+  const margin = {top: 10, right: 10, bottom: 10, left: 10};
+
+  const svg = d3.create("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "width: 100%; height: auto; font: 12px system-ui, sans-serif;");
+
+  const projection = d3.geoEqualEarth()
+    .fitExtent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]], {type: "Sphere"});
+
+  const path = d3.geoPath(projection);
+  
+  // Set sphere (background) color to a dark gray for a seamless look.
+  svg.append("path").attr("d", path({type: "Sphere"})).attr("fill", "#111827");
+  
+  // Graticule lines styled for dark mode.
+  const graticule = d3.geoGraticule10();
+  svg.insert("path", ":first-child").attr("d", path(graticule)).attr("fill", "none").attr("stroke", "#4b5563").attr("stroke-width", 0.5);
+
+  svg.append("g")
+    .selectAll("path")
+    .data(worldISO.features)
+    .join("path")
+      .attr("d", path)
+      .attr("fill", d => {
+        const iso = String(d.properties?.["ISO3166-1-Alpha-3"] || "").trim();
+        const c = countByISO.get(iso);
+        // Use a neutral dark gray for countries with no data.
+        return c == null ? "#374151" : colorScale(c);
+      })
+      // Use a slightly lighter gray for country borders.
+      .attr("stroke", "#6b7280")
+      .attr("stroke-width", 0.5)
+    .append("title")
+      .text(d => {
+        const p = d.properties || {};
+        const name = p.name ?? p.ADMIN ?? p.admin ?? "Unknown";
+        const iso  = String(p["ISO3166-1-Alpha-3"] || "").trim();
+        const c    = countByISO.get(iso);
+        return `${name} (${iso || "—"})\nCrimes criminalized: ${c ?? "No data"}/4`;
+      });
+
+  // Append the dark-mode-ready legend.
+  svg.append("g")
+    .attr("transform", `translate(${margin.left + 12}, ${margin.top + 12})`)
+    .append(() => DiscreteLegend({
+      scale: colorScale,
+      title: "Number of attrocity crimes criminalized",
+      steps: [0,1,2,3,4]
+    }));
+
+  return svg.node();
+}
+```
+
+<div class="grid grid-cols-1">
+  <div class="card">
+  ${resize((width) => chloroplethChart(rawData, worldISO, width))}
+  </div>
+</div>
+
+
+
+
+
 <style>
 
 .hero {
