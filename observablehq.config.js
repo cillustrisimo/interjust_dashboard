@@ -23,8 +23,8 @@ export default {
   root: "src",
 
   interpreters: {
-    ".py": ["/interjust_dashboard/venv/bin/python"] // Full path to your venv Python
-  },
+    ".py": ["venv/bin/python3.13"] // Full path to your venv Python
+  }
 
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.
