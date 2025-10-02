@@ -23,8 +23,8 @@ const TOP_LAUNCH_VEHICLES = new Set([
 
 // “Top” launching states
 const TOP_STATES_MAP = new Map([
-  ["US", "United States"],
-  ["SU", "Soviet Union"],
+  ["US", "UN Member States"],
+  ["SU", "TESTn"],
   ["RU", "Russia"],
   ["CN", "China"]
 ]);
