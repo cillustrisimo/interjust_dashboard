@@ -4,11 +4,11 @@ title: Draft Dashboard
 toc: false
 ---
 <!-- Interjust Logo -->
-<div class="logo-container">
+<!-- <div class="logo-container">
     <img src="interjust_dashboard/images/InterJust-logo.png" 
           alt="Interjust Logo" 
           class="logo">
-</div> 
+</div>  -->
 
 <!-- Landing Page Title -->
 <div class="hero">
