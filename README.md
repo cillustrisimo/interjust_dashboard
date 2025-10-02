@@ -4,6 +4,17 @@ This is the early draft of a project for the Responsibility Lab, building data v
 
 ## Some Preliminaries
 
+### node.js Requirements
+This is an Observable Framework project. To get started:
+
+1. Clone this repo and `cd` into it
+2. Install a modern version of Node.js (if necessary)
+3. Run `npm install` in the terminal
+4. Run `npm run dev` in the terminal
+5. Visit http://localhost:3000 to see the live preview
+
+
+### Python Requirements
 Before running the static site, navigate to the directory via the terminal, then activate the
 Python venv before running the site so as to ensure the data loaders work properly.
 
