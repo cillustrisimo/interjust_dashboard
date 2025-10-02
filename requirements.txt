@@ -1,0 +1,12 @@
+# Requirements file for Observable Framework Python data loaders
+# Core data manipulation libraries
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Optional: Additional useful libraries for data processing
+# Uncomment as needed:
+# matplotlib>=3.7.0
+# seaborn>=0.12.0
+# scipy>=1.10.0
+# requests>=2.31.0
+# openpyxl>=3.1.0  # For Excel file support with pandas
