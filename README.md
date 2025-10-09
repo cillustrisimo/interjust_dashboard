@@ -2,6 +2,12 @@
 
 This is the early draft of a project for the Responsibility Lab, building data visualization tools for InterJust. We are utilizing the Observable Framework
 
+**To see how we intend the visualization to render at the end of our work, launch a terminal in the HTML_Drafts folder and run the following code:**
+```
+python3 -m http.server
+```
+- Then, access server that is launched on webpage (likely in port 8000)
+
 ## Some Preliminaries
 
 ### node.js Requirements
