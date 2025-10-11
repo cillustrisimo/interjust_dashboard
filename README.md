@@ -2,7 +2,7 @@
 
 This is the early draft of a project for the Responsibility Lab, building data visualization tools for InterJust. We are utilizing the Observable Framework
 
-**To see how we intend the visualization to render at the end of our work, you may navigate to [https://cillustrisimo.github.io/interjust_dashboard/](https://username.github.io/repository-name/), or  launch a terminal in the run the following code:**
+**To see how we intend the visualization to render at the end of our work, you may navigate to [https://cillustrisimo.github.io/interjust_dashboard](https://cillustrisimo.github.io/interjust_dashboard), or  launch a terminal in the run the following code:**
 ```
 python3 -m http.server
 ```
