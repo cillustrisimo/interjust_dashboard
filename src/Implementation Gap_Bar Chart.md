@@ -1,3 +1,7 @@
+
+# Interactive Bar Chart Example
+## Implementation Gap
+
 ```js
 const rawData = FileAttachment("data/Data_Interjust@2.csv").csv({typed: true});
 ```
