@@ -30,5 +30,5 @@ normalized_uj_counts['count'] = (normalized_uj_counts['count']/relevant_counts[0
 
 # send per million word frequency to standard out
 normalized_uj_counts.to_csv(sys.stdout)
-normalized_uj_counts.to_csv('normalized_uj_counts', index=False)
+
 

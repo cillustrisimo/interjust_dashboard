@@ -5,10 +5,10 @@ toc: false
 ---
 <!-- Interjust Logo -->
 <!-- <div class="logo-container">
-    <img src="/images/InterJust-logo.png" 
+    <img src="interjust_dashboard/images/InterJust-logo.png" 
           alt="Interjust Logo" 
           class="logo">
-</div> -->
+</div>  -->
 
 <!-- Landing Page Title -->
 <div class="hero">
@@ -19,92 +19,15 @@ toc: false
 
 <!-- LOAD RELEVANT DATA -->
 ```js
-const launches = FileAttachment("data/launches.csv").csv({typed: true});
-// const uj_counts = FileAttachment("src/data/uj_counts.csv").csv({typed: true});
+const uj_counts_py = FileAttachment("data/uj_counts.csv").csv({typed: true});
 ```
 
 <!-- TOY UJ COUNT DATA -->
 ```js
-const rawMap = new Map([ 
-  [1945,0.010794721354486746],
-  [1946,0.018284247792158585],
-  [1947,0.015153321643931131],
-  [1948,0.014131844256328019],
-  [1949,0.015843764878285455],
-  [1950,0.013378724100880568],
-  [1951,0.017462949340615125],
-  [1952,0.032063520221056956],
-  [1953,0.02326363840263997],
-  [1954,0.02526832334798883],
-  [1955,0.026259908223732968],
-  [1956,0.05171962751847784],
-  [1957,0.024072019438059408],
-  [1958,0.02125400305167911],
-  [1959,0.0227687091796163],
-  [1960,0.017079554061946847],
-  [1961,0.030374095278074224],
-  [1962,0.032639220700517224],
-  [1963,0.0341787590845585],
-  [1964,0.03957640970202419],
-  [1965,0.025752710040540697],
-  [1966,0.016729920587852304],
-  [1967,0.022142521355621253],
-  [1968,0.02519683705485237],
-  [1969,0.023083425603767714],
-  [1970,0.024226742636021568],
-  [1971,0.017493817695298133],
-  [1972,0.01820720191789203],
-  [1973,0.014043878365875848],
-  [1974,0.04004461859403032],
-  [1975,0.016567666974669097],
-  [1976,0.012964584696314854],
-  [1977,0.015992295444204406],
-  [1978,0.023821304240695746],
-  [1979,0.03224145610577721],
-  [1980,0.014311704756653762],
-  [1981,0.00950856677262391],
-  [1982,0.01157136946257089],
-  [1983,0.024286615859661746],
-  [1984,0.018081743335010076],
-  [1985,0.014428513790259442],
-  [1986,0.022609803415177394],
-  [1987,0.02627785314601084],
-  [1988,0.04069841753937103],
-  [1989,0.03160624282831638],
-  [1990,0.07717300191811122],
-  [1991,0.03161383387064819],
-  [1992,0.05739252570953508],
-  [1993,0.018819747314946206],
-  [1994,0.02890118129766588],
-  [1995,0.032502609335153275],
-  [1996,0.04734107019348836],
-  [1997,0.06002422278289939],
-  [1998,0.045286830283620925],
-  [1999,0.07982270000337377],
-  [2000,0.10472714071349662],
-  [2001,0.09577619359399236],
-  [2002,0.1016779425878256],
-  [2003,0.19212108234163933],
-  [2004,0.17333601668639423],
-  [2005,0.28602754823087073],
-  [2006,0.2561641387731734],
-  [2007,0.15580535628198067],
-  [2008,0.16963562014570244]
-]);
-
-const uj_counts = Array.from(rawMap, ([key, value]) => ({ Years: key, y: value }));
-```
-
-<!-- A shared color scale for consistency, sorted by the number of launches -->
-
-```js
-const color = Plot.scale({
-  color: {
-    type: "categorical",
-    domain: d3.groupSort(launches, (D) => -D.length, (d) => d.state).filter((d) => d !== "Other"),
-    unknown: "var(--theme-foreground-muted)"
-  }
-});
+const uj_counts = uj_counts_py.map(d => ({
+  year: +d.year,       // The '+' converts the string '1945' to the number 1945
+  count: +d.count      // The '+' converts the count string to a floating-point number
+}));
 ```
 
 <!-- Cards with big numbers -->
@@ -129,7 +52,109 @@ const color = Plot.scale({
   </div>
 </div>
 
-<!-- Dual Charts (NEED TO NORMALIZE COUNT) -->
+
+<!-- MARCO BAR PLOT -->
+```js
+const rawData = FileAttachment("static_data/Data_Interjust@2.csv").csv({typed: true});
+```
+```js
+const regionalData = d3.rollup(rawData,
+  v => ({
+    total: v.length,
+    withLaws: v.filter(d => {
+      const g = d["Jurisdiction GENOCIDE - NO perpetrator presence"] !== "N/A";
+      const w = d["Jurisdiction WAR CRIMES - NO perpetrator presence"] !== "N/A";
+      const c = d["Jurisdiction CRIMES AGAINST HUMANITY - NO perpetrator presence"] !== "N/A";
+      const a = d["Jurisdiction AGGRESSION - NO perpetrator presence"] !== "N/A";
+      return g || w || c || a;
+    }).length,
+    withCases: v.filter(d => d["Jurisprudence - Has the country had a UJ or ETJ case? "] === "Yes").length
+  }),
+  d => d.Region
+);
+```
+```js
+const selectedRegion = view(Inputs.select(
+  ["All Regions", ...regionalData.keys()].sort(),
+  {label: "Filter by region:", value: "All Regions"}
+));
+```
+```js
+function implementationChart(data, region, width) {
+  const filteredData = region === "All Regions" ? data : data.filter(d => d.Region === region);
+  const total = filteredData.length;
+  const withLaws = filteredData.filter(d => {
+    const g = d["Jurisdiction GENOCIDE - NO perpetrator presence"] !== "N/A";
+    const w = d["Jurisdiction WAR CRIMES - NO perpetrator presence"] !== "N/A";
+    const c = d["Jurisdiction CRIMES AGAINST HUMANITY - NO perpetrator presence"] !== "N/A";
+    const a = d["Jurisdiction AGGRESSION - NO perpetrator presence"] !== "N/A";
+    return g || w || c || a;
+  }).length;
+  const withCases = filteredData.filter(d => d["Jurisprudence - Has the country had a UJ or ETJ case? "] === "Yes").length;
+  
+  const svg = d3.create("svg").attr("viewBox", [0, 0, width, 540]).attr("style", "width: 100%; height: auto;");
+  const height = 540;
+  const margin = {top: 80, right: 40, bottom: 80, left: 80};
+  const colors = {total: "#206dc6ff", laws: "#5484d2ff", cases: "#a0e7f3ff"};
+  const plotData = [
+    {category: "Total", value: total, color: colors.total},
+    {category: "Has Laws", value: withLaws, color: colors.laws},
+    {category: "Prosecuted", value: withCases, color: colors.cases}
+  ];
+  
+  const x = d3.scaleBand().domain(plotData.map(d => d.category)).range([margin.left, width - margin.right]).padding(0.3);
+  const y = d3.scaleLinear().domain([0, Math.max(total * 1.1, 220)]).nice().range([height - margin.bottom, margin.top]);
+  
+  svg.append("g").attr("transform", `translate(0,${height - margin.bottom})`).call(d3.axisBottom(x).tickSize(0)).selectAll("text").style("font-size", "16px").style("fill", "white");
+  svg.append("g").attr("transform", `translate(${margin.left},0)`).call(d3.axisLeft(y).ticks(5)).selectAll("text").style("font-size", "14px").style("fill", "white");
+  
+  // Bars with animation
+  svg.selectAll(".bar")
+    .data(plotData)
+    .join("rect")
+    .attr("x", d => x(d.category))
+    .attr("y", height - margin.bottom)
+    .attr("width", x.bandwidth())
+    .attr("height", 0)
+    .attr("fill", d => d.color)
+    .attr("rx", 4)
+    .transition()
+    .duration(800)
+    .delay((d, i) => i * 150)
+    .attr("y", d => y(d.value))
+    .attr("height", d => height - margin.bottom - y(d.value));
+  
+  // Labels with animation
+  svg.selectAll(".label")
+    .data(plotData)
+    .join("text")
+    .attr("x", d => x(d.category) + x.bandwidth() / 2)
+    .attr("y", height - margin.bottom)
+    .attr("text-anchor", "middle")
+    .style("font-size", "20px")
+    .style("font-weight", "bold")
+    .style("fill", d => d.color)
+    .style("opacity", 0)
+    .text(d => d.value)
+    .transition()
+    .duration(800)
+    .delay((d, i) => i * 150 + 400)
+    .attr("y", d => y(d.value) - 10)
+    .style("opacity", 1);
+  
+  svg.append("text").attr("x", margin.left).attr("y", 30).style("font-size", "18px").style("font-weight", "600").style("fill", "white").text(region === "All Regions" ? "Global Justice Implementation Gap" : `${region}: Justice Implementation Gap`);
+  
+  return svg.node();
+}
+```
+
+<div class="grid grid-cols-1">
+  <div class="card">
+    ${resize((width) => implementationChart(rawData, selectedRegion, width))}
+  </div>
+</div>
+
+<!-- Dual Charts -->
 <!-- One plot is word count timeline, other is waffle chart -->
 <div class="grid grid-cols-2" style="grid-auto-rows: 504px;">
   <div class="card">${
@@ -139,7 +164,7 @@ const color = Plot.scale({
       width,
       y: {grid: true, label: "Per Million Words Frequency"},
       marks: [
-        Plot.line(uj_counts, { x: "Years", y: "y" })
+        Plot.line(uj_counts, { x: "year", y: "count" })
       ]
     }))
   }</div>
@@ -163,59 +188,301 @@ const color = Plot.scale({
 </div>
 
 
+<!-- MARCO Chloropleth Init -->
 
-<!-- PLACE HOLDER PLOT -->
+<!-- Calling in the relevant data -->
 ```js
-function launchTimeline(data, {width} = {}) {
-  return Plot.plot({
-    title: "PLACEHOLDER",
-    width,
-    height: 300,
-    y: {grid: true, label: "PLACEHOLDER"},
-    color: {...color, legend: true},
-    marks: [
-      Plot.rectY(data, Plot.binX({y: "count"}, {x: "date", fill: "state", interval: "year", tip: true})),
-      Plot.ruleY([0])
-    ]
+const rawDataChloro = FileAttachment("data/Data_Interjust@2.csv").csv({typed: true});
+const worldISO = d3.json("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson");
+```
+
+<!-- Defining the chart -->
+```js
+function chloroplethChart(rawData, worldISO, width) {
+
+  // 1. HELPER FUNCTIONS AND DATA PROCESSING
+  // ==========================================
+
+  // Helper to convert varied string inputs ("Yes", "1", "true") to a 1 or 0.
+  function to01(v) {
+    const s = String(v ?? "").trim().toLowerCase();
+    return s === "yes" || s === "true" || s === "1" || s === "y" || s === "sí" || s === "si" ? 1 : 0;
+  }
+
+  // Define the specific columns in the CSV that correspond to each crime.
+  const crimeColumns = {
+    genocide: "Genocide - Does the country criminalize genocide?",
+    war: "War Crimes - Does the country criminalize war crimes?",
+    cah: "Crimes Against Humanity - Does the country criminalize crimes against humanity?",
+    aggression: "Aggression - Does the country criminalize the international crime of aggression or the crimes against peace?"
+  };
+
+  // Process the raw data to count how many of the four crimes are criminalized per country.
+  const crimeRows = rawData.map(d => {
+    const iso3 = String(d["ISO 3166-1 alpha-3"] || "").trim();
+    const genocide   = to01(d[crimeColumns.genocide]);
+    const war        = to01(d[crimeColumns.war]);
+    const cah        = to01(d[crimeColumns.cah]);
+    const aggression = to01(d[crimeColumns.aggression]);
+    const criminalized_count = genocide + war + cah + aggression;
+    return { iso3, criminalized_count, Country: d.Country };
   });
+  
+  // Create a Map for quick lookup of a country's crime count by its ISO code.
+  const countByISO = new Map(crimeRows.map(d => [d.iso3, d.criminalized_count]));
+
+  // Dark Mode Color scale: A sequential scale from deep blue to bright yellow.
+  const colorScale = d3.scaleLinear()
+    .domain([0, 4])
+    .range(["#081d58", "#ffffd9"]);
+
+  // Function to generate a discrete color legend, styled for dark mode.
+  function DiscreteLegend({ scale, title = "", steps = [0,1,2,3,4], sw = 22, sh = 12, pad = 10 }) {
+    const g = d3.create("svg:g");
+    const textColor = "#f3f4f6"; // Light gray for text
+    const bgColor = "#1f2937";   // Dark background for legend
+    const brdColor = "#4b5563"; // Border color
+
+    if (title) {
+      g.append("text").attr("y", 0).attr("dy", "0.8em").attr("font-size", 13).attr("font-weight", 600).attr("fill", textColor).text(title);
+    }
+    const y0 = title ? 18 : 0;
+
+    const row = g.append("g").attr("transform", `translate(0,${y0})`);
+    steps.forEach((s, i) => {
+      const x = i * (sw + 32);
+      row.append("rect").attr("x", x).attr("y", 0).attr("width", sw).attr("height", sh).attr("rx", 2).attr("fill", scale(s) ?? "#374151").attr("stroke", brdColor);
+      row.append("text").attr("x", x + sw + 6).attr("y", sh / 2).attr("dominant-baseline", "middle").attr("font-size", 12).attr("fill", textColor).text(String(s));
+    });
+
+    const bbox = g.node().getBBox();
+    g.insert("rect", ":first-child").attr("x", bbox.x - pad).attr("y", bbox.y - pad).attr("width", bbox.width + pad * 2).attr("height", bbox.height + pad * 2).attr("fill", bgColor).attr("stroke", brdColor).attr("rx", 6).attr("opacity", 0.9);
+
+    return g.node();
+  }
+
+  // 2. SVG MAP CREATION
+  // ==========================================
+
+  const height = width * 0.6; // Maintain aspect ratio
+  const margin = {top: 10, right: 10, bottom: 10, left: 10};
+
+  const svg = d3.create("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "width: 100%; height: auto; font: 12px system-ui, sans-serif;");
+
+  const projection = d3.geoEqualEarth()
+    .fitExtent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]], {type: "Sphere"});
+
+  const path = d3.geoPath(projection);
+  
+  // Set sphere (background) color to a dark gray for a seamless look.
+  svg.append("path").attr("d", path({type: "Sphere"})).attr("fill", "#111827");
+  
+  // Graticule lines styled for dark mode.
+  const graticule = d3.geoGraticule10();
+  svg.insert("path", ":first-child").attr("d", path(graticule)).attr("fill", "none").attr("stroke", "#4b5563").attr("stroke-width", 0.5);
+
+  svg.append("g")
+    .selectAll("path")
+    .data(worldISO.features)
+    .join("path")
+      .attr("d", path)
+      .attr("fill", d => {
+        const iso = String(d.properties?.["ISO3166-1-Alpha-3"] || "").trim();
+        const c = countByISO.get(iso);
+        // Use a neutral dark gray for countries with no data.
+        return c == null ? "#374151" : colorScale(c);
+      })
+      // Use a slightly lighter gray for country borders.
+      .attr("stroke", "#6b7280")
+      .attr("stroke-width", 0.5)
+    .append("title")
+      .text(d => {
+        const p = d.properties || {};
+        const name = p.name ?? p.ADMIN ?? p.admin ?? "Unknown";
+        const iso  = String(p["ISO3166-1-Alpha-3"] || "").trim();
+        const c    = countByISO.get(iso);
+        return `${name} (${iso || "—"})\nCrimes criminalized: ${c ?? "No data"}/4`;
+      });
+
+  // Append the dark-mode-ready legend.
+  svg.append("g")
+    .attr("transform", `translate(${margin.left + 12}, ${margin.top + 12})`)
+    .append(() => DiscreteLegend({
+      scale: colorScale,
+      title: "Number of attrocity crimes criminalized",
+      steps: [0,1,2,3,4]
+    }));
+
+  return svg.node();
 }
 ```
 
 <div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => launchTimeline(launches, {width}))}
+  ${resize((width) => chloroplethChart(rawData, worldISO, width))}
   </div>
 </div>
 
-<!-- Plot of launch vehicles -->
+
+
+<!-- NEW TEST CHLOROPLETH -CARL -->
 
 ```js
-function vehicleChart(data, {width}) {
-  return Plot.plot({
-    title: "PLACEHOLDER",
-    width,
-    height: 300,
-    marginTop: 0,
-    marginLeft: 50,
-    x: {grid: true, label: "PLACEHOLDER"},
-    y: {label: null},
-    color: {...color, legend: true},
-    marks: [
-      Plot.rectX(data, Plot.groupY({x: "count"}, {y: "family", fill: "state", tip: true, sort: {y: "-x"}})),
-      Plot.ruleX([0])
-    ]
-  });
+const chartVariant = view(Inputs.radio(
+  ["Binary (Any Crime)", "Heatmap (Number of Crimes)"], 
+  {label: "Select Map Variant", value: "Binary (Any Crime)"}
+));
+```
+
+```js
+// Load the primary dataset and the GeoJSON for world boundaries.
+const justiceData = rawData
+const worldGeoJSON = d3.json("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson");
+```
+
+```js
+// This is the main function that creates the chart.
+// It processes the data and handles all D3.js rendering logic.
+function interactiveChloropleth(rawData, worldISO, variant, width) {
+
+  // 1. DATA PROCESSING AND HELPER FUNCTIONS
+  // =========================================
+
+  // Helper to standardize varied string inputs ("Yes", "1", "true") into a clean "Yes" or "No".
+  function formatStatus(value) {
+    const s = String(value ?? "").trim().toLowerCase();
+    // Consider various forms of "yes" in different languages or formats.
+    const affirmative = ["yes", "true", "1", "y", "sí", "si"];
+    return affirmative.includes(s) ? "Yes" : "No";
+  }
+
+  // Define the specific CSV columns that correspond to each crime.
+  const crimeColumns = {
+    genocide: "Genocide - Does the country criminalize genocide?",
+    war: "War Crimes - Does the country criminalize war crimes?",
+    cah: "Crimes Against Humanity - Does the country criminalize crimes against humanity?",
+    aggression: "Aggression - Does the country criminalize the international \"crime of aggression\" or the \"crimes against peace\"?"
+  };
+  
+  // Create a Map for efficient lookup of country data by its ISO code.
+  const dataByISO = new Map();
+  for (const d of rawData) {
+    const iso = String(d["ISO 3166-1 alpha-3"] || "").trim();
+    if (iso) {
+      const genocide = formatStatus(d[crimeColumns.genocide]);
+      const war = formatStatus(d[crimeColumns.war]);
+      const cah = formatStatus(d[crimeColumns.cah]);
+      const aggression = formatStatus(d[crimeColumns.aggression]);
+      
+      // Calculate the total number of criminalized crimes for the heatmap.
+      const crimeCount = (genocide === "Yes" ? 1 : 0) + 
+                         (war === "Yes" ? 1 : 0) + 
+                         (cah === "Yes" ? 1 : 0) + 
+                         (aggression === "Yes" ? 1 : 0);
+      
+      dataByISO.set(iso, {
+        countryName: d.Country,
+        hasAnyCrime: formatStatus(d["Does the country have at least one criminalized international crime?"]),
+        crimeCount: crimeCount,
+        statuses: { // Store individual statuses for the tooltip
+          Genocide: genocide,
+          "War Crimes": war,
+          "Crimes against Humanity": cah,
+          Aggression: aggression
+        }
+      });
+    }
+  }
+
+  // 2. CHART CONFIGURATION
+  // =======================
+
+  const height = Math.min(600, width * 0.6);
+  const projection = d3.geoMercator().scale(width / 2 / Math.PI - 20).translate([width / 2, height / 1.7]);
+  const path = d3.geoPath(projection);
+
+  // Define color scales for both variants.
+  const binaryColor = d3.scaleOrdinal()
+    .domain(["Yes", "No"])
+    .range(["#16a34a", "#ef4444"]); // Green for Yes, Red for No
+
+  const heatmapColor = d3.scaleSequential(d3.interpolateViridis)
+    .domain([0, 4]); // Domain is 0 to 4 crimes
+
+  const noDataColor = "#374151"; // Neutral dark gray for countries not in the dataset.
+
+  // 3. SVG RENDERING
+  // ==================
+  
+  const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height])
+      .attr("style", "max-width: 100%; height: auto; background-color: #111827;");
+
+  // Add a sphere for the globe background
+  svg.append("path")
+      .attr("d", path({type: "Sphere"}))
+      .attr("fill", "#111827")
+      .attr("stroke", "#4b5563");
+
+  // Add the countries (land masses)
+  svg.append("g")
+    .selectAll("path")
+    .data(worldISO.features)
+    .join("path")
+      .attr("d", path)
+      .attr("stroke", "#6b7280")
+      .attr("stroke-width", 0.5)
+      .attr("fill", d => {
+        const iso = String(d.properties?.["ISO3166-1-Alpha-3"] || "").trim();
+        const countryData = dataByISO.get(iso);
+
+        if (!countryData) return noDataColor;
+
+        // Apply color based on the selected chart variant
+        if (variant === "Binary (Any Crime)") {
+          return binaryColor(countryData.hasAnyCrime);
+        } else { // "Heatmap (Number of Crimes)"
+          return heatmapColor(countryData.crimeCount);
+        }
+      })
+    .append("title") // This creates the hover tooltip
+      .text(d => {
+        const iso = String(d.properties?.["ISO3166-1-Alpha-3"] || "").trim();
+        const countryData = dataByISO.get(iso);
+        const countryName = d.properties?.name ?? "Unknown Country";
+        
+        if (!countryData) {
+          return `${countryName} (${iso || "—"})\nNo data available`;
+        }
+
+        // Build the detailed tooltip string
+        const tooltipDetails = Object.entries(countryData.statuses)
+          .map(([crime, status]) => `- ${crime}: ${status}`)
+          .join("\n");
+        
+        return `${countryData.countryName} (${iso})\n\nCriminalized:\n${tooltipDetails}`;
+      });
+
+  return svg.node();
 }
 ```
 
+<!-- CALL CHART -->
 <div class="grid grid-cols-1">
-  <div class="card">
-    ${resize((width) => vehicleChart(launches, {width}))}
+  <div class="card" style="background-color: #111827;">
+    ${resize((width) => interactiveChloropleth(justiceData, worldGeoJSON, chartVariant, width))}
   </div>
 </div>
 
+
+
+
+<!-- STYLING FOR THE  -->
 <style>
-
 .hero {
   display: flex;
   flex-direction: column;

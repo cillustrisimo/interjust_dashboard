@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Meridian</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body class="bg-[#203341] text-gray-300">
+
+  <div 
+      class="min-h-screen bg-contain bg-center bg-no-repeat" 
+      style="background-image: url('images/icons_objects/balance.png');"
+    >
+        <div class="min-h-screen w-full bg-[#203341]/95 flex flex-col">
+
+            <header class="border-b border-gray-700/50">
+                <div class="container mx-auto px-6 py-4">
+                    <nav class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <div class="h-12 w-32 text-white text-xs flex items-center justify-center rounded">
+                                <img src="images/icons_objects/interjust-logo.svg" alt="Interjust Logo" >
+                            </div>
+                            <div class="h-12 w-32 text-white text-xs flex items-center justify-center rounded">
+                                <img src="images/icons_objects/logo.svg" alt="Project Meridian Globe Logo" >
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-5">
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">Home</a>
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">About</a>
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">Glossary</a>
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">Methodology</a>
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">Resources</a>
+                        </div>
+                    </nav>
+                    <div class="flex justify-end mt-4">
+                        <div class="relative w-full max-w-xs">
+                            <input type="search" placeholder="Search data sets" class="w-full bg-gray-800/50 border border-gray-700 text-gray-300 text-sm rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="main-container" class="flex-grow flex flex-col items-center justify-center py-20 px-6 transition-all duration-500 ease-in-out">
+                
+                <div id="primary-column" class="max-w-4xl w-full flex flex-col items-center gap-10 transition-all duration-500 ease-in-out">
+                    
+                    <div id="logo-section" class="flex flex-col md:flex-row items-center justify-center gap-6 w-full transition-all duration-500 ease-in-out">
+                        <div class="flex items-center gap-4 flex-shrink-0">
+                            <div class="flex items-center justify-center text-white text-sm">
+                                <img src="images/icons_objects/logo.svg" alt="Project Meridian Globe Logo" class="h-24 w-auto" >
+                            </div>
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-normal text-white leading-relaxed text-center md:text-left">
+                            An open-access digital platform that maps universal jurisdiction laws across 216 countries, empowering survivors, lawyers, and investigators to pursue accountability for international crimes beyond borders.
+                        </h1>
+                    </div>
+                    <div id="nav-grid" class="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
+
+                        <a href="#" data-target="page-home" class="nav-card block p-6 bg-gray-800/60 border border-gray-700/50 rounded-lg transition-all duration-300 ease-in-out border-2 border-blue-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/30">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Homepage</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Hero section with key statistics and global map preview</p>
+                        </a>
+
+                        <a href="#" data-target="page-about" data-path="pages/about.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/30">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">About / Overview</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Project goals, methodology, and how to use the tool</p>
+                        </a>
+
+                        <a href="#" data-target="page-dashboard" data-path="pages/dashboard.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/30">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Key Findings</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Something something, key findings...</p>
+                        </a>
+
+                        <a href="#" data-target="page-explore" data-path="pages/explore.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/3D">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Explore the Data</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Search tool and country profiles</p>
+                        </a>
+
+                        <a href="#" data-target="page-context" data-path="pages/context.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/3D">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Context & Analysis</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Trends, challenges, and case studies</p>
+                        </a>
+
+                        <a href="#" data-target="page-resources" data-path="pages/resources.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/3D">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Resources</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Reports, glossary, and references</p>
+                        </a>
+
+                    </div>
+                </div>
+                <div id="detail-content-wrapper" class="w-0 opacity-0 transition-opacity duration-500 ease-in-out">
+                    
+                    <div id="page-home" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-about" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-dashboard" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-explore" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-context" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-resources" class="detail-page hidden p-6">
+                        </div>
+
+                </div>
+
+            </main>
+            
+            <footer id="disclaimer-section" class="py-12 px-6 transition-all duration-500 ease-in-out">
+                <div class="max-w-5xl mx-auto text-center">
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        The Universal Justice Project (UJP) is a research project only. Nothing in the UJP or its related analysis should be taken as legal advice. Anyone intending to file a legal action should consult local counsel in the respective jurisdiction for legal advice. The UJP was created with openly available, online, public information. Therefore, there may be information in the UJP that is incorrect because it is outdated, mistranslated, or reflected incorrectly online. We welcome and encourage anyone who has updated information to please contact us: The-Docket@cfj.org.
+                    </D3>
+                </div>
+            </footer>
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
