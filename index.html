@@ -3,510 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Draft Dashboard</title>
+    <title>Project Meridian</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v3.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* very light gray */
-        }
-        /* Custom styles for toggle switches */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #0d9488; /* teal-600 */
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #0d9488; /* teal-600 */
-        }
-        /* Style for map paths on hover */
-        #map-container svg path {
-            transition: fill 0.2s ease-in-out;
-        }
-        #map-container svg path:hover {
-            fill: #fbbf24; /* amber-400, gives highlight effect */
-        }
-        /* Tooltip style */
-        .tooltip {
-            position: absolute;
-            text-align: left;
-            padding: 8px 12px;
-            font-size: 0.875rem;
-            background: #1f2937; /* gray-800 */
-            color: white;
-            border: 0px;
-            border-radius: 8px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-            max-width: 250px;
-        }
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
+    
 </head>
-<body class="text-gray-800">
+<body class="bg-[#203341] text-gray-300">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header class="flex justify-between items-center py-6 border-b border-gray-200">
-            <nav class="flex items-center space-x-8">
-                <a href="#" class="text-gray-500 hover:text-gray-900 font-medium">About</a>
-                <a href="#" class="text-gray-500 hover:text-gray-900 font-medium">Methodology</a>
-                <a href="#" class="text-gray-500 hover:text-gray-900 font-medium">Glossary</a>
-            </nav>
-            <div class="relative">
-                <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
-                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+  <div 
+      class="min-h-screen bg-contain bg-center bg-no-repeat" 
+      style="background-image: url('images/icons_objects/balance.png');"
+    >
+        <div class="min-h-screen w-full bg-[#203341]/95 flex flex-col">
+
+            <header class="border-b border-gray-700/50">
+                <div class="container mx-auto px-6 py-4">
+                    <nav class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <div class="h-12 w-32 text-white text-xs flex items-center justify-center rounded">
+                                <img src="images/icons_objects/interjust-logo.svg" alt="Interjust Logo" >
+                            </div>
+                            <div class="h-12 w-32 text-white text-xs flex items-center justify-center rounded">
+                                <img src="images/icons_objects/logo.svg" alt="Project Meridian Globe Logo" >
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-5">
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">Home</a>
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">About</a>
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">Glossary</a>
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">Methodology</a>
+                            <a href="#" class="text-sm text-gray-300 hover:text-white transition-colors">Resources</a>
+                        </div>
+                    </nav>
+                    <div class="flex justify-end mt-4">
+                        <div class="relative w-full max-w-xs">
+                            <input type="search" placeholder="Search data sets" class="w-full bg-gray-800/50 border border-gray-700 text-gray-300 text-sm rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="main-container" class="flex-grow flex flex-col items-center justify-center py-20 px-6 transition-all duration-500 ease-in-out">
+                
+                <div id="primary-column" class="max-w-4xl w-full flex flex-col items-center gap-10 transition-all duration-500 ease-in-out">
+                    
+                    <div id="logo-section" class="flex flex-col md:flex-row items-center justify-center gap-6 w-full transition-all duration-500 ease-in-out">
+                        <div class="flex items-center gap-4 flex-shrink-0">
+                            <div class="flex items-center justify-center text-white text-sm">
+                                <img src="images/icons_objects/logo.svg" alt="Project Meridian Globe Logo" class="h-24 w-auto" >
+                            </div>
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-normal text-white leading-relaxed text-center md:text-left">
+                            An open-access digital platform that maps universal jurisdiction laws across 216 countries, empowering survivors, lawyers, and investigators to pursue accountability for international crimes beyond borders.
+                        </h1>
+                    </div>
+                    <div id="nav-grid" class="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
+
+                        <a href="#" data-target="page-home" class="nav-card block p-6 bg-gray-800/60 border border-gray-700/50 rounded-lg transition-all duration-300 ease-in-out border-2 border-blue-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/30">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Homepage</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Hero section with key statistics and global map preview</p>
+                        </a>
+
+                        <a href="#" data-target="page-about" data-path="pages/about.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/30">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">About / Overview</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Project goals, methodology, and how to use the tool</p>
+                        </a>
+
+                        <a href="#" data-target="page-dashboard" data-path="pages/dashboard.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/30">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Key Findings</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Something something, key findings...</p>
+                        </a>
+
+                        <a href="#" data-target="page-explore" data-path="pages/explore.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/3D">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Explore the Data</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Search tool and country profiles</p>
+                        </a>
+
+                        <a href="#" data-target="page-context" data-path="pages/context.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/3D">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Context & Analysis</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Trends, challenges, and case studies</p>
+                        </a>
+
+                        <a href="#" data-target="page-resources" data-path="pages/resources.html" class="nav-card block p-6 bg-gray-800/30 border border-gray-700/50 rounded-lg cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/3D">
+                            <h3 class="text-xl font-semibold text-blue-400 mb-2">Resources</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Reports, glossary, and references</p>
+                        </a>
+
+                    </div>
+                </div>
+                <div id="detail-content-wrapper" class="w-0 opacity-0 transition-opacity duration-500 ease-in-out">
+                    
+                    <div id="page-home" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-about" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-dashboard" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-explore" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-context" class="detail-page hidden p-6">
+                        </div>
+
+                    <div id="page-resources" class="detail-page hidden p-6">
+                        </div>
+
+                </div>
+
+            </main>
+            
+            <footer id="disclaimer-section" class="py-12 px-6 transition-all duration-500 ease-in-out">
+                <div class="max-w-5xl mx-auto text-center">
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        The Universal Justice Project (UJP) is a research project only. Nothing in the UJP or its related analysis should be taken as legal advice. Anyone intending to file a legal action should consult local counsel in the respective jurisdiction for legal advice. The UJP was created with openly available, online, public information. Therefore, there may be information in the UJP that is incorrect because it is outdated, mistranslated, or reflected incorrectly online. We welcome and encourage anyone who has updated information to please contact us: The-Docket@cfj.org.
+                    </D3>
+                </div>
+            </footer>
             </div>
-        </header>
-
-        <main class="py-10">
-            <section class="text-center bg-gray-100 rounded-lg p-8 sm:p-12 mb-12">
-                <h1 class="text-2xl md:text-4xl font-bold text-gray-800 max-w-4xl mx-auto">
-                    Explore how countries use their own laws to pursue justice for genocide, war crimes, crimes against humanity, and the crime of aggression...
-                </h1>
-            </section>
-
-            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <p class="text-gray-500">Advocacy on International Crimes</p>
-                    <p id="stat-advocacy" class="text-5xl font-bold text-teal-600 my-2">...</p>
-                    <p class="text-gray-600">UN Member States that have laws which allow them to investigate crimes committed beyond their own borders</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <p class="text-gray-500">National Laws on International Crimes</p>
-                    <p id="stat-national-laws" class="text-5xl font-bold text-teal-600 my-2">...</p>
-                    <p class="text-gray-600">UN Member States have at least one core international crime in domestic law</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <p class="text-gray-500">Criminalization by Crime Type</p>
-                    <p id="stat-crime-type" class="text-5xl font-bold text-teal-600 my-2">...</p>
-                    <p class="text-gray-600">UN Member States have criminalized genocide, the most of any core crime</p>
-                </div>
-
-                <!-- NEED TO UPDATE CARD -->
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <p class="text-gray-500">Fourth Stat Card</p>
-                    <p id="stat-fourth-card" class="text-5xl font-bold text-teal-600 my-2">...</p>
-                    <p class="text-gray-600">This card will likely describe one of the crimes from the key points section.</p>
-                </div>
-            </section>
-
-            <section class="bg-white p-6 sm:p-8 rounded-lg border border-gray-200">
-                <h2 class="text-3xl font-bold text-center mb-6">World Map of National Laws on International Crimes</h2>
-                <div class="relative w-full max-w-md mx-auto mb-8">
-                     <input type="text" id="country-search" placeholder="Search for a country..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-teal-500">
-                     <svg class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                </div>
-
-                <div id="map-container"></div>
-                <div class="tooltip"></div>
-
-                <div class="flex justify-center items-center space-x-6 my-6">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-5 h-5 rounded-sm" style="background-color: #eab308;"></div>
-                        <span>All selected crimes</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="w-5 h-5 rounded-sm" style="background-color: #14b8a6;"></div>
-                        <span>At least one selected crime</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="w-5 h-5 rounded-sm bg-gray-300"></div>
-                        <span>No selected crimes / No data</span>
-                    </div>
-                </div>
-
-                <div id="filters" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto p-4 border-t border-gray-200">
-                    <div class="flex items-center justify-between" data-crime="genocide">
-                        <span class="font-medium text-gray-700">Genocide</span>
-                        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input type="checkbox" name="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked/>
-                            <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between" data-crime="war_crimes">
-                        <span class="font-medium text-gray-700">War Crimes</span>
-                        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input type="checkbox" name="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked/>
-                            <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                        </div>
-                    </div>
-                     <div class="flex items-center justify-between" data-crime="humanity">
-                        <span class="font-medium text-gray-700">Crimes Against Humanity</span>
-                         <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input type="checkbox" name="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked/>
-                            <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between" data-crime="aggression">
-                        <span class="font-medium text-gray-700">Crime of Aggression</span>
-                        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input type="checkbox" name="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked/>
-                            <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                        </div>
-                    </div>
-                </div>
-            </section> 
-
-            <!-- NEED NEW NAME FOR THIS GRAPH -->
-            <section class="bg-white p-6 sm:p-8 rounded-lg border border-gray-200 mt-12">
-                <h2 class="text-3xl font-bold text-center">Advocacy Point</h2>
-                <p id="chart-subtitle" class="text-center text-gray-600 mb-6"></p>
-                <div id="bar-graph-container" class="text-center">
-                    </div>
-            </section>
-
-        </main>
     </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // --- DATA ---
-        const geoJsonUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
-        const crimeDataUrl = "src/static_data/Data_Interjust@2.csv";
+    <script src="script.js"></script>
 
-        let crimeData = {};
-        // --- MAP SETUP ---
-        const container = d3.select("#map-container");
-        const tooltip = d3.select(".tooltip");
-        const width = container.node().getBoundingClientRect().width;
-        const height = width * 0.55;
-
-        const svg = container.append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .attr("viewBox", `0 0 ${width} ${height}`);
-
-        const projection = d3.geoMercator()
-            .scale(width / (2 * Math.PI))
-            .translate([width / 2, height / 1.6]);
-
-        const path = d3.geoPath().projection(projection);
-
-        // --- COLOR SCALES  FOR MAP ---
-        const colorAll = "#eab308"; // yellow-500
-        const colorSome = "#14b8a6"; // teal-500
-        const colorNone = "#d1d5db"; // gray-300
-
-        // --- DATA LOADING AND DRAWING LOGIC ---
-        Promise.all([
-            d3.csv(crimeDataUrl),
-            d3.json(geoJsonUrl)
-        ]).then(([csvData, worldData]) => {
-            // key is the name in the GeoJSON map,
-            // value is the corresponding name in CSV file.
-            const nameMappings = {
-                // GeoJSON Name: CSV Name
-                "Bolivia" : "Bolivia, Plurinational State of",
-                "Bosnia and Herz.": "Bosnia and Herzegovina",
-                "Brunei": "Brunei Darussalam",
-
-                "Central African Rep.": "Central African Republic",
-                "Congo": "Congo, Republic of the",
-                "Czechia": "Czech Republic",
-                "Côte d'Ivoire": "Côte d'Ivoire",
-
-                "Dem. Rep. Congo": "Congo, Democratic Republic of the (DRC)",
-                "Dominican Rep.": "Dominican Republic",
-                "Eq. Guinea": "Equatorial Guinea",
-
-                "Falkland Is.": "Falkland Islands",
-       
-                "Iran": "Iran, Islamic Republic Of",
-                "Iraq": "Iraq‡",
-            
-                "Laos": "Lao People's Democratic Republic",
-                
-                "Moldova": "Moldova, Republic of",
-                "Myanmar": "Myanmar (Burma)",
-                "N. Cyprus": "Cyprus",
-               
-                "North Korea": "Korea, Democratic People's Republic of (North Korea)",
-
-                "Palestine": "State of Palestine",
-
-                "Russia": "Russian Federation",
-           
-                "S. Sudan": "South Sudan",
-                "Solomon Is.": "Solomon Islands",
-                "South Korea": "Korea, Republic of (South Korea)",
-                "Syria": "Syrian Arab Republic",
-                "Tanzania": "Tanzania, United Republic of",
-                "United Kingdom": "United Kingdom of Great Britain and Northern Ireland",
-                "Venezuela": "Venezuela, Bolivarian Republic of",
-            };
-            
-            // Create a simple lookup map keyed by the original CSV country name.
-            const csvDataByName = new Map();
-            csvData.forEach(row => {
-                csvDataByName.set(row["Country"].trim(), row);
-            });
-
-            const countries = topojson.feature(worldData, worldData.objects.countries);
-
-            // Build the final crimeData object, keyed by numeric ID.
-            countries.features.forEach(feature => {
-                const geoName = feature.properties.name; // Name from the map file
-                const numericId = feature.id;
-
-                // Find the corresponding CSV name: use the mapping, or fall back to the geoName itself.
-                const csvName = nameMappings[geoName] || geoName;
-
-                const row = csvDataByName.get(csvName); // Look up data in our CSV map
-
-                if (row && numericId) {
-                    crimeData[numericId] = {
-                        name: row["Country"], // Store the original name for display
-                        genocide: row["Genocide - Does the country criminalize genocide?"] === "Yes",
-                        war_crimes: row["War Crimes - Does the country criminalize war crimes?"] === "Yes",
-                        humanity: row["Crimes Against Humanity - Does the country criminalize crimes against humanity?"] === "Yes",
-                        aggression: row['Aggression - Does the country criminalize the international ""crime of aggression"" or the ""crimes against peace""?'] === "Yes",
-                        anyCrime: row["Does the country have at least one criminalized international crime?"] === "Yes"
-                    };
-                }
-            });
-
-            updateStats(crimeData);
-
-            // TOOL TIP CODE
-            svg.selectAll("path")
-                .data(countries.features)
-                .enter().append("path")
-                .attr("d", path)
-                .attr("stroke", "#ffffff")
-                .attr("stroke-width", 0.5)
-                .on("mouseover", function (event, d) {
-                    tooltip.style("opacity", 1);
-                })
-                .on("mousemove", function (event, d) {
-                    const countryData = crimeData[d.id]; // This lookup will now be more successful
-                    let tooltipHtml = `<strong>${d.properties.name}</strong>`;
-                    if (countryData) {
-                        const activeCrimes = getActiveCrimes();
-                        tooltipHtml += `<div class='mt-2 text-xs'>`;
-                        activeCrimes.forEach(crime => {
-                            const hasLaw = countryData[crime.id] ? 'Yes' : 'No';
-                            tooltipHtml += `<div>${crime.name}: <span class='font-bold'>${hasLaw}</span></div>`;
-                        });
-                        tooltipHtml += `</div>`;
-                    } else {
-                        tooltipHtml += "<br/><span class='text-xs'>No data available</span>";
-                    }
-
-                    tooltip.html(tooltipHtml)
-                        .style("left", (event.pageX + 15) + "px")
-                        .style("top", (event.pageY - 28) + "px");
-                })
-                .on("mouseout", function () {
-                    tooltip.style("opacity", 0);
-                });
-
-            updateMap();
-        }).catch(error => {
-            console.error("Error loading data:", error);
-            container.text("Failed to load map data.");
-        });
-
-        // --- INTERACTIVITY  ---
-
-        function updateStats(data) {
-            const totalCountries = Object.keys(data).length;
-            let anyCrimeCount = 0;
-            let genocideCount = 0;
-            Object.values(data).forEach(country => {
-                if (country.anyCrime) anyCrimeCount++;
-                if (country.genocide) genocideCount++;
-            });
-            d3.select("#stat-advocacy").text("150");
-            d3.select("#stat-national-laws").text(anyCrimeCount);
-            d3.select("#stat-crime-type").text(genocideCount);
-        }
-
-        function getActiveCrimes() {
-            const active = [];
-            document.querySelectorAll("#filters [data-crime]").forEach(el => {
-                if (el.querySelector('input').checked) {
-                    active.push({
-                        id: el.dataset.crime,
-                        name: el.querySelector('span').textContent
-                    });
-                }
-            });
-            return active;
-        }
-
-        function getCountryColor(countryData, activeCrimes) {
-            if (!countryData || activeCrimes.length === 0) {
-                return colorNone;
-            }
-
-            let trueCount = 0;
-            for (const crime of activeCrimes) {
-                if (countryData[crime.id]) {
-                    trueCount++;
-                }
-            }
-
-            if (trueCount === activeCrimes.length && activeCrimes.length > 0) {
-                return colorAll;
-            } else if (trueCount > 0) {
-                return colorSome;
-            } else {
-                return colorNone;
-            }
-        }
-
-        // update the map function
-        function updateMap() {
-            const activeCrimes = getActiveCrimes();
-            svg.selectAll("path")
-                .transition()
-                .duration(300)
-                .attr("fill", d => {
-                    const countryData = crimeData[d.id];
-                    return getCountryColor(countryData, activeCrimes);
-                });
-        }
-
-        // lets filters select for what data we are counting for
-        document.querySelectorAll('#filters input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', updateMap);
-        });
-
-        // isolates the countries displayed on the map (will gray out other countries not similar to search)
-        document.getElementById('country-search').addEventListener('input', function (e) {
-            const searchTerm = e.target.value.toLowerCase();
-            svg.selectAll('path')
-                .attr('opacity', d => {
-                    const countryName = d.properties.name.toLowerCase();
-                    const countryData = crimeData[d.id];
-                    const csvName = countryData ? countryData.name.toLowerCase() : "";
-
-                    return countryName.includes(searchTerm) || csvName.includes(searchTerm) ? 1 : 0.2;
-                });
-        });
-        // BAR CHART SCRIPT
-        // NEED TO ADD REAL COUNTS
-        // ======================================================
-
-        // Define the container for the chart
-        const barChartContainer = d3.select("#bar-graph-container");
-
-        // Data for the Bar Chart
-        // Each object contains the group name, its value, and its specific color
-        const data = [
-            { group: "|", value: 127, color: "#14b8a6" }, // teal-500
-            { group: " |", value: 10, color: "#e06666" }
-        ];
-
-        // SVG and Chart Setup
-        // Adjusted margins to give more space for y-axis labels and top legend
-        const margin = { top: 60, right: 50, bottom: 50, left: 160 };
-        const chartWidth = 1100 - margin.left - margin.right;
-        const chartHeight = 250 - margin.top - margin.bottom;
-
-        const svgBar = barChartContainer.append("svg")
-            .attr("width", chartWidth + margin.left + margin.right)
-            .attr("height", chartHeight + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
-
-        // Scales
-        const x = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.value) + 10]) // Added padding to the domain for text labels
-            .range([0, chartWidth]);
-
-        const y = d3.scaleBand()
-            .domain(data.map(d => d.group))
-            .range([0, chartHeight])
-            .padding(0.25);
-
-        // Axes
-        const xAxis = svgBar.append("g")
-            .attr("transform", `translate(0,${chartHeight})`)
-            .call(d3.axisBottom(x).ticks(7));
-
-        const yAxis = svgBar.append("g")
-            .call(d3.axisLeft(y).tickSize(0)) // Removed tick lines for a cleaner look
-            .select(".domain").remove(); // Removed the y-axis line
-
-        yAxis.selectAll("text").style("font-size", "16px");
-
-        // Draw the bars
-        svgBar.selectAll("rect")
-            .data(data)
-            .enter()
-            .append("rect")
-            .attr("y", d => y(d.group))
-            .attr("height", y.bandwidth())
-            .attr("x", 0)
-            .attr("width", d => x(d.value))
-            .attr("fill", d => d.color);
-
-        // Add text labels at the end of each bar
-        svgBar.selectAll(".bar-label")
-            .data(data)
-            .enter()
-            .append("text")
-            .attr("class", "bar-label")
-            .attr("x", d => x(d.value) + 8) // Position text slightly after the bar ends
-            .attr("y", d => y(d.group) + y.bandwidth() / 2) // Center text vertically
-            .attr("dy", "0.35em")
-            .style("font-size", "16px")
-            .style("font-weight", "bold")
-            .style("fill", "#333")
-            .text(d => d.value);
-
-        // Create the legend
-        const legendData = [
-            { color: "#14b8a6", text: "UN Member States with at least one law against atrocity crimes" },
-            { color: "#e06666", text: "UN Member States which have used them" }
-        ];
-
-        const legend = svgBar.append("g")
-            .attr("class", "legend");
-
-        let legendXOffset = 0; // Tracks the horizontal position for each legend item
-
-        legendData.forEach((item, index) => {
-            const legendItem = legend.append("g")
-                .attr("transform", `translate(${legendXOffset}, 0)`);
-
-            legendItem.append("rect")
-                .attr("width", 18)
-                .attr("height", 18)
-                .attr("fill", item.color);
-
-            legendItem.append("text")
-                .attr("x", 24)
-                .attr("y", 9)
-                .attr("dy", "0.35em")
-                .text(item.text)
-                .style("font-size", "14px")
-                .style("alignment-baseline", "middle");
-
-            // Update the offset for the next item, adding padding
-            legendXOffset += legendItem.node().getBBox().width + 30;
-        });
-
-        // Center the entire legend group horizontally
-        const legendWidth = legend.node().getBBox().width;
-        const legendX = (chartWidth / 2) - (legendWidth / 2);
-        const legendY = -margin.top + 25; // Position it in the top margin area
-
-        legend.attr("transform", `translate(${legendX}, ${legendY})`);
-
-        // ======================================================
-    });
-</script>
 </body>
 </html>
