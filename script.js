@@ -215,10 +215,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (country.anyCrime) anyCrimeCount++;
                 if (country.genocide) genocideCount++;
             });
-            d3.select("#stat-advocacy").text("150"); // Hardcoded as in old file
-            d3.select("#stat-national-laws").text(anyCrimeCount);
-            d3.select("#stat-crime-type").text(genocideCount);
-            d3.select("#stat-fourth-card").text("..."); // Placeholder
+            d3.select("#stat-advocacy").text("142"); // Hardcoded FOR NOW
+            d3.select("#stat-national-laws").text("134");
+            d3.select("#stat-crime-type").text("99");
+            d3.select("#stat-fourth-card").text("51"); // Placeholder
         }
 
         function getActiveCrimes() {
