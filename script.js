@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContainer.classList.remove('flex-col', 'items-center', 'justify-center', 'py-20');
         mainContainer.classList.add('flex-row', 'items-start', 'pt-12', 'container', 'mx-auto');
         primaryColumn.classList.remove('max-w-4xl', 'w-full', 'items-center');
-        primaryColumn.classList.add('w-full', 'md:w-1/3', 'lg:w-1/4', 'pr-6', 'flex-shrink-0');
+        primaryColumn.classList.add('w-full', 'md:w-1/3', 'lg:w-1/4', 'pr-6', 'flex-shrink-0', 'sticky', 'top-12', 'self-start'); // <-- MODIFIED LINE
         navGrid.classList.remove('sm:grid-cols-2', 'lg:grid-cols-3', 'max-w-5xl');
         navGrid.classList.add('grid-cols-1');
     }
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContainer.classList.add('flex-col', 'items-center', 'justify-center', 'py-20');
         mainContainer.classList.remove('flex-row', 'items-start', 'pt-12', 'container', 'mx-auto');
         primaryColumn.classList.add('max-w-4xl', 'w-full', 'items-center');
-        primaryColumn.classList.remove('w-full', 'md:w-1/3', 'lg:w-1/4', 'pr-6', 'flex-shrink-0');
+        primaryColumn.classList.remove('w-full', 'md:w-1/3', 'lg:w-1/4', 'pr-6', 'flex-shrink-0', 'sticky', 'top-12', 'self-start'); // <-- MODIFIED LINE
         navGrid.classList.add('sm:grid-cols-2', 'lg:grid-cols-3', 'max-w-5xl');
         navGrid.classList.remove('grid-cols-1');
         detailWrapper.classList.add('w-0', 'opacity-0');
@@ -85,14 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Make the SVG responsive using viewBox.
         // scale to 100% of the container.
         const svg = container.append("svg")
-            .attr("width", "100%") // <-- FIX: Use 100%
-            .attr("height", "100%") // <-- FIX: Use 100%
-            .attr("viewBox", `0 0 ${baseWidth} ${baseHeight}`); // <-- FIX: Set viewBox
+            .attr("width", "100%") // <--  Use 100%
+            .attr("height", "100%") // <-- Use 100%
+            .attr("viewBox", `0 0 ${baseWidth} ${baseHeight}`); // <-- Set viewBox
 
         // Scale the projection to the base size, not the "real" width
         const projection = d3.geoMercator()
-            .scale(baseWidth / (2 * Math.PI)) // <-- FIX: Use baseWidth
-            .translate([baseWidth / 2, baseHeight / 1.6]); // <-- FIX: Use baseWidth/Height
+            .scale(baseWidth / (2 * Math.PI)) // <-- Use baseWidth
+            .translate([baseWidth / 2, baseHeight / 1.6]); // <-- Use baseWidth/Height
 
         const path = d3.geoPath().projection(projection);
 
@@ -299,11 +299,11 @@ document.addEventListener('DOMContentLoaded', () => {
         barChartContainer.html("");
 
         const data = [
-            { group: "|", value: 127, color: "#14b8a6" },
-            { group: " |", value: 10, color: "#e06666" }
+            { group: "|", value: 148, color: "#14b8a6" },
+            { group: " |", value: 23, color: "#e06666" }
         ];
 
-        // --- 2. SVG AND CHART SETUP (FIXED) ---
+        // --- 2. SVG AND CHART SETUP () ---
         const margin = { top: 60, right: 50, bottom: 50, left: 160 };
 
         // Define a "base" size.
@@ -316,9 +316,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Make the SVG responsive using viewBox
         const svgBar = barChartContainer.append("svg")
-            .attr("width", "100%") // <-- FIX: Use 100%
-            .attr("height", "100%") // <-- FIX: Use 100%
-            .attr("viewBox", `0 0 ${baseWidth} ${baseHeight}`) // <-- FIX: Set viewBox
+            .attr("width", "100%") // <--  Use 100%
+            .attr("height", "100%") // <--  Use 100%
+            .attr("viewBox", `0 0 ${baseWidth} ${baseHeight}`) // <--  Set viewBox
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
         
@@ -405,10 +405,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .style("fill", "#e5e7eb")
             .style("alignment-baseline", "middle");
 
-        // Manually create Item 2 with a fixed offset
+        // Manually create Item 2 with a fixed  offset
         const legendItem2 = legend.append("g")
             .attr("class", "legend-item")
-            .attr("transform", "translate(450, 0)"); // <-- FIX: Manually set offset
+            .attr("transform", "translate(450, 0)"); // <--  Manually set offset
 
         legendItem2.append("rect")
             .attr("width", 18)
@@ -427,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Center the legend
         const legendWidth = legend.node().getBBox().width;
         legend.attr("transform", `translate(${(chartWidth - legendWidth) / 2}, ${-margin.top + 25})`);
-        // --- END OF LEGEND FIX ---
+
     }
 
         
@@ -444,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return; // Do nothing, content is already there
         }
-        // --- END FIX ---
+
 
         // Show a loading message
         targetPage.innerHTML = `<p class="text-lg text-gray-400">Loading...</p>`;
@@ -535,12 +535,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // UNIVERSAL JURISDICTION MODULE
 // ============================================
 // PURPOSE: Handles navigation to and rendering of Universal Jurisdiction page
-// LOCATION: Add this code to the END of script.js (after the existing code)
-// DEPENDENCIES: 
-//   - D3.js (already loaded in index.html)
-//   - Observable Plot (needs to be added to index.html - see instructions)
-//   - CSV data file: src/static_data/Data_Interjust@2.csv
-// ============================================
 
 // --------------------------------------------
 // NAVIGATION HANDLER
