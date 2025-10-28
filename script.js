@@ -475,7 +475,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetId === 'page-universal-jurisdiction') {
                 initUniversalJurisdiction();
             }
-            
+
+            // If this is Modes of Liability, init charts
+            if (targetId === 'page-modes-of-liability' && window.initModesOfLiability) {
+                window.initModesOfLiability();
+            }
+
         } catch (error) {
             console.error("Fetch error:", error);
             targetPage.innerHTML = `<p class="text-lg text-red-400">Error: Could not load content.</p>`;
