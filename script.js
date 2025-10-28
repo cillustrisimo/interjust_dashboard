@@ -540,12 +540,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // UNIVERSAL JURISDICTION MODULE
 // ============================================
 // PURPOSE: Handles navigation to and rendering of Universal Jurisdiction page
-// LOCATION: Add this code to the END of script.js (after the existing code)
-// DEPENDENCIES: 
-//   - D3.js (already loaded in index.html)
-//   - Observable Plot (needs to be added to index.html - see instructions)
-//   - CSV data file: src/static_data/Data_Interjust@2.csv
-// ============================================
 
 // --------------------------------------------
 // NAVIGATION HANDLER
@@ -700,63 +694,75 @@ async function initUniversalJurisdiction() {
         // STEP 5: CALCULATE STATISTICS
         // --------------------------------------------
         // Each filter creates a list of countries that meet certain jurisdiction criteria
-        
-        // States with ANY jurisdiction beyond their borders
+
+// 0. Countries with at least one UJ case
+const statesWithCases = unMemberStates.filter(row => {
+    const jurisprudenceCol = row["Jurisprudence - Has the country had a UJ or ETJ case?"];
+    return jurisprudenceCol && jurisprudenceCol.trim().toLowerCase() === "yes";        
+});
+
+// 1. Countries with jurisdiction beyond borders (any type, any column)
         const statesWithJurisdictionBeyondBorders = unMemberStates.filter(row => 
             Object.values(jurisdictionCols).some(crime => 
                 hasJurisdiction(row[crime.no]) || hasJurisdiction(row[crime.yes])
             )
         );
         
-        // States with ABSOLUTE universal jurisdiction (marked as "UJ")
+// 2. Absolute UJ - ONLY check NO perpetrator columns (CORRECTED)
         const statesWithAbsoluteUJ = unMemberStates.filter(row => 
             Object.values(jurisdictionCols).some(crime => 
-                hasJurisdictionType(row[crime.no], "UJ") || hasJurisdictionType(row[crime.yes], "UJ")
+                hasJurisdictionType(row[crime.no], "UJ")
             )
         );
         
-        // States requiring PRESENCE of the suspect
-        const statesWithPresenceJurisdiction = unMemberStates.filter(row => 
-            Object.values(jurisdictionCols).some(crime => 
-                hasJurisdictionType(row[crime.yes], "Presence only")
-            )
-        );
+// 3. Perpetrator Presence - ONLY check YES columns (already correct)
+const statesWithPresenceJurisdiction = unMemberStates.filter(row => 
+    Object.values(jurisdictionCols).some(crime => 
+        hasJurisdictionType(row[crime.yes], "Presence only")
+    )
+);
         
-        // States with ACTIVE PERSONALITY jurisdiction (based on perpetrator nationality)
-        const statesWithActivePersonality = unMemberStates.filter(row => 
-            Object.values(jurisdictionCols).some(crime => 
-                hasJurisdictionType(row[crime.no], "Active personality") || 
-                hasJurisdictionType(row[crime.yes], "Active personality")
-            )
-        );
+// 4. Active Personality - check BOTH columns (already correct)
+const statesWithActivePersonality = unMemberStates.filter(row => 
+    Object.values(jurisdictionCols).some(crime => 
+        hasJurisdictionType(row[crime.no], "Active personality") || 
+        hasJurisdictionType(row[crime.yes], "Active personality")
+    )
+);
         
-        // States with PASSIVE PERSONALITY jurisdiction (based on victim nationality)
-        const statesWithPassivePersonality = unMemberStates.filter(row => 
-            Object.values(jurisdictionCols).some(crime => 
-                hasJurisdictionType(row[crime.no], "Passive personality") || 
-                hasJurisdictionType(row[crime.yes], "Passive personality")
-            )
-        );
+// 5. Passive Personality - check BOTH columns (already correct)
+const statesWithPassivePersonality = unMemberStates.filter(row => 
+    Object.values(jurisdictionCols).some(crime => 
+        hasJurisdictionType(row[crime.no], "Passive personality") || 
+        hasJurisdictionType(row[crime.yes], "Passive personality")
+    )
+);
         
-        // States with PROTECTIVE PRINCIPLE jurisdiction (based on national security)
-        const statesWithProtectivePrinciple = unMemberStates.filter(row => 
-            Object.values(jurisdictionCols).some(crime => 
-                hasJurisdictionType(row[crime.no], "Protective principle") || 
-                hasJurisdictionType(row[crime.yes], "Protective principle")
-            )
-        );
-        
-        // Create statistics object with counts
-        const stats = {
-            total: unMemberStates.length,
-            beyondBorders: statesWithJurisdictionBeyondBorders.length,
-            absoluteUJ: statesWithAbsoluteUJ.length,
-            presenceOnly: statesWithPresenceJurisdiction.length,
-            activePersonality: statesWithActivePersonality.length,
-            passivePersonality: statesWithPassivePersonality.length,
-            protectivePrinciple: statesWithProtectivePrinciple.length,
-            treatyObligation: 94 // Based on Geneva Conventions ratification
-        };
+// 6. Protective Principle - ONLY check NO perpetrator columns (CORRECTED)
+const statesWithProtectivePrinciple = unMemberStates.filter(row => 
+    Object.values(jurisdictionCols).some(crime => 
+        hasJurisdictionType(row[crime.no], "Protective principle")
+    )
+);
+
+// 7. Treaty Obligations - make dynamic instead of hardcoded (CORRECTED)
+const statesWithTreatyObligation = unMemberStates.filter(row => 
+    hasJurisdictionType(row[jurisdictionCols.warCrimes.yes], "Treaty")
+);
+
+  
+// 8. Create statistics object with counts
+   const stats = {
+    total: unMemberStates.length,
+    beyondBorders: statesWithJurisdictionBeyondBorders.length,
+    absoluteUJ: statesWithAbsoluteUJ.length,
+    presenceOnly: statesWithPresenceJurisdiction.length,
+    activePersonality: statesWithActivePersonality.length,
+    passivePersonality: statesWithPassivePersonality.length,
+    protectivePrinciple: statesWithProtectivePrinciple.length,
+    treatyObligation: statesWithTreatyObligation.length,
+    withCases: statesWithCases.length
+};
         
         console.log('Statistics calculated:', stats);
         
@@ -816,8 +822,9 @@ async function initUniversalJurisdiction() {
         contentEl.style.display = 'block';
         
         console.log('Universal Jurisdiction page initialized successfully');
-        
-    } catch (error) {
+     }      
+
+    catch (error) {
         // --------------------------------------------
         // ERROR HANDLING
         // --------------------------------------------
@@ -841,16 +848,17 @@ async function initUniversalJurisdiction() {
 // Fills in dynamic text elements with calculated values
 
 function populateTextContent(stats) {
-    // Hero stat (main "Beyond Borders" number)
+    // Hero stat
     const heroStat = document.getElementById('hero-stat');
     if (heroStat) {
+        const percentage = Math.round(stats.beyondBorders / stats.total * 100);
         heroStat.innerHTML = `
-            <div class="text-6xl font-bold text-green-400">${stats.beyondBorders}</div>
-            <div class="text-2xl text-gray-300 mt-2">out of ${stats.total} UN Member States</div>
+            <div class="text-6xl font-bold text-blue-400">${percentage}%</div>
+            <div class="text-2xl text-gray-300 mt-2">of ${stats.total} UN Member States</div>
         `;
     }
     
-    // Absolute UJ description and stat
+    // Absolute UJ
     const absoluteUJDesc = document.getElementById('absolute-uj-description');
     if (absoluteUJDesc) {
         absoluteUJDesc.innerHTML = `<strong class="text-white">${stats.absoluteUJ}</strong> UN Member States can exercise absolute universal jurisdiction over at least one of the most serious international crimes.`;
@@ -864,7 +872,7 @@ function populateTextContent(stats) {
         `;
     }
     
-    // Presence Required description and stat
+    // Presence Required
     const presenceDesc = document.getElementById('presence-required-description');
     if (presenceDesc) {
         presenceDesc.innerHTML = `<strong class="text-white">${stats.presenceOnly}</strong> UN Member States can exercise conditional universal jurisdiction requiring the presence of the suspect in their territory.`;
@@ -873,12 +881,12 @@ function populateTextContent(stats) {
     const presenceStat = document.getElementById('presence-required-stat');
     if (presenceStat) {
         presenceStat.innerHTML = `
-            <div class="text-6xl font-bold text-purple-400">${stats.presenceOnly}</div>
+            <div class="text-6xl font-bold text-blue-400">${stats.presenceOnly}</div>
             <div class="text-3xl text-gray-400 mt-2">${Math.round(stats.presenceOnly / stats.total * 100)}%</div>
         `;
     }
     
-    // Active Personality description and stat
+    // Active Personality
     const activeDesc = document.getElementById('active-personality-description');
     if (activeDesc) {
         activeDesc.innerHTML = `<strong class="text-white">${stats.activePersonality}</strong> UN Member States can exercise jurisdiction over at least one of the most serious international crimes when their own nationals are the alleged perpetrators.`;
@@ -892,7 +900,7 @@ function populateTextContent(stats) {
         `;
     }
     
-    // Passive Personality description and stat
+    // Passive Personality
     const passiveDesc = document.getElementById('passive-personality-description');
     if (passiveDesc) {
         passiveDesc.innerHTML = `<strong class="text-white">${stats.passivePersonality}</strong> UN Member States can exercise jurisdiction over at least one of the most serious international crimes when their own nationals are victims.`;
@@ -901,12 +909,12 @@ function populateTextContent(stats) {
     const passiveStat = document.getElementById('passive-personality-stat');
     if (passiveStat) {
         passiveStat.innerHTML = `
-            <div class="text-6xl font-bold text-orange-400">${stats.passivePersonality}</div>
+            <div class="text-6xl font-bold text-blue-400">${stats.passivePersonality}</div>
             <div class="text-3xl text-gray-400 mt-2">${Math.round(stats.passivePersonality / stats.total * 100)}%</div>
         `;
     }
     
-    // Protective Principle description and stat
+    // Protective Principle
     const protectiveDesc = document.getElementById('protective-principle-description');
     if (protectiveDesc) {
         protectiveDesc.innerHTML = `<strong class="text-white">${stats.protectivePrinciple}</strong> UN Member States can exercise jurisdiction over at least one of the most serious international crimes to protect their own national interest or security.`;
@@ -915,12 +923,12 @@ function populateTextContent(stats) {
     const protectiveStat = document.getElementById('protective-principle-stat');
     if (protectiveStat) {
         protectiveStat.innerHTML = `
-            <div class="text-6xl font-bold text-teal-400">${stats.protectivePrinciple}</div>
+            <div class="text-6xl font-bold text-blue-400">${stats.protectivePrinciple}</div>
             <div class="text-3xl text-gray-400 mt-2">${Math.round(stats.protectivePrinciple / stats.total * 100)}%</div>
         `;
     }
     
-    // Treaty-Based description and stat
+    // Treaty-Based
     const treatyDesc = document.getElementById('treaty-based-description');
     if (treatyDesc) {
         treatyDesc.innerHTML = `<strong class="text-white">${stats.treatyObligation}</strong> UN Member States have an obligation to exercise jurisdiction over certain serious international crimes as part of international treaties they have ratified.`;
@@ -929,7 +937,7 @@ function populateTextContent(stats) {
     const treatyStat = document.getElementById('treaty-based-stat');
     if (treatyStat) {
         treatyStat.innerHTML = `
-            <div class="text-6xl font-bold text-yellow-400">${stats.treatyObligation}</div>
+            <div class="text-6xl font-bold text-blue-400">${stats.treatyObligation}</div>
             <div class="text-3xl text-gray-400 mt-2">${Math.round(stats.treatyObligation / stats.total * 100)}%</div>
         `;
     }
@@ -961,6 +969,7 @@ function renderAllCharts(stats, regionalData, comparisonData) {
         const chart = Plot.plot({
             height: 300,
             marginLeft: marginLeft,
+            marginRight: 60,
             x: {label: "Number of States", grid: true},
             y: {label: null},
             color: {range: colors},
@@ -1003,6 +1012,7 @@ function renderAllCharts(stats, regionalData, comparisonData) {
         
         const chart = Plot.plot({
             marginLeft: 120,
+            marginRight: 60,
             height: 250,
             x: {label: "Number of States", grid: true},
             y: {label: null},
@@ -1034,15 +1044,15 @@ function renderAllCharts(stats, regionalData, comparisonData) {
     // --------------------------------------------
     // CHART 1: Beyond Borders Overview
     // --------------------------------------------
-    createOverviewChart(
-        'chart-beyond-borders-overview',
-        [
-            {category: "With Laws", value: stats.beyondBorders},
-            {category: "Without Laws", value: stats.total - stats.beyondBorders}
-        ],
-        ["#2ecc71", "#e74c3c"],
-        200
-    );
+    //createOverviewChart(
+        //'chart-beyond-borders-overview',
+        //[
+        //    {category: "With Laws", value: stats.beyondBorders},
+        //    {category: "Without Laws", value: stats.total - stats.beyondBorders}
+        //],
+        //["#2ecc71", "#e74c3c"],
+        //200
+    //);
     
     // --------------------------------------------
     // CHART 2: Beyond Borders Regional
@@ -1204,12 +1214,6 @@ function renderAllCharts(stats, regionalData, comparisonData) {
                     textAnchor: "start",
                     fill: "white"
                 }),
-                // Reference line at 50%
-                Plot.ruleX([stats.total / 2], {
-                    stroke: "white",
-                    strokeDasharray: "4,4",
-                    strokeOpacity: 0.3
-                })
             ]
         });
         
