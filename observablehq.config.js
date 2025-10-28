@@ -6,21 +6,28 @@ export default {
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly
   // lets you organize them into sections and have unlisted pages.
-  // pages: [
-  //   {
-  //     name: "Examples",
-  //     pages: [
-  //       {name: "Dashboard", path: "/example-dashboard"},
-  //       {name: "Report", path: "/example-report"}
-  //     ]
-  //   }
-  // ],
+  //pages: [
+     //{
+       //name: "Pages",
+       //pages: [
+         //{name: "Project Meridian - Justice Beyond Borders", path: "/src/Landing Page.md"},
+         //{name: "Universal Jurisdiction", path: "/src/Jurisdiction over Serious International Crimes.md"},
+          //{name: "Interactive Bar Chart Example", path: "/src/Implementation Gap_Bar Chart.md"},
+         //{name: "Draft Dashboard", path: "/src/index.md"}
+       //]
+     //}
+   //],
+
 
   // Content to add to the head of the page, e.g. for a favicon:
   head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
 
   // The path to the source root.
   root: "src",
+
+  interpreters: {
+    ".py": ["venv/bin/python3.13"] // Full path to your venv Python
+  }
 
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.
