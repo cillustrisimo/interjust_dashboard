@@ -540,6 +540,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // UNIVERSAL JURISDICTION MODULE
 // ============================================
 // PURPOSE: Handles navigation to and rendering of Universal Jurisdiction page
+// LOCATION: Add this code to the END of script.js (after the existing code)
+// DEPENDENCIES: 
+//   - D3.js (already loaded in index.html)
+//   - Observable Plot (needs to be added to index.html - see instructions)
+//   - CSV data file: src/static_data/Data_Interjust@2.csv
+// ============================================
 
 // --------------------------------------------
 // NAVIGATION HANDLER
