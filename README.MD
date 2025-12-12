@@ -1,6 +1,6 @@
 # InterJust Dashboard
 
-A data visualization platform (draft) for the Responsibility Lab, presenting international criminal justice data through interactive charts and maps.
+A (draft) data visualization platform for the Responsibility Lab, presenting international criminal justice data through interactive charts and maps.
 
 ---
 
@@ -33,39 +33,99 @@ Then navigate to `http://localhost:8000` in your browser.
 
 ```
 interjust_dashboard/
-├── index.html              # Main page
+├── index.html
 ├── css/
-│   ├── styles.css          # Core styles
 │   ├── additional_styles.css
-│   ├── mobile_styles.css   # Responsive design
-│   └── globe_case_study.css
-├── js/
-│   ├── data_loader.js      # Data fetching and processing
-│   ├── charts.js           # D3.js chart rendering
-│   ├── placeholder_filler.js
-│   ├── case_study_globes.js
-│   └── data_preload.js     # Static data fallback
+│   ├── globe_case_study.css
+│   ├── mobile_styles.css
+│   ├── style.css
+│   └── timeline_styles_integrated.css
 ├── data/
+│   ├── geojson/
+│   │   ├── countries.geojson
+│   │   ├── region-africa.geojson
+│   │   ├── region-asia.geojson
+│   │   ├── region-caribbean.geojson
+│   │   ├── region-central-america.geojson
+│   │   ├── region-europe.geojson
+│   │   ├── region-middle-east-north-africa.geojson
+│   │   ├── region-north-america.geojson
+│   │   ├── region-oceania.geojson
+│   │   ├── region-south-america.geojson
+│   │   └── world.geojson
 │   ├── interjust_snapshot.csv
-│   └── world-110m.json     # TopoJSON for maps
-└── assets/
+│   └── timeline_data.json
+├── images/
+│   ├── icons_objects/
+│   ├── timeline/
+│   ├── interjust-logo.svg
+│   └── interjust-logo.png
+└── js/
+    ├── case_study_globes.js
+    ├── charts.js
+    ├── data_loader.js
+    ├── data_preload.js
+    ├── placeholder_filler.js
+    ├── scripts.js
+    ├── stats_snapshot.js
+    ├── timeline_mobile.js
+    └── timeline_script.js
 ```
 
 ---
 
-## Data Architecture
+## File Descriptions
 
-The dashboard uses a tiered data loading strategy:
+### Root
 
-1. **Instant Render** - Preloaded static data for immediate display
-2. **Background Refresh** - Live Airtable API fetch updates the cache
-3. **Fallback** - CSV snapshot if API is unavailable
+| File | Description |
+|------|-------------|
+| `index.html` | Main HTML document containing the full scrollytelling narrative, chart containers, and page structure |
 
-All data processing is centralized in `DataCounterHub` within `data_loader.js`.
+### CSS
+
+| File | Description |
+|------|-------------|
+| `style.css` | Core stylesheet with CSS variables, typography, layout grid, navigation, and base component styles |
+| `additional_styles.css` | Extended styles for case studies, references section, gradient backgrounds, and graph containers |
+| `globe_case_study.css` | Styles for interactive globe modals, country pins, and case study narrative panels |
+| `mobile_styles.css` | Responsive design rules for mobile and tablet viewports |
+| `timeline_styles_integrated.css` | Styles for the historical timeline component including cards, markers, and scroll behavior |
+
+### JavaScript
+
+| File | Description |
+|------|-------------|
+| `data_loader.js` | Central data management module handling Airtable API fetches, CSV fallback, caching, and the DataCounterHub for all statistical calculations |
+| `charts.js` | D3.js chart rendering functions for all visualizations (choropleth, bar charts, packed bubbles) |
+| `scripts.js` | Page interaction logic including scroll spy navigation, scrollytelling focus/zoom, and smooth scroll behavior |
+| `placeholder_filler.js` | Dynamic statistic injection into DOM placeholders with two-phase loading (instant cache, background sync) |
+| `stats_snapshot.js` | LocalStorage-based statistics cache with automatic updates when live data changes |
+| `data_preload.js` | Static data snapshot for instant page rendering before API response |
+| `case_study_globes.js` | Interactive 3D globe rendering for country case studies with rotation, pins, and modal integration |
+| `timeline_script.js` | Timeline component logic for desktop with scroll-based animations and card transitions |
+| `timeline_mobile.js` | Mobile-optimized timeline with touch interactions and responsive layout |
+
+### Data
+
+| File/Folder | Description |
+|-------------|-------------|
+| `geojson/` | Geographic boundary files for world map and individual regions |
+| `interjust_snapshot.csv` | Static CSV export of the Airtable database for offline fallback |
+| `timeline_data.json` | Structured data for historical timeline events and milestones |
+
+### Images
+
+| Folder/File | Description |
+|-------------|-------------|
+| `icons_objects/` | Miscellaneous UI icons and decorative elements |
+| `timeline/` | Images associated with timeline events |
+| `interjust-logo.svg` | Vector logo for crisp rendering at any size |
+| `interjust-logo.png` | Raster logo fallback |
 
 ---
 
-## Visualizations
+## Visualizations (subject to change)
 
 | Section | Chart Type | Description |
 |---------|------------|-------------|
@@ -79,26 +139,12 @@ Additional features include interactive case study globes and scrollytelling nar
 
 ---
 
-## Key Technologies
-
-- D3.js for data visualization
-- TopoJSON for geographic rendering
-- Airtable API for live data
-- Vanilla JavaScript (ES5 compatible)
-
----
-
-## Browser Support
-
-Tested on modern versions of Chrome, Firefox, Safari, and Edge. Mobile responsive design included.
-
----
 
 ## Notes
 
 This is an early draft. Features and data are subject to change as the project develops.
 
+
 All text is from InterJust. The platform itself was developed by the Responsibility Lab
 
----
 
