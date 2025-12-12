@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Meridian: Global Justice Report</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/additional_styles.css">
+    <link rel="stylesheet" href="css/globe_case_study.css">
+    <link rel="stylesheet" href="css/timeline_styles_integrated.css"> 
+    <link rel="stylesheet" href="css/mobile_styles.css">
+    
+    <!-- GSAP for animations (required by timeline) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+    <!-- Arushi-style landing page -->
+     <section class="landing-splash" id="landing">
+        <div class="splash-top">
+            <div class="splash-logos">
+                <img src="images/icons_objects/interjust-logo.svg" alt="Interjust Logo" >
+                <span class="logo-divider">|</span>
+               <img src="images/icons_objects/logo.svg" alt="Project Meridian Globe Logo" >
+            </div>
+            <div class="splash-search">
+                <input type="text" placeholder="Search" disabled>
+            </div>
+        </div>
+
+            <div class="splash-hero-grid">
+                <div class="splash-brand">
+                   <img class="splash-logo-icon" src="images/icons_objects/logo.svg" alt="Project Meridian Globe Logo">
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="splash-title">
+                    Global Justice Report: National Laws and Universal Accountability
+                </div>
+            </div>
+        </div>
+
+        <div class="splash-info-banner">
+            <p>Explore how countries use their own laws to pursue justice for genocide, war crimes, crimes against humanity, and the crime of aggression...</p>
+        </div>
+
+        <a href="#glossary" class="btn-fly-down">
+            Discover More <span class="arrow">→</span>
+        </a>
+
+        <div class="splash-legal">
+            <p>The Universal Justice Project (UJP) is a research project only. Nothing in the UJP or its related analysis should be taken as legal advice. Anyone intending to file a legal action should consult local counsel.</p>
+        </div>
+    </section>
+
+     <!-- ============================================================ -->
+        <!-- GLOSSARY AND NAV DEFINITION SECTION -->
+        <!-- ============================================================ -->
+
+    <section id="glossary" class="glossary-section">
+        <div class="glossary-container">
+            
+            <div class="glossary-left">
+                <h2 class="glossary-big-title">Table of Contents</h2>
+                <p class="glossary-subtitle">Navigate the report sections</p>
+            </div>
+
+            <div class="glossary-right">
+                <a href="#section-1" class="glossary-list-item">
+                    <span class="g-num">01</span>
+                    <span class="g-text">What is Universal Jurisdiction?</span>
+                    <span class="g-arrow">→</span>
+                </a>
+
+                <a href="#section-2" class="glossary-list-item">
+                    <span class="g-num">02</span>
+                    <span class="g-text">What crimes can States prosecute?</span>
+                    <span class="g-arrow">→</span>
+                </a>
+
+                <a href="#section-3" class="glossary-list-item">
+                    <span class="g-num">03</span>
+                    <span class="g-text">Who can be held responsible?</span>
+                    <span class="g-arrow">→</span>
+                </a>
+
+                <a href="#section-4" class="glossary-list-item">
+                    <span class="g-num">04</span>
+                    <span class="g-text">How states pursue crimes beyond their borders</span>
+                    <span class="g-arrow">→</span>
+                </a>
+
+                <a href="#section-5" class="glossary-list-item">
+                    <span class="g-num">05</span>
+                    <span class="g-text">How often states apply universal jurisdiction</span>
+                    <span class="g-arrow">→</span>
+                </a>
+
+                <a href="#references" class="glossary-list-item">
+                    <span class="g-num">06</span>
+                    <span class="g-text">References</span>
+                    <span class="g-arrow">→</span>
+                </a>
+                
+            </div>
+        </div>
+    </section>
+
+ <nav id="side-nav" class="side-nav">
+        <ul>
+            <li>
+                <a href="#section-1" data-tooltip="Timeline of universal jurisdiction development">
+                    <span class="nav-num">01</span>
+                    <span class="nav-title">What is Universal Jurisdiction?</span>
+                </a>
+            </li>
+            <li>
+                <a href="#section-2" data-tooltip="Criminalization of international crimes">
+                    <span class="nav-num">02</span>
+                    <span class="nav-title">What crimes can States prosecute?</span>
+                </a>
+            </li>
+            <li>
+                <a href="#section-3" data-tooltip="Command responsibility doctrine">
+                    <span class="nav-num">03</span>
+                    <span class="nav-title">Who can be held responsible?</span>
+                </a>
+            </li>
+            <li>
+                <a href="#section-4" data-tooltip="Types of extraterritorial jurisdiction">
+                    <span class="nav-num">04</span>
+                    <span class="nav-title">How states pursue crimes beyond their borders</span>
+                </a>
+            </li>
+            <li>
+                <a href="#section-5" data-tooltip="Case statistics and specialized units">
+                    <span class="nav-num">05</span>
+                    <span class="nav-title">How often states apply universal jurisdiction</span>
+                </a>
+            </li>
+            <li>
+                <a href="#references" data-tooltip="Sources and citations">
+                    <span class="nav-num">06</span>
+                    <span class="nav-title">References</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="page-content">
+
+        <!-- ============================================================ -->
+        <!-- HERO SECTION -->
+        <!-- ============================================================ -->
+        <section class="hero-section" id="section-1">
+            <div class="text-container">
+                <p class="series-label">Project Meridian</p>
+                <h1>What is universal jurisdiction?</h1>
+                <p class="dek">Understanding the laws that enable States to fight atrocity crimes, and their context.</p>
+                <div class="byline">A joint project: <a href="#">Berkeley Responsibility Lab × Project Meridian</a></div>
+            </div>
+        </section>
+
+        <section class="narrative-block">
+            <p>While <span id="stat-intro-jurisdiction" class="stat-placeholder">--</span> U.N. Member States have laws that allow them to investigate and prosecute crimes committed beyond their own borders, few have actually done so in practice.<sup><a href="#ref-1" class="ref-link">[1]</a></sup></p>
+
+            <p>Project Meridian is dedicated to mobilizing States to use and improve their laws to pursue accountability for the most serious international crimes, so that all survivors can realize meaningful access to justice and perpetrators have nowhere to hide.</p>
+            
+            <p>Universal jurisdiction is a legal principle which allows States to prosecute the most serious international crimes -- war crimes, crimes against humanity, genocide, and the crime of aggression -- regardless of where those crimes were committed, the nationality of the perpetrator, and the nationality of the victim.<sup><a href="#ref-2" class="ref-link">[2]</a></sup> Lawyers, civil society actors, and other advocates have been working to develop universal jurisdiction as a mechanism to pursue justice for survivors of mass atrocities since the Second World War.<sup><a href="#ref-3" class="ref-link">[3]</a></sup> Despite some setbacks, the application of universal jurisdiction has been gaining momentum over the past three decades.<sup><a href="#ref-4" class="ref-link">[4]</a></sup> The timeline below marks major events in the development and application of universal jurisdiction.</p>
+        </section>
+     
+
+        <!-- ============================================================ -->
+        <!-- SECTION 1: HORIZONTAL TIMELINE -->
+        <!-- ============================================================ -->
+        <section class="timeline-section" id="timeline-section">
+            <div class="timeline-container" id="timeline-container">
+                <div class="timeline-line" id="timeline-line"></div>
+                <div class="timeline-events" id="events-container"></div>
+                <div class="year-labels" id="labels-container"></div>
+            </div>
+
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Year label -->
+            <div class="year-label" id="year-label"></div>
+        </section>
+
+        <!-- Modal is created dynamically by timeline_script.js -->
+
+        <!-- ============================================================ -->
+        <!-- SECTION 2: WHAT CRIMES CAN STATES PROSECUTE? -->
+        <!-- ============================================================ -->
+
+        <section class="narrative-block" id="section-2">
+            <h2>What types of crimes can States prosecute under universal jurisdiction?</h2>
+            <p>States can prosecute the most serious international crimes -- war crimes, crimes against humanity, genocide, and the crime of aggression -- under universal jurisdiction. In order for a State to prosecute one or more of those crimes under universal jurisdiction, the State must first criminalize them in its national laws.</p>
+        </section>
+
+        <!-- Graph 2A: Choropleth Map - Static One Column -->
+        <section class="section-one-column">
+            <div class="graph-container" id="chart-section-2a">
+                <!-- Choropleth Map is rendered here by charts.js -->
+            </div>
+             <p class="graph-caption">Figure 2A: Criminalization of the Most Serious International Crimes – <span id="stat-criminalization-at-least-one" class="stat-placeholder">--</span> out of 193 U.N. Member States have criminalized at least one of the four most serious international crimes.</p>
+        </section>
+
+        <section class="narrative-block-lower">
+            <p>Most U.N. Member States (<span id="stat-criminalization-percent" class="stat-placeholder">--</span> percent) have criminalized at least one of the four most serious international crimes. War crimes are the most widely criminalized of the group, followed by, genocide, crimes against humanity, and the crime of aggression. Just <span id="stat-criminalization-all-four" class="stat-placeholder">--</span> U.N. Member States have criminalized all four of the most serious international crimes.</p>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- SECTION 3: WHO CAN BE HELD RESPONSIBLE? -->
+        <!-- ============================================================ -->
+
+        <section class="narrative-block" id="section-3">
+            <h2>Who can be held responsible under universal jurisdiction?</h2>
+            <p>Under universal jurisdiction, States can prosecute direct perpetrators of atrocity crimes as well as individuals who had control over the direct perpetrators. States can hold the latter category of persons liable for the most serious international crimes under the doctrine of command or superior responsibility.</p>
+        </section>
+
+        <!-- Graph 3: Static - Command Responsibility -->
+        <section class="section-one-column">
+            <div class="graph-container-transparent" id="chart-section-3">
+                <!-- Command responsibility visualization -->
+            </div>
+            <p class="graph-caption">Figure 3: Command or Superior Responsibility – <span id="stat-command-responsibility" class="stat-placeholder">--</span> U.N. Member States recognize command or superior responsibility as a form of liability in their criminal code.</p>
+        </section>
+
+        <section class="narrative-block-lower">
+            <p>In the context of situations like Ukraine, where the International Criminal Court is pursuing a handful of top-level individuals and Ukrainian prosecutors cannot target most commanders due to the previous absence of command responsibility in Ukrainian criminal law, the use of command or superior responsibility in cases launched in other national jurisdictions that recognize the legal doctrine can fill an important gap in accountability efforts.</p>
+        </section>
+
+        <!-- Case Study: Yan Petrovsky - SIMPLIFIED FORMAT -->
+        <section class="case-study-block">
+            <div class="case-study-container">
+                <div class="case-study-header">
+                    <span class="case-study-label">Case Study</span>
+                    <h3>Russian Mercenary Commander Yan Petrovsky Prosecuted in Finland for War Crimes Committed in Eastern Ukraine</h3>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-narrative">
+                        <p>Yan Petrovsky is a Russian national and co-founder and former commander of Rusich, a far-right mercenary unit linked to the Wagner Group.<sup><a href="#ref-21" class="ref-link">[21]</a></sup> In September 2014, Rusich mercenaries under Petrovsky's command took part in an ambush in Luhansk, eastern Ukraine that left 22 Ukrainian soldiers dead and four others injured.<sup><a href="#ref-22" class="ref-link">[22]</a></sup> In 2023, Petrovsky, then living under the alias Voislav Torden, circumvented a Schengen Area entry ban and travelled to Finland, where he obtained a one-year residence permit based on family ties.<sup><a href="#ref-23" class="ref-link">[23]</a></sup> The Finnish Border Guard arrested Petrovsky during a security check at Helsinki Airport in July 2023 and ascertained his real identity through database checks.<sup><a href="#ref-24" class="ref-link">[24]</a></sup> Finland's National Bureau of Investigation led a ten-month investigation into Petrovsky's alleged involvement in war crimes in eastern Ukraine, in close cooperation with Ukrainian authorities, beginning in December 2023.<sup><a href="#ref-25" class="ref-link">[25]</a></sup> The Helsinki District Court convicted Petrovsky of war crimes in March 2025.<sup><a href="#ref-26" class="ref-link">[26]</a></sup> Petrovsky's conviction is the first worldwide under the principle of universal jurisdiction for war crimes committed in Ukraine.<sup><a href="#ref-27" class="ref-link">[27]</a></sup></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- SECTION 4: HOW STATES PURSUE CRIMES BEYOND THEIR BORDERS -->
+        <!-- Multiple jurisdiction types + Case Studies -->
+        <!-- ============================================================ -->
+        
+        <section class="narrative-block" id="section-4">
+            <h2>What are the different ways States can investigate and prosecute crimes that occurred outside their own borders?</h2>
+            <p>States can invoke several types of jurisdiction to investigate and prosecute crimes that were committed outside their own borders. With the exception of absolute universal jurisdiction, each of these bases for jurisdiction relies on the existence of some type of "link" between the prosecuting State and the crime committed, such as the nationality of the alleged perpetrator or victim, or the presence of the alleged perpetrator on the prosecuting State's territory. In order for a State to investigate and prosecute extraterritorial crimes, the State must first pass a law that recognizes one or more of these jurisdictional bases.</p>
+        </section>
+
+        <!-- Graph 4A: Scrollytelling - Legal Ability Map -->
+        <section id="scrolly-section-4a">
+            <div class="sticky-graphic">
+                <div class="chart-wrapper" id="chart-section-4a">
+                    <!-- Radial/map chart -->
+                </div>
+            </div>
+
+        <div class="scrolly-steps">
+                <div class="step" data-action="show-legal-ability" data-target="chart-section-4a">
+                    <div class="card">
+                        <h3>Legal Ability to Investigate and Prosecute Extraterritorial Crimes</h3>
+                        <p><span id="stat-jurisdiction-any" class="stat-placeholder">--</span> out of 193 U.N. Member States have laws that allow them to investigate and prosecute at least one of the most serious international crimes committed beyond their own borders.</p>
+                    </div>
+                </div>
+
+                <div class="step" data-action="show-absolute" data-target="chart-section-4a">
+                    <div class="card">
+                        <h3>Absolute Universal Jurisdiction</h3>
+                        <p><span id="stat-jurisdiction-absolute" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes, regardless of the nationality of the alleged perpetrator, the nationality of the victim, the location where the offense was committed, or the location of the alleged perpetrator.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="narrative-block-lower">
+            <p>Absolute universal jurisdiction is the "purest" form of universal jurisdiction, reflecting the original idea behind the principle that certain crimes are considered to be committed against the international community as a whole.</p>
+        </section>
+
+        <!-- Case Study: Taha al-Jumailly - SIMPLIFIED FORMAT -->
+        <section class="case-study-block">
+            <div class="case-study-container">
+                <div class="case-study-header">
+                    <span class="case-study-label">Case Study</span>
+                    <h3>Former ISIS Member Taha al-Jumailly Prosecuted in Germany for Genocide, Crimes against Humanity, and War Crimes Committed Against Yazidi Women in Iraq</h3>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-narrative">
+                        <p>Taha al-Jumailly is an Iraqi national and former ISIS member who committed genocide, crimes against humanity, and war crimes through his enslavement and abuse of a Yazidi woman and her daughter.<sup><a href="#ref-28" class="ref-link">[28]</a></sup> Along with his wife, Jennifer Wenisch, a German national who was later convicted of crimes against humanity and war crimes, al-Jumailly held the Yazidi woman and her daughter in inhuman conditions at his home in Fallujah during the summer of 2015.<sup><a href="#ref-29" class="ref-link">[29]</a></sup> The German Federal Court of Justice issued an arrest warrant for al-Jumailly in April 2019, based on a structural investigation into crimes committed against the Yazidi by ISIS in Syria and Iraq that German authorities had opened in 2014.<sup><a href="#ref-30" class="ref-link">[30]</a></sup> Greek authorities arrested al-Jumailly based on the European Arrest Warrant in May 2019, and extradited him to Germany in October.<sup><a href="#ref-31" class="ref-link">[31]</a></sup> The Higher Regional Court of Frankfurt am Main convicted al-Jumailly of genocide, crimes against humanity, and war crimes and sentenced him to life imprisonment in November 2021.<sup><a href="#ref-32" class="ref-link">[32]</a></sup> Al-Jumailly's genocide conviction was the first worldwide of an ISIS member.<sup><a href="#ref-33" class="ref-link">[33]</a></sup></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Graphs 4B & 4C: Two-column static - Presence & Active Personality Jurisdiction -->
+        <section class="section-two-column">
+            <div class="graph-container" id="chart-section-4b">
+                <!-- Presence jurisdiction chart -->
+            </div>
+            <div class="graph-container" id="chart-section-4c">
+                <!-- Active personality chart -->
+            </div>
+        </section>
+
+   <!-- Graphs 4B & 4C captions -->
+        <div class="graph-caption-row">
+            <p class="graph-caption">Figure 4B: Presence Jurisdiction – <span id="stat-jurisdiction-presence" class="stat-placeholder">--</span> States require perpetrator presence</p>
+            <p class="graph-caption">Figure 4C: Active Personality Jurisdiction – <span id="stat-jurisdiction-active" class="stat-placeholder">--</span> States can prosecute nationals</p>
+        </div>
+
+        <section class="narrative-block-lower">
+            <p>In many States, laws granting jurisdiction over the most serious international crimes committed abroad are subject to a significant limitation: the suspected perpetrator must be physically present in that State to trigger jurisdiction. This limitation, commonly referred to as "conditional universal jurisdiction,"<sup><a href="#ref-34" class="ref-link">[34]</a></sup> is often motivated by resource constraints which justify focusing on those perpetrators who are actually present on the would-be prosecuting State's territory.</p>
+            <p>Most States exercise jurisdiction over crimes committed by their nationals, regardless of the place of commission. This is commonly referred to as "active personality" jurisdiction. Some States interpret this type of jurisdiction to include alleged perpetrators who are residents, refugees, or stateless persons residing permanently in that State.</p>
+        </section>
+
+        <!-- Case Study: Ousman Sonko - SIMPLIFIED FORMAT -->
+        <section class="case-study-block">
+            <div class="case-study-container">
+                <div class="case-study-header">
+                    <span class="case-study-label">Case Study</span>
+                    <h3>Former Gambian Interior Minister Ousmon Sonko Prosecuted in Switzerland for Crimes Committed in The Gambia During the Regime of Yahya Jammeh</h3>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-narrative">
+                        <p>Ousmon Sonko is a Gambian national who committed crimes against humanity in several roles under the regime of Yahya Jammeh, who led The Gambia from 1996-2017.<sup><a href="#ref-35" class="ref-link">[35]</a></sup> Sonko left the Gambia in September 2016.<sup><a href="#ref-36" class="ref-link">[36]</a></sup> Trial International filed a criminal complaint with prosecutors in Switzerland in January 2017, after it became aware of Sonko's presence in country.<sup><a href="#ref-37" class="ref-link">[37]</a></sup> Switzerland's Office of the Attorney General then opened what would become a six-year investigation which involved multiple trips to The Gambia to collect evidence and hear witness testimony.<sup><a href="#ref-38" class="ref-link">[38]</a></sup> In 2021, The Gambia's Truth, Reconciliation, and Reparations Commission recommended that Sonko be prosecuted for killings and acts of torture and sexual violence committed between 2000 and 2016.<sup><a href="#ref-39" class="ref-link">[39]</a></sup> The Federal Criminal Court of Bellinzona convicted Sonko of crimes against humanity and sentenced him to 20 years' imprisonment in May 2024.<sup><a href="#ref-40" class="ref-link">[40]</a></sup> Having previously served as The Gambia's Minister of the Interior, Sonko is to date the highest-ranking State official prosecuted by a European court under the principle of universal jurisdiction.<sup><a href="#ref-41" class="ref-link">[41]</a></sup></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Graph 4D: Scrollytelling - Passive Personality & Protective Principle -->
+        <section id="scrolly-section-4d">
+            <div class="sticky-graphic">
+                <div class="chart-wrapper" id="chart-section-4d">
+                    <!-- Network/bubble chart -->
+                </div>
+            </div>
+
+           <div class="scrolly-steps">
+                <div class="step" data-action="show-passive" data-target="chart-section-4d">
+                    <div class="card">
+                        <h3>Passive Personality Jurisdiction</h3>
+                        <p><span id="stat-jurisdiction-passive" class="stat-placeholder">--</span> U.N. Member States can exercise some sort of jurisdiction over at least one of the most serious international crimes when a victim of the crime is a national of that State.</p>
+                    </div>
+                </div>
+
+                <div class="step" data-action="show-protective" data-target="chart-section-4d">
+                    <div class="card">
+                        <h3>Protective Principle Jurisdiction</h3>
+                        <p><span id="stat-jurisdiction-protective" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes to protect their own national interest or security.</p>
+                    </div>
+                </div>
+
+                <div class="step" data-action="show-treaty" data-target="chart-section-4d">
+                    <div class="card">
+                        <h3>Treaty-Based Obligation</h3>
+                        <p><span id="stat-jurisdiction-treaty" class="stat-placeholder">--</span> U.N. Member States have an obligation to exercise jurisdiction over certain serious international crimes as a result of international treaties they have ratified.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="narrative-block-lower">
+            <p>Many States exercise jurisdiction over crimes committed against their nationals, regardless of the place of commission. This is commonly referred to as "passive personality" jurisdiction. Some States extend this jurisdiction to victims who are residents, refugees, or stateless persons residing permanently in that State.</p>
+        </section>
+
+        <!-- Case Study: Assad Officials - SIMPLIFIED FORMAT -->
+        <section class="case-study-block">
+            <div class="case-study-container">
+                <div class="case-study-header">
+                    <span class="case-study-label">Case Study</span>
+                    <h3>Assad Regime Officials Prosecuted in Absentia in France for the Arrest, Detention, and Disappearance of Dual French and Syrian Nationals in Damascus</h3>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-narrative">
+                        <p>Ali Mamlouk, Jamil Hassan, and Abdel Salam Mahmoud are all Syrian nationals and former high-ranking officials in the Assad regime who were connected to the November 2013 arrest, detention, and disappearance of dual French and Syrian nationals Patrick and Mazen Dabbagh in Damascus.<sup><a href="#ref-47" class="ref-link">[47]</a></sup> Obeida Dabbagh, a family member of the disappeared, filed a complaint at the Paris Tribunal with the International Federation for Human Rights and one of its French affiliates in October 2016.<sup><a href="#ref-48" class="ref-link">[48]</a></sup> Judges from France's specialized unit for the prosecution of international crimes issued international arrest warrants for the three suspects in October 2018, and they completed their investigation in March 2022.<sup><a href="#ref-49" class="ref-link">[49]</a></sup> The Paris Criminal Court convicted Mamlouk, Hassan, and Mahmoud in absentia for complicity in crimes against humanity and war crimes and sentenced them to life imprisonment in May 2024.<sup><a href="#ref-50" class="ref-link">[50]</a></sup> In its ruling, the Court held that functional immunities for State officials do not apply in serious international crimes cases.<sup><a href="#ref-51" class="ref-link">[51]</a></sup></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Graph 4E: Static - Treaty-based obligations -->
+        <section class="section-one-column">
+            <div class="graph-container" id="chart-section-4e">
+                <!-- Stacked bar chart -->
+            </div>
+            <p class="graph-caption">Figure 4E: Treaty-Based Obligations to Exercise Jurisdiction</p>
+        </section>
+
+        <section class="narrative-block-lower">
+            <p>Many States are required to exercise jurisdiction over crimes committed abroad as an obligation under a treaty. Most relevant for Project Meridian, the 1949 Geneva Conventions, which govern the conduct of war and provide protections for those who are not taking part in hostilities, include an obligation to prosecute suspected war criminals or extradite them to a State that is better placed to prosecute.<sup><a href="#ref-54" class="ref-link">[54]</a></sup> Therefore, any State that has ratified the Geneva Conventions has not only jurisdiction but an obligation to investigate and prosecute "grave breaches" of the Conventions committed in other States.</p>
+            <p>Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as "protective principle" jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries,<sup><a href="#ref-52" class="ref-link">[52]</a></sup> States rarely invoke it to investigate and prosecute such crimes.<sup><a href="#ref-53" class="ref-link">[53]</a></sup></p>
+        </section>
+
+        <!-- Case Study: Eshetu Alemu - SIMPLIFIED FORMAT -->
+        <section class="case-study-block">
+            <div class="case-study-container">
+                <div class="case-study-header">
+                    <span class="case-study-label">Case Study</span>
+                    <h3>Dual Ethiopian and Dutch National Eshetu Alemu Prosecuted in the Netherlands for International Crimes Committed in Ethiopia</h3>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-narrative">
+                        <p>Eshetu Alemu is a dual Ethiopian and Dutch national who committed war crimes as a member of the communist military regime, the "Derg", that ruled Ethiopia from 1974-91.<sup><a href="#ref-42" class="ref-link">[42]</a></sup> Alemu settled in the Netherlands in 1990, a year prior to the Derg's collapse, and obtained Dutch citizenship in 1998.<sup><a href="#ref-43" class="ref-link">[43]</a></sup> Also in 1998, a Dutch magazine published an investigative piece linking Alemu to war crimes in Ethiopia.<sup><a href="#ref-44" class="ref-link">[44]</a></sup> Based on the magazine article, the Dutch National Investigative Service's International Crimes Unit opened what would become a four-year investigation into Alemu in 2009 that involved cooperation with Ethiopia's Special Prosecutor's Office.<sup><a href="#ref-45" class="ref-link">[45]</a></sup> Dutch police arrested Alemu in September 2015, and The Hague District Court convicted him of war crimes and sentenced him to life imprisonment in December 2017.<sup><a href="#ref-46" class="ref-link">[46]</a></sup> Alemu's case is to date the only prosecution abroad for international crimes committed in Ethiopia.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- SECTION 5: HOW FREQUENTLY DO STATES APPLY UJ? -->
+        <!-- ============================================================ -->
+        
+        <section class="narrative-block" id="section-5">
+            <h2>How frequently do States apply universal jurisdiction?</h2>
+            <p>While most States have laws that allow them to investigate and prosecute crimes committed beyond their own borders, few have actually done so. This gap is due to a variety of procedural and practical limitations, including special requirements that can make it difficult to trigger jurisdiction, capacity issues among national authorities, and lack of political will. Underutilization of these laws represents a significant missed opportunity to pursue accountability on behalf of survivors and families of victims of atrocity crimes</p>
+        </section>
+
+        <!-- Graph 5A: Scrollytelling - Bubble Chart for Cases -->
+        <section id="scrolly-section-5a">
+            <div class="sticky-graphic">
+                <div class="chart-wrapper" id="chart-section-5a">
+                    <!-- Bubble/heatmap chart -->
+                </div>
+            </div>
+
+            <div class="scrolly-steps">
+                <div class="step" data-action="show-all-cases" data-target="chart-section-5a">
+                    <div class="card">
+                        <h3>Investigations and Prosecutions of Serious International Crimes</h3>
+                        <p><span id="stat-cases-launched" class="stat-placeholder">--</span> U.N. Member States have launched a criminal case involving international crimes committed outside of their borders.</p>
+                    </div>
+                </div>
+
+                <div class="step" data-action="highlight-europe" data-target="chart-section-5a">
+                    <div class="card">
+                        <h3>Euro-Centric Application</h3>
+                        <p>246 out of 270 cases have been opened in Europe against perpetrators from outside the continent. Germany leads with 70 cases, followed by France with 56.</p>
+                    </div>
+                </div>
+
+                <div class="step" data-action="show-gap" data-target="chart-section-5a">
+                    <div class="card">
+                        <h3>The Gap in Application</h3>
+                        <p>Only 21 countries have launched at least one such case, despite <span id="stat-jurisdiction-for-gap" class="stat-placeholder">--</span> States having laws enabling them to do so.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Section 5 narrative -->
+        <section class="narrative-block">
+            <p>Even though <span id="stat-jurisdiction-any-2" class="stat-placeholder">--</span> U.N. Member States can hold alleged perpetrators of the most serious international crimes accountable even when the crimes were committed outside their borders, only about <span id="stat-percent-used-laws" class="stat-placeholder">--</span> percent of those States have used their laws to open such cases. One of the key barriers that explains this gap is the legal limitations which effectively make universal jurisdiction much less universal than it was meant to be. Two such limitations are that many States require that the alleged perpetrator be present on their territory to open an investigation, and sometimes political authorization to initiate a prosecution.</p>
+            <p>Another challenge related to this gap is the perception it creates of the selective application of universal jurisdiction, and international criminal law in general. While the use of laws to investigate and prosecute extraterritorial crimes has been expanding geographically in recent years,<sup><a href="#ref-55" class="ref-link">[55]</a></sup> most serious international crimes cases (246 out of 270) have been opened in Europe against perpetrators from outside the continent.<sup><a href="#ref-56" class="ref-link">[56]</a></sup> This trend and the lack of prosecutions of suspected perpetrators from certain Western States undermine the universality of the international justice system.<sup><a href="#ref-57" class="ref-link">[57]</a></sup> Further geographical expansion of prosecutions is critically important for the system's future credibility and success.</p>
+        </section>
+
+        <!-- Graph 5B: Static - Specialized Units -->
+        <section class="section-one-column">
+            <div class="graph-container-transparent" id="chart-section-5b">
+                <!-- ANUS BUBBLE CHART -->
+            </div>
+            <p class="graph-caption">Figure 5B: Specialized Units to Investigate and Prosecute International Crimes – <span id="stat-specialized-units" class="stat-placeholder">--</span> U.N. Member States have a specialized unit</p>
+        </section>
+
+        <section class="narrative-block-lower">
+            <p>Beyond legal limitations, additional barriers to more widespread application of universal jurisdiction are lack of capacity and political will among national authorities. Investigations of the most serious international crimes often require more specialized expertise and resources than investigations of other offenses, and many States are hesitant to spend what limited resources they have on lengthy investigations of crimes that took place outside their borders. States may also face political pressure from other States not to carry out prosecutions at all.<sup><a href="#ref-58" class="ref-link">[58]</a></sup></p>
+            <p>An increase in recent years in the number of specialized units dedicated to international crimes as part of police and prosecutorial teams is a sign of growing commitment among States to combatting impunity for the most serious international crimes. Additionally, collaborative platforms such as the European Network for the investigation and prosecution of genocide, crimes against humanity and war crimes within Eurojust have been created "to enable close cooperation between the national authorities [of EU Member States] when investigating and prosecuting" such crimes.<sup><a href="#ref-59" class="ref-link">[59]</a></sup> However, more work needs to be done to build this type of investigative and prosecutorial expertise outside of Europe, and to combat the lack of political will that often impedes the opening of serious international crimes cases in the first place.</p>
+        </section>
+
+        <!-- Closing Statement -->
+        <section class="narrative-block closing-section">
+            <div class="closing-divider"></div>
+            <p>Despite limitations and challenges, the possibilities for prosecuting alleged perpetrators of the most serious international crimes at the national level are significant and expanding. Developing and supporting this system will enable effective access to justice for thousands of survivors. It will also ensure that a wide range of perpetrators who are currently outside the reach of the International Criminal Court can still be brought to account.</p>
+            <p>Project Meridian provides comprehensive and transparent information to help survivors and practitioners make the most of these expanding opportunities. Equally, the Project has identified some of the main obstacles to realizing the promise of universal justice. The information collected and tracked by Project Meridian can help advocates, practitioners, and government officials turn this promise into a reality.</p>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- REFERENCES SECTION -->
+        <!-- ============================================================ -->
+        <section class="references-section" id="references">
+            <div class="text-container">
+                <h2>References</h2>
+                <p class="references-intro">Sources and citations for this report. Project Meridian tracks the criminalization of the most serious international crimes across 216 total jurisdictions, but presents findings for the 193 UN Member States only.</p>
+            </div>
+            
+            <div class="references-list">
+                <div class="reference-item" id="ref-1">
+                    <span class="ref-number">[1]</span>
+                    <span class="ref-text">Project Meridian tracks the criminalization of the most serious international crimes and the investigation and prosecution of those crimes extraterritorially across 216 total jurisdictions, including 193 UN Member States, two UN Non-Member States (the Holy See and Palestine), and 21 other entities (territories, special administrative regions, "constituent countries," and the like). However, this live data report presents up-to-date findings for the 193 UN Member States only.</span>
+                </div>
+
+                <div class="reference-item" id="ref-2">
+                    <span class="ref-number">[2]</span>
+                    <span class="ref-text">Cedric Ryngaert, <em>Jurisdiction in International Law</em> 101, 127-28 (2nd ed. 2015). The term "universal jurisdiction" is sometimes used as shorthand to describe a number of types of extraterritorial jurisdiction laws presented in this live data report.</span>
+                </div>
+
+                <div class="reference-item" id="ref-3">
+                    <span class="ref-number">[3]</span>
+                    <span class="ref-text">Basic Facts on Universal Jurisdiction, Human Rights Watch (Oct. 19, 2009), <a href="https://www.hrw.org/news/2009/10/19/basic-facts-universal-jurisdiction" target="_blank">https://www.hrw.org/news/2009/10/19/basic-facts-universal-jurisdiction</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-4">
+                    <span class="ref-number">[4]</span>
+                    <span class="ref-text">See Máximo Langer &amp; Mackenzie Eason, <em>The Quiet Expansion of Universal Jurisdiction</em>, 30(3) Eur. J. Int'l. L. 779, 785 (2019), <a href="https://www.ejil.org/pdfs/30/3/2994.pdf" target="_blank">https://www.ejil.org/pdfs/30/3/2994.pdf</a>. See also Beth Van Schaack &amp; Zarko Perovic, <em>The Prevalence of "Present-In" Jurisdiction</em>, 107 Proc. Ann. Meeting Am. Soc'y Int'l L. 237, 239 (2013), <a href="https://www.jstor.org/stable/10.5305/procannmeetasil.107.0237" target="_blank">https://www.jstor.org/stable/10.5305/procannmeetasil.107.0237</a>; Máximo Langer, <em>Universal Jurisdiction is Not Disappearing: The Shift from 'Global Enforcer' to 'No Safe Haven' Universal Jurisdiction</em>, 13 J. Int'l Crim. Just. 245 (2015), <a href="https://promiseinstitute.law.ucla.edu/wp-content/uploads/2022/06/Universal-Jurisdiction-is-Not-Disappearing.pdf" target="_blank">https://promiseinstitute.law.ucla.edu/wp-content/uploads/2022/06/Universal-Jurisdiction-is-Not-Disappearing.pdf</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-5">
+                    <span class="ref-number">[5]</span>
+                    <span class="ref-text">Geneva Convention for the Amelioration of the Condition of the Wounded and Sick in the Armed Forces in the Field, art. 50, Aug. 12 1949, 75 U.N.T.S. 31 [hereinafter Geneva Convention I]; Geneva Convention for the Amelioration of the Condition of the Wounded, Sick, and Shipwrecked Members of Armed Forces at Sea, art. 51, Aug. 12 1949 75 U.N.T.S. 85 [hereinafter Geneva Convention II]; Geneva Convention Relative to the Treatment of Prisoners of War, art. 129, Aug. 12 1949, 75 U.N.T.S. 135 [hereinafter Geneva Convention III]; Geneva Convention Relative to the Protection of Civilian Persons in the Time of War, art. 146, Aug. 12 1949, 75 U.N.T.S. 287 [hereinafter Geneva Convention IV]. "Grave breaches" of the Geneva Conventions refer to those violations that are considered the most serious. Examples of grave breaches include willful killing, torture, and inhuman treatment; willfully causing great suffering to the body or health; or extensive, unlawful, and wanton destruction of property.</span>
+                </div>
+
+                <div class="reference-item" id="ref-6">
+                    <span class="ref-number">[6]</span>
+                    <span class="ref-text">Basic Facts on Universal Jurisdiction, Human Rights Watch.</span>
+                </div>
+
+                <div class="reference-item" id="ref-7">
+                    <span class="ref-number">[7]</span>
+                    <span class="ref-text">See Convention against Torture and Other Cruel, Inhuman or Degrading Treatment or Punishment, art. 5(2), Dec. 10, 1984, 1465 U.N.T.S. 85 ("Each State Party shall likewise take such measures as may be necessary to establish its jurisdiction over such offences in cases where the alleged offender is present in any territory under its jurisdiction and it does not extradite him pursuant to article 8 to any of the States mentioned in paragraph I of this article.").</span>
+                </div>
+
+                <div class="reference-item" id="ref-8">
+                    <span class="ref-number">[8]</span>
+                    <span class="ref-text">Fulgence Niyonteze, Trial International, <a href="https://www.legal-tools.org/doc/bb9da0/pdf/" target="_blank">https://www.legal-tools.org/doc/bb9da0/pdf/</a> (last updated Jun. 10, 2016).</span>
+                </div>
+
+                <div class="reference-item" id="ref-9">
+                    <span class="ref-number">[9]</span>
+                    <span class="ref-text">International Criminal Court, <em>Understanding the International Criminal Court</em> 6 (2020), <a href="https://www.icc-cpi.int/sites/default/files/Publications/understanding-the-icc.pdf" target="_blank">https://www.icc-cpi.int/sites/default/files/Publications/understanding-the-icc.pdf</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-10">
+                    <span class="ref-number">[10]</span>
+                    <span class="ref-text">The Pinochet Precedent: How Victims Can Pursue Human Rights Criminals Abroad, Human Rights Watch (Nov. 1, 1998), <a href="https://www.hrw.org/report/1998/11/01/pinochet-precedent/how-victims-can-pursue-human-rights-criminals-abroad" target="_blank">https://www.hrw.org/report/1998/11/01/pinochet-precedent/how-victims-can-pursue-human-rights-criminals-abroad</a>; Daniel Krcmaric, <em>The Justice Dilemma: Leaders and Exile in an Era of Accountability</em> 41 (2020).</span>
+                </div>
+
+                <div class="reference-item" id="ref-11">
+                    <span class="ref-number">[11]</span>
+                    <span class="ref-text">Princeton University, <em>The Princeton Principles on Universal Jurisdiction</em> 25-27 (2001), <a href="https://www.icj.org/wp-content/uploads/2001/01/Princeton-Principles-Universal-Jurisdiction-report-2001-eng.pdf" target="_blank">https://www.icj.org/wp-content/uploads/2001/01/Princeton-Principles-Universal-Jurisdiction-report-2001-eng.pdf</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-12">
+                    <span class="ref-number">[12]</span>
+                    <span class="ref-text">G.A. Res. 64/117 (Dec. 16, 2009), <a href="https://docs.un.org/en/A/RES/64/117" target="_blank">https://docs.un.org/en/A/RES/64/117</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-13">
+                    <span class="ref-number">[13]</span>
+                    <span class="ref-text">International Criminal Court, <em>Understanding the International Criminal Court</em>, 26.</span>
+                </div>
+
+                <div class="reference-item" id="ref-14">
+                    <span class="ref-number">[14]</span>
+                    <span class="ref-text">France Convicts Rwandan National for Genocide, Other States Should Follow Its Example, Trial International (Dec. 5, 2016), <a href="https://trialinternational.org/latest-post/france-convicts-rwandan-national-for-genocide-other-states-should-follow-its-example/" target="_blank">https://trialinternational.org/latest-post/france-convicts-rwandan-national-for-genocide-other-states-should-follow-its-example/</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-15">
+                    <span class="ref-number">[15]</span>
+                    <span class="ref-text">Hissène Habré, Trial International, <a href="https://ujim.trialinternational.org/latest-post/hissene-habre/" target="_blank">https://ujim.trialinternational.org/latest-post/hissene-habre/</a> (last updated Oct. 20, 2023).</span>
+                </div>
+
+                <div class="reference-item" id="ref-16">
+                    <span class="ref-number">[16]</span>
+                    <span class="ref-text">The Prosecutor v. Eyad Al-Gharib, International Crimes Database, <a href="https://www.internationalcrimesdatabase.org/Case/3324/Eyad-Al-Gharib/" target="_blank">https://www.internationalcrimesdatabase.org/Case/3324/Eyad-Al-Gharib/</a> (last visited Nov. 25, 2025).</span>
+                </div>
+
+                <div class="reference-item" id="ref-17">
+                    <span class="ref-number">[17]</span>
+                    <span class="ref-text">German Court Hands Down First Genocide Conviction Against ISIS Member, Doughty Street Chambers (Nov. 30, 2021), <a href="https://www.doughtystreet.co.uk/news/german-court-hands-down-first-genocide-conviction-against-isis-member" target="_blank">https://www.doughtystreet.co.uk/news/german-court-hands-down-first-genocide-conviction-against-isis-member</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-18">
+                    <span class="ref-number">[18]</span>
+                    <span class="ref-text">Convention Signed to Combat International Crime More Effectively, Government of the Netherlands (Feb. 14, 2024), <a href="https://www.government.nl/latest/news/2024/02/14/convention-signed-to-combat-international-crime-more-effectively" target="_blank">https://www.government.nl/latest/news/2024/02/14/convention-signed-to-combat-international-crime-more-effectively</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-19">
+                    <span class="ref-number">[19]</span>
+                    <span class="ref-text">Gambian Former Minister of Interior Ousman Sonko Sentenced to 20 Years in Prison for Crimes Against Humanity in Historic Swiss Trial, Trial International, <a href="https://trialinternational.org/latest-post/gambian-former-minister-of-interior-ousman-sonko-convicted-of-crimes-against-humanity-in-historic-swiss-trial/" target="_blank">https://trialinternational.org/latest-post/gambian-former-minister-of-interior-ousman-sonko-convicted-of-crimes-against-humanity-in-historic-swiss-trial/</a> (last updated May 16, 2024).</span>
+                </div>
+
+                <div class="reference-item" id="ref-20">
+                    <span class="ref-number">[20]</span>
+                    <span class="ref-text">Yan Petrovsky (aka Vojislav Torden), Trial International, <a href="https://ujim.trialinternational.org/latest-post/yan-petrovsky/" target="_blank">https://ujim.trialinternational.org/latest-post/yan-petrovsky/</a> (last updated Nov. 11, 2025); Jeanette Bjorkqvist, Finland on the Frontline for Trying Russians for War Crimes, Justice Info (Jan. 23, 2025), <a href="https://www.justiceinfo.net/en/140579-finland-frontline-trying-russians-war-crimes.html" target="_blank">https://www.justiceinfo.net/en/140579-finland-frontline-trying-russians-war-crimes.html</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-21">
+                    <span class="ref-number">[21]</span>
+                    <span class="ref-text">Andrey Shilov, Russian Accused of Ukraine War Crimes Found Guilty in Finland, Radio Free Europe/Radio Liberty (Mar. 14, 2025), <a href="https://www.rferl.org/a/russian-ukraine-war-crimes-guilty-finland/33347563.html" target="_blank">https://www.rferl.org/a/russian-ukraine-war-crimes-guilty-finland/33347563.html</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-22">
+                    <span class="ref-number">[22]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-23">
+                    <span class="ref-number">[23]</span>
+                    <span class="ref-text">Yan Petrovsky (aka Vojislav Torden), Trial International; Tuomas Rimpilainen, The Old Identity of a Russian Military Leader Suspected of Terrorist Crimes Was Revealed Through Intelligence Information from the Border Guard and Facial Comparison, YLE (Aug. 28, 2023), <a href="https://yle.fi/a/74-20047280" target="_blank">https://yle.fi/a/74-20047280</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-24">
+                    <span class="ref-number">[24]</span>
+                    <span class="ref-text">Tuomas Rimpilainen, The Old Identity of a Russian Military Leader Suspected of Terrorist Crimes Was Revealed Through Intelligence Information from the Border Guard and Facial Comparison.</span>
+                </div>
+
+                <div class="reference-item" id="ref-25">
+                    <span class="ref-number">[25]</span>
+                    <span class="ref-text">Yan Petrovsky (aka Vojislav Torden), Trial International.</span>
+                </div>
+
+                <div class="reference-item" id="ref-26">
+                    <span class="ref-number">[26]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-27">
+                    <span class="ref-number">[27]</span>
+                    <span class="ref-text">Bjorkqvist, Finland on the Frontline for Trying Russians for War Crimes.</span>
+                </div>
+
+                <div class="reference-item" id="ref-28">
+                    <span class="ref-number">[28]</span>
+                    <span class="ref-text">Taha A.J., Trial International, <a href="https://ujim.trialinternational.org/latest-post/taha-aj/" target="_blank">https://ujim.trialinternational.org/latest-post/taha-aj/</a> (last updated Apr. 15, 2024).</span>
+                </div>
+
+                <div class="reference-item" id="ref-29">
+                    <span class="ref-number">[29]</span>
+                    <span class="ref-text">Id. See also Jennifer W., Trial International, <a href="https://ujim.trialinternational.org/latest-post/jennifer-w/" target="_blank">https://ujim.trialinternational.org/latest-post/jennifer-w/</a> (last updated Apr. 15, 2024).</span>
+                </div>
+
+                <div class="reference-item" id="ref-30">
+                    <span class="ref-number">[30]</span>
+                    <span class="ref-text">Taha A.J., Trial International.</span>
+                </div>
+
+                <div class="reference-item" id="ref-31">
+                    <span class="ref-number">[31]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-32">
+                    <span class="ref-number">[32]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-33">
+                    <span class="ref-number">[33]</span>
+                    <span class="ref-text">German Court Hands Down First Genocide Conviction Against ISIS Member, Doughty Street Chambers.</span>
+                </div>
+
+                <div class="reference-item" id="ref-34">
+                    <span class="ref-number">[34]</span>
+                    <span class="ref-text">UN Secretary General, The Scope and Application of the Principle of Universal Jurisdiction, ¶16, UN Doc. A/65/181 (Jul. 29, 2010), <a href="https://digitallibrary.un.org/record/689030?ln=en&v=pdf" target="_blank">https://digitallibrary.un.org/record/689030?ln=en&v=pdf</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-35">
+                    <span class="ref-number">[35]</span>
+                    <span class="ref-text">Trial International, <em>Universal Jurisdiction Annual Review 2025</em> (2025), 91-92, <a href="https://trialinternational.org/wp-content/uploads/2025/04/03_TRIAL_UJAR_2025_FINAL_DIGITAL.pdf" target="_blank">https://trialinternational.org/wp-content/uploads/2025/04/03_TRIAL_UJAR_2025_FINAL_DIGITAL.pdf</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-36">
+                    <span class="ref-number">[36]</span>
+                    <span class="ref-text">Id. at 91.</span>
+                </div>
+
+                <div class="reference-item" id="ref-37">
+                    <span class="ref-number">[37]</span>
+                    <span class="ref-text">Id. at 91.</span>
+                </div>
+
+                <div class="reference-item" id="ref-38">
+                    <span class="ref-number">[38]</span>
+                    <span class="ref-text">Id. at 91-92.</span>
+                </div>
+
+                <div class="reference-item" id="ref-39">
+                    <span class="ref-number">[39]</span>
+                    <span class="ref-text">Id. at 91.</span>
+                </div>
+
+                <div class="reference-item" id="ref-40">
+                    <span class="ref-number">[40]</span>
+                    <span class="ref-text">Id. at 92.</span>
+                </div>
+
+                <div class="reference-item" id="ref-41">
+                    <span class="ref-number">[41]</span>
+                    <span class="ref-text">Gambian Former Minister of Interior Ousman Sonko Sentenced to 20 Years in Prison for Crimes Against Humanity in Historic Swiss Trial, Trial International.</span>
+                </div>
+
+                <div class="reference-item" id="ref-42">
+                    <span class="ref-number">[42]</span>
+                    <span class="ref-text">Eshetu Alemu, Trial International, <a href="https://ujim.trialinternational.org/latest-post/eshetu-alemu/" target="_blank">https://ujim.trialinternational.org/latest-post/eshetu-alemu/</a> (last updated Apr. 15, 2024).</span>
+                </div>
+
+                <div class="reference-item" id="ref-43">
+                    <span class="ref-number">[43]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-44">
+                    <span class="ref-number">[44]</span>
+                    <span class="ref-text">Eshetu Alemu, International Crimes Database, <a href="https://www.internationalcrimesdatabase.org/Case/3317" target="_blank">https://www.internationalcrimesdatabase.org/Case/3317</a> (last visited Nov. 24, 2025).</span>
+                </div>
+
+                <div class="reference-item" id="ref-45">
+                    <span class="ref-number">[45]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-46">
+                    <span class="ref-number">[46]</span>
+                    <span class="ref-text">Eshetu Alemu, Trial International.</span>
+                </div>
+
+                <div class="reference-item" id="ref-47">
+                    <span class="ref-number">[47]</span>
+                    <span class="ref-text">Trial International, <em>Universal Jurisdiction Annual Review 2025</em>, 35.</span>
+                </div>
+
+                <div class="reference-item" id="ref-48">
+                    <span class="ref-number">[48]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-49">
+                    <span class="ref-number">[49]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-50">
+                    <span class="ref-number">[50]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-51">
+                    <span class="ref-number">[51]</span>
+                    <span class="ref-text">Id.</span>
+                </div>
+
+                <div class="reference-item" id="ref-52">
+                    <span class="ref-number">[52]</span>
+                    <span class="ref-text">Matthew Garrod, <em>The Protective Principle of Jurisdiction over War Crimes and the Hollow Concept of Universality</em>, 12 Int'l Crim. L. Rev. 763, 815-18 (2012), <a href="https://files.core.ac.uk/download/pdf/52397682.pdf" target="_blank">https://files.core.ac.uk/download/pdf/52397682.pdf</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-53">
+                    <span class="ref-number">[53]</span>
+                    <span class="ref-text">Ryngaert, <em>supra</em> note 2, at 116.</span>
+                </div>
+
+                <div class="reference-item" id="ref-54">
+                    <span class="ref-number">[54]</span>
+                    <span class="ref-text">Geneva Convention I art. 50; Geneva Convention II art. 51; Geneva Convention III art. 129; Geneva Convention IV art. 146.</span>
+                </div>
+
+                <div class="reference-item" id="ref-55">
+                    <span class="ref-number">[55]</span>
+                    <span class="ref-text">Langer &amp; Eason, <em>supra</em> note 4, at 807.</span>
+                </div>
+
+                <div class="reference-item" id="ref-56">
+                    <span class="ref-number">[56]</span>
+                    <span class="ref-text">See e.g. Trial International, <em>Universal Jurisdiction Annual Review 2025</em>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-57">
+                    <span class="ref-number">[57]</span>
+                    <span class="ref-text">Richard Dicker, <em>A Few Reflections on the Current Status and Future Direction of Universal Jurisdiction Practice</em>, 107 Proc. Ann. Meeting Am. Soc'y Int'l L. 233, 236 (2013), <a href="https://www.jstor.org/stable/10.5305/procannmeetasil.107.0233a" target="_blank">https://www.jstor.org/stable/10.5305/procannmeetasil.107.0233a</a>.</span>
+                </div>
+
+                <div class="reference-item" id="ref-58">
+                    <span class="ref-number">[58]</span>
+                    <span class="ref-text">See e.g. <em>Belgium Scales Back Its War Crimes Law Under U.S. Pressure</em>, Associated Press (Aug. 2, 2003), <a href="https://www.nytimes.com/2003/08/02/world/belgium-scales-back-its-war-crimes-law-under-us-pressure.html" target="_blank">https://www.nytimes.com/2003/08/02/world/belgium-scales-back-its-war-crimes-law-under-us-pressure.html</a> (reporting on the Belgian Parliament's decision to amend and narrow its landmark 1993 universal jurisdiction law as a result of pressure from the United States, after complaints were filed under the law against high-ranking American and Israeli officials).</span>
+                </div>
+
+                <div class="reference-item" id="ref-59">
+                    <span class="ref-number">[59]</span>
+                    <span class="ref-text">Genocide Prosecution Network, Eurojust, <a href="https://www.eurojust.europa.eu/judicial-cooperation/practitioner-networks/genocide-prosecution-network" target="_blank">https://www.eurojust.europa.eu/judicial-cooperation/practitioner-networks/genocide-prosecution-network</a> (last visited Nov. 24, 2025).</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="copyright">&copy; Project Meridian</p>
+        </div>
+    </footer>
+  
+    <!-- NOT ON GITHUB. Exists to call OS env variables. Doing it like this cause I don't want to work with NodeJS LOL -->
+    <script src="js/config.js"></script>
+
+    <!-- DATA LOADING FUNCTIONS -->
+    <script src="js/data_preload.js"></script>
+    <script src="js/data_loader.js"></script>
+
+    <!-- d3js for graphs -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+   
+    <!-- TopoJSON for choropleth map (fallback) -->
+    <script src="https://unpkg.com/topojson-client@3"></script>
+
+    <!-- homebrew js for charts (charts.js), timeline script, and site nav functionality (scripts.js) -->
+    <script src="js/charts.js"></script>
+  
+
+    <!-- This fills in all the "while XX" or (XX percent) text -->
+     <!-- We also add a cache which updates on site visits. Pls feel free to change to something better LOL -->
+    <script src="js/stats_snapshot.js"></script>
+    <script src="js/placeholder_filler.js"></script>
+
+    <!-- TIMELINE SCRIPT -->
+    <script src="js/timeline_script.js"></script> 
+    <script src="js/timeline_mobile.js"></script>
+
+    <!-- MAIN SCRIPTS FOR SITE FUNCTIONING -->
+    <script src="js/scripts.js"></script>
+
+    <script src="js/case_study_globes.js"></script>
+
+</body>
+</html>

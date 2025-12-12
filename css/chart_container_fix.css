@@ -1,0 +1,41 @@
+/**
+ * CHART CONTAINER FIX
+ * ==================================================
+ * Removes dark background boxes from chart containers
+ * so they blend seamlessly into the page background
+ * ==================================================
+ */
+
+/* Remove dark container styling from graph containers */
+.graph-container {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 10px 0 !important; /* Keep some vertical spacing */
+}
+
+/* Also handle any wrapper elements charts might create */
+.graph-container > div,
+.graph-container > svg {
+    background: transparent !important;
+}
+
+/* Choropleth specific - ensure wrapper is transparent */
+.choropleth-wrapper {
+    background: transparent !important;
+}
+
+/* Keep search bar styled nicely (choropleth search) */
+.choropleth-search-container {
+    background: transparent !important;
+}
+
+/* Optional: Add subtle top/bottom borders for visual separation if needed */
+/*
+.graph-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 20px 0 !important;
+    margin: 10px 0 !important;
+}
+*/

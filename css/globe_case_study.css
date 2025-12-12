@@ -1,0 +1,454 @@
+/* ===============================================
+   GLOBE CASE STUDY STYLES
+   Interactive case study globe styles
+   Color scheme matches Project Meridian report
+   =============================================== */
+
+/* ===============================================
+   ANIMATIONS
+   =============================================== */
+@keyframes globeFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes pinFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes globeSpin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+@keyframes globePulse {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(99, 179, 237, 0.4);
+    }
+    50% { 
+        box-shadow: 0 0 0 15px rgba(99, 179, 237, 0);
+    }
+}
+
+@keyframes modalFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===============================================
+   NARRATIVE BLOCK WITH GLOBE
+   Globe floats alongside the narrative text
+   =============================================== */
+.narrative-block.has-case-study,
+.narrative-block-lower.has-case-study {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.narrative-block.has-case-study.globe-right,
+.narrative-block-lower.has-case-study.globe-right {
+    flex-direction: row;
+}
+
+.narrative-block.has-case-study.globe-left,
+.narrative-block-lower.has-case-study.globe-left {
+    flex-direction: row-reverse;
+}
+
+.narrative-block.has-case-study .narrative-content,
+.narrative-block-lower.has-case-study .narrative-content {
+    flex: 1;
+    max-width: var(--text-width, 600px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===============================================
+   GLOBE CONTAINER
+   Positioned to the side of narrative blocks
+   =============================================== */
+.globe-case-study-trigger {
+    position: relative;
+    flex-shrink: 0;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Globe wrapper with floating animation */
+.globe-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.globe-wrapper:hover {
+    transform: scale(1.1);
+}
+
+/* The globe button itself */
+.globe-button {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: globeFloat 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.globe-button::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: rgba(99, 179, 237, 0.1);
+    animation: globePulse 2s ease-in-out infinite;
+}
+
+.globe-button img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.globe-wrapper:hover .globe-button img {
+    animation: globeSpin 2s linear infinite;
+}
+
+/* Country label under globe */
+.globe-country-label {
+    margin-top: 10px;
+    font-family: sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-accent, #63B3ED);
+    text-align: center;
+    text-shadow: 0 0 8px rgba(99, 179, 237, 0.4);
+    position: relative;
+}
+
+/* Subtle decorative line under the label */
+.globe-country-label::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(99, 179, 237, 0.5), transparent);
+    margin: 6px auto 0 auto;
+}
+
+/* ===============================================
+   MODAL OVERLAY
+   =============================================== */
+.case-study-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.case-study-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    animation: overlayFadeIn 0.3s ease;
+}
+
+/* ===============================================
+   MODAL CARD
+   =============================================== */
+.case-study-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    background: linear-gradient(180deg, #2D3748 0%, #1A202C 100%);
+    border: 1px solid var(--color-border, #4A5568);
+    border-radius: 16px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.case-study-modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    animation: modalFadeIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Modal header with location */
+.modal-header {
+    padding: 1.5rem 2rem 1rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+}
+
+.modal-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(99, 179, 237, 0.15);
+    color: var(--color-accent, #63B3ED);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(99, 179, 237, 0.3);
+    box-shadow: 0 2px 8px rgba(99, 179, 237, 0.15);
+}
+
+.modal-location svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+}
+
+/* Close button */
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-muted, #A0AEC0);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* Modal content */
+.modal-content {
+    padding: 1.5rem 2rem 2rem 2rem;
+    max-height: calc(85vh - 120px);
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-narrative {
+    position: relative;
+    overflow: hidden; /* Contains the float */
+}
+
+/* Text wrapper for proper float behavior */
+.modal-text {
+    display: block;
+}
+
+.modal-text p,
+.modal-narrative p {
+    margin-bottom: 1em;
+}
+
+.modal-text p:last-child,
+.modal-narrative p:last-child {
+    margin-bottom: 0;
+}
+
+.modal-title {
+    font-family: var(--font-head, Georgia, serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.3;
+}
+
+.modal-narrative {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text, #E2E8F0);
+}
+
+.modal-narrative sup a.ref-link {
+    color: var(--color-accent, #63B3ED);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ===============================================
+   FLOATING GLOBE IN MODAL CORNER
+   Text wraps around the globe using float
+   =============================================== */
+.modal-globe {
+    float: right;
+    width: 140px;
+    height: 140px;
+    margin: 0 0 15px 20px;
+    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+    z-index: 5;
+    shape-outside: circle(50%);
+    position: relative;
+}
+
+.modal-globe img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Pin overlay on modal globe - blue theme with shadow */
+.modal-globe-pin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+}
+
+/* Pin color styling - applied via CSS filter or inline SVG fill */
+.modal-globe-pin svg {
+    overflow: visible;
+}
+
+.modal-globe-pin .pin-marker {
+    fill: #4A90D9;
+    stroke: #2563EB;
+    stroke-width: 1;
+}
+
+.modal-globe-pin .pin-dot {
+    fill: #1E40AF;
+}
+
+/* Animate the pin group inside the SVG */
+.modal-globe-pin .pin-animated {
+    animation: pinFloat 3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    will-change: transform;
+}
+
+/* ===============================================
+   STANDALONE GLOBE SECTION
+   For case studies without preceding narrative
+   =============================================== */
+.globe-case-study-standalone {
+    max-width: var(--wide-width, 900px);
+    margin: 3rem auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ===============================================
+   RESPONSIVE DESIGN
+   =============================================== */
+@media (max-width: 900px) {
+    .narrative-block.has-case-study,
+    .narrative-block-lower.has-case-study {
+        flex-direction: column !important;
+        align-items: center;
+    }
+    
+    .narrative-block.has-case-study .narrative-content,
+    .narrative-block-lower.has-case-study .narrative-content {
+        order: 1;
+    }
+    
+    .globe-case-study-trigger {
+        order: 2;
+        margin-top: 2rem;
+        width: 100%;
+    }
+    
+    .globe-button {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .globe-button img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 600px) {
+    .case-study-modal {
+        width: 95%;
+        max-height: 90vh;
+        border-radius: 12px;
+    }
+    
+    .modal-header {
+        padding: 1.25rem 1.5rem 1rem 1.5rem;
+    }
+    
+    .modal-content {
+        padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+    }
+    
+    .modal-title {
+        font-size: 1.25rem;
+    }
+    
+    .modal-narrative {
+        font-size: 1rem;
+    }
+    
+    .modal-globe {
+        width: 100px;
+        height: 100px;
+        margin: 0 0 10px 15px;
+    }
+}
+
+/* ===============================================
+   HIDE OLD CASE STUDY BLOCKS
+   These are replaced by the globe system
+   =============================================== */
+.case-study-block {
+    display: none !important;
+}

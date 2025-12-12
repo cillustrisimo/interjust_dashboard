@@ -1,0 +1,1191 @@
+/* =====================================================
+   MOBILE STYLES 
+   
+   IMPORTANT: All styles are scoped to mobile breakpoints
+   to avoid breaking desktop functionality
+   ===================================================== */
+
+/* =====================================================
+   REMOVE SEARCH BAR (ALL SCREENS)
+   ===================================================== */
+.splash-search {
+    display: none !important;
+}
+
+/* =====================================================
+ LOGO CENTERING ON MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .splash-top {
+        justify-content: center !important;
+        width: 100%;
+    }
+    
+    .splash-logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+    }
+    
+    .splash-logos img {
+        max-height: 40px;
+        width: auto;
+    }
+    
+    .logo-divider {
+        color: rgba(255,255,255,0.5);
+    }
+    
+    .splash-hero-grid {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .splash-brand {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* =====================================================
+   TABLE OF CONTENTS - FULL WIDTH LINES (MOBILE)
+   ===================================================== */
+@media (max-width: 900px) {
+    .glossary-section {
+        padding: 2rem 0;
+    }
+    
+    .glossary-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    .glossary-right {
+        width: 100%;
+        flex: none;
+    }
+    
+    .glossary-list-item {
+        width: 100%;
+        padding: 1.5rem 0;
+        margin: 0;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        border-top: 1px solid var(--color-border, #4A5568);
+    }
+    
+    .glossary-list-item:last-child {
+        border-bottom: 1px solid var(--color-border, #4A5568);
+    }
+    
+    .g-text {
+        font-size: 1.2rem;
+        flex-grow: 1;
+        padding-right: 1rem;
+    }
+    
+    .g-num {
+        font-size: 0.85rem;
+        margin-right: 1rem;
+        min-width: 25px;
+    }
+    
+    .glossary-big-title {
+        font-size: 2.5rem;
+    }
+    
+    .glossary-left {
+        position: static;
+        margin-bottom: 1rem;
+    }
+}
+
+/* =====================================================
+   HAMBURGER MENU NAVIGATION (MOBILE ONLY)
+   ===================================================== */
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-nav {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: var(--color-header-bg, #1A202C);
+        border-bottom: 1px solid var(--color-border, #2D3748);
+        padding: 12px 15px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .mobile-nav:has(+ .mobile-menu.is-open) {
+        border-bottom-color: transparent;
+    }
+    
+    body {
+        padding-top: 56px;
+    }
+    
+    .site-header {
+        display: none;
+    }
+}
+
+.mobile-nav-logo {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    position: relative;
+    z-index: 10001;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger-btn.is-open span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger-btn.is-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger-btn.is-open span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+.mobile-menu {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu {
+        display: block;
+        position: fixed;
+        top: 55px;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        max-height: calc(100vh - 55px);
+        overflow-y: auto;
+        background: rgba(26, 32, 44, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 9998;
+        padding: 0 20px 15px 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        border-top: none;
+    }
+    
+    .mobile-menu.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.mobile-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu-item {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.mobile-menu-item:first-child {
+    border-top: none;
+}
+
+.mobile-menu-link {
+    display: flex;
+    align-items: center;
+    padding: 14px 10px;
+    color: var(--color-text, #E2E8F0);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.mobile-menu-link:hover,
+.mobile-menu-link:active {
+    color: #63B3ED;
+    background: rgba(99, 179, 237, 0.1);
+    padding-left: 18px;
+}
+
+.mobile-menu-num {
+    font-family: monospace;
+    color: #63B3ED;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 0.9rem;
+    min-width: 25px;
+}
+
+.mobile-menu-title {
+    font-family: var(--font-head, Georgia, serif);
+    font-size: 1.1rem;
+    line-height: 1.3;
+}
+
+/* =====================================================
+   TIMELINE PROGRESS BAR - HIDE AFTER SECTION (MOBILE)
+   ===================================================== */
+@media (max-width: 900px) {
+    .progress-indicator {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .progress-indicator.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .progress-bar {
+        width: 100px;
+    }
+}
+
+/* =====================================================
+   SCROLLYTELLING - MOBILE ONLY
+   Key: Keep sticky behavior, just adjust sizing
+   ===================================================== */
+@media (max-width: 768px) {
+    [id^="scrolly-section-"] {
+        position: relative;
+        width: 100%;
+        margin: 2rem auto 4rem auto;
+        padding: 0;
+        overflow: visible;
+    }
+    
+    .sticky-graphic {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 56px;
+        height: calc(100vh - 56px);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        overflow: visible;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+    
+    .chart-wrapper {
+        width: 95%;
+        max-width: 700px;
+        height: auto;
+        min-height: 320px;
+        max-height: 60vh;
+        transform: none !important;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+    }
+    
+    .chart-wrapper.is-zoomed {
+        transform: none !important;
+    }
+    
+    .chart-wrapper svg {
+        width: 100%;
+        height: auto;
+        max-height: 55vh;
+        display: block;
+    }
+    
+    .scrolly-steps {
+        position: relative;
+        z-index: 10;
+        margin-top: -60vh;
+        padding-bottom: 60vh;
+        padding-left: 10px;
+        padding-right: 10px;
+        max-width: 100%;
+        pointer-events: none;
+    }
+    
+    .step {
+        min-height: 75vh;
+        display: flex;
+        align-items: center;
+        padding: 1rem 5px;
+        pointer-events: none;
+    }
+    
+    .step:nth-child(odd) {
+        justify-content: flex-start;
+    }
+    
+    .step:nth-child(even) {
+        justify-content: flex-end;
+    }
+    
+    .step .card {
+        max-width: 55%;
+        min-width: 150px;
+        margin: 0;
+        padding: 1rem;
+        background: var(--color-card-bg, rgba(26, 32, 44, 0.95));
+        border: 1px solid var(--color-border, #2D3748);
+        border-radius: 8px;
+        backdrop-filter: blur(10px);
+        pointer-events: auto;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    
+    .step:nth-child(odd) .card {
+        border-left: 3px solid var(--color-accent, #63B3ED);
+    }
+    
+    .step:nth-child(even) .card {
+        border-right: 3px solid var(--color-accent, #63B3ED);
+    }
+    
+    .step .card h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .step .card p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 480px) {
+    .sticky-graphic {
+        top: 56px !important;
+        height: calc(100vh - 56px) !important;
+    }
+    
+    .chart-wrapper {
+        width: 90% !important;
+        min-height: 220px;
+        max-height: 45vh;
+    }
+    
+    .step {
+        min-height: 70vh;
+    }
+    
+    .step .card {
+        max-width: 60% !important;
+        min-width: 150px;
+        padding: 0.85rem;
+    }
+    
+    .step .card h3 {
+        font-size: 0.9rem;
+    }
+    
+    .step .card p {
+        font-size: 0.8rem;
+    }
+}
+
+/* =====================================================
+   VERTICAL TIMELINE - MOBILE ONLY
+   Includes left-side year markers and connecting line
+   ===================================================== */
+@media (max-width: 900px) {
+    .timeline-section {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+    
+    .timeline-container {
+        position: relative;
+        top: auto;
+        height: auto;
+        min-height: auto;
+        display: block;
+        padding: 1rem;
+        overflow: visible;
+    }
+    
+    .timeline-line {
+        display: none;
+    }
+    
+    /* Hide the horizontal timeline line */
+    .timeline-container::before {
+        display: none;
+    }
+    
+    .timeline-events {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0 1rem 0;
+        width: 100%;
+        height: auto;
+    }
+    
+    /* Vertical connecting line on left side */
+    .timeline-events::before {
+        content: '';
+        position: absolute;
+        left: 28px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+            180deg,
+            transparent 0%,
+            var(--timeline-line-color, #d4876f) 5%,
+            var(--timeline-line-color, #d4876f) 95%,
+            transparent 100%
+        );
+        z-index: 1;
+    }
+    
+    .timeline-event {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        opacity: 1 !important;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding-left: 60px;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Dot marker on the timeline */
+    .timeline-event::before {
+        content: '';
+        position: absolute;
+        left: 22px;
+        top: 1.2rem;
+        width: 14px;
+        height: 14px;
+        background: var(--timeline-bg, #2D3748);
+        border: 3px solid var(--timeline-line-color, #d4876f);
+        border-radius: 50%;
+        z-index: 2;
+        box-shadow: 0 0 0 4px var(--timeline-bg, #2D3748);
+    }
+    
+    /* Connecting line from dot to card */
+    .timeline-event::after {
+        content: '';
+        position: absolute;
+        left: 36px;
+        top: calc(1.2rem + 6px);
+        width: 24px;
+        height: 2px;
+        background: var(--timeline-line-color, #d4876f);
+        z-index: 1;
+    }
+    
+    /* Hide the event marker dots (using pseudo-element instead) */
+    .event-marker {
+        display: none;
+    }
+    
+    .cluster-stem {
+        display: none;
+    }
+    
+    .timeline-event .event-content {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: none;
+    }
+    
+    .event-content.standalone-card {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+    }
+    
+    .timeline-event .event-content.above,
+    .timeline-event .event-content.below,
+    .timeline-event .event-content.len-short.above,
+    .timeline-event .event-content.len-short.below,
+    .timeline-event .event-content.len-med.above,
+    .timeline-event .event-content.len-med.below,
+    .timeline-event .event-content.len-long.above,
+    .timeline-event .event-content.len-long.below {
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .cluster-branches {
+        position: relative !important;
+        left: auto !important;
+        transform: none !important;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+        width: 100%;
+    }
+    
+    .cluster-branches.above,
+    .cluster-branches.below {
+        top: auto !important;
+        bottom: auto !important;
+        align-items: stretch;
+    }
+    
+    .branch-node {
+        position: relative;
+        padding: 0;
+        display: block;
+        width: 100%;
+    }
+    
+    .branch-node::before,
+    .branch-node::after {
+        display: none;
+    }
+    
+    .cluster-branches .event-content {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    
+    .cluster-branches.above .event-content.len-short,
+    .cluster-branches.above .event-content.len-med,
+    .cluster-branches.above .event-content.len-long,
+    .cluster-branches.below .event-content.len-short,
+    .cluster-branches.below .event-content.len-med,
+    .cluster-branches.below .event-content.len-long {
+        margin: 0 !important;
+    }
+    
+    .year-labels {
+        display: none;
+    }
+    
+    .timeline-title-header {
+        position: relative;
+        padding: 1rem;
+        background: var(--timeline-bg);
+        margin-bottom: 1rem;
+    }
+    
+    .timeline-title-header h2 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-events {
+        padding-left: 0;
+    }
+    
+    .timeline-events::before {
+        left: 22px;
+    }
+    
+    .timeline-event {
+        padding-left: 50px;
+    }
+    
+    .timeline-event::before {
+        left: 16px;
+        width: 12px;
+        height: 12px;
+    }
+    
+    .timeline-event::after {
+        left: 28px;
+        width: 22px;
+    }
+    
+    .timeline-event .event-content {
+        padding: 0.75rem;
+    }
+    
+    .event-title {
+        font-size: 1rem;
+    }
+}
+
+/* =====================================================
+   HIDE READ MORE BUTTON - MOBILE ONLY
+   (Keep it on desktop for existing behavior)
+   ===================================================== */
+@media (max-width: 900px) {
+    .read-more-btn {
+        display: none !important;
+    }
+}
+
+/* =====================================================
+   GRAPH CONTAINERS - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .section-one-column {
+        max-width: 100%;
+        padding: 0 10px;
+        margin: 0 auto 2rem auto;
+    }
+    
+    .section-two-column {
+        display: block;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    
+    .section-two-column .graph-container {
+        margin-bottom: 2rem;
+    }
+    
+    .graph-container {
+        width: 100%;
+        min-height: 280px;
+        max-height: 400px;
+        padding: 15px;
+        overflow: hidden;
+    }
+    
+    .graph-container svg {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 350px;
+    }
+    
+    .graph-caption-row {
+        display: block;
+        padding: 0 10px;
+    }
+    
+    .graph-caption {
+        margin-bottom: 1rem;
+    }
+}
+
+/* =====================================================
+   DATA TABLE - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .table-section {
+        max-width: 100%;
+        padding: 0 10px;
+        margin-bottom: 3rem;
+    }
+    
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -10px;
+        padding: 0 10px;
+    }
+    
+    table {
+        min-width: 500px;
+        font-size: 0.8rem;
+    }
+    
+    th, td {
+        padding: 0.5rem;
+        white-space: nowrap;
+    }
+    
+    .table-controls {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+}
+
+/* =====================================================
+   HERO & NARRATIVE - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 20px 15px 40px 15px;
+        max-width: 100%;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .dek {
+        font-size: 1.1rem;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .series-label {
+        font-size: 0.7rem;
+    }
+    
+    .byline {
+        font-size: 0.8rem;
+    }
+    
+    .narrative-block,
+    .narrative-block-bottom,
+    .narrative-block-lower {
+        max-width: 100%;
+        padding: 0 15px;
+        margin-bottom: 3rem;
+    }
+    
+    .narrative-block h2,
+    .narrative-block-bottom h2,
+    .narrative-block-lower h2 {
+        font-size: 1.8rem;
+        text-align: left;
+    }
+    
+    .narrative-block p,
+    .narrative-block-bottom p,
+    .narrative-block-lower p {
+        max-width: 100%;
+        font-size: 1rem;
+    }
+    
+    .narrative-block p:first-of-type::first-letter {
+        font-size: 2.8rem;
+        padding-right: 8px;
+    }
+}
+
+/* =====================================================
+   SIDE NAV - HIDE ON MOBILE
+   ===================================================== */
+@media (max-width: 768px) {
+    .side-nav {
+        display: none !important;
+    }
+    
+    section[id^="section-"],
+    #section-1,
+    #section-2,
+    #section-3,
+    #section-4,
+    #section-5,
+    #glossary {
+        scroll-margin-top: 60px;
+    }
+}
+
+/* =====================================================
+   LANDING PAGE / SPLASH - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .landing-splash {
+        min-height: 100svh;
+        padding: 20px 15px;
+    }
+    
+    .splash-hero-text {
+        font-size: 2rem;
+    }
+    
+    .splash-subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+    
+    .splash-scroll-indicator {
+        bottom: 30px;
+    }
+}
+
+/* =====================================================
+   GLOBE CASE STUDY - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 900px) {
+    .narrative-block.has-case-study,
+    .narrative-block-lower.has-case-study {
+        flex-direction: column !important;
+    }
+    
+    .globe-case-study-trigger {
+        margin: 2rem auto 0 auto;
+    }
+}
+
+/* =====================================================
+   MOBILE ENHANCEMENTS 
+   ===================================================== */
+
+/* =====================================================
+   FLIP ANIMATION - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 900px) {
+    #card-modal-overlay {
+        perspective: 1500px;
+    }
+    
+    .modal-card-container {
+        perspective: 1500px;
+    }
+    
+    .modal-card {
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        opacity: 0;
+        transform: rotateY(-90deg) scale(0.9);
+        transition: opacity 0.4s ease,
+                    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .modal-card.animate-in {
+        opacity: 1;
+        transform: rotateY(0deg) scale(1);
+    }
+    
+    .modal-card.animate-out {
+        opacity: 0;
+        transform: rotateY(90deg) scale(0.9);
+        transition: opacity 0.3s ease,
+                    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .timeline-event .event-content.expanded {
+        transform: rotateY(90deg) scale(0.95) !important;
+        opacity: 0;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.3s ease;
+    }
+    
+    .cluster-branches .event-content.expanded {
+        transform: rotateY(90deg) scale(0.95) !important;
+        opacity: 0;
+    }
+    
+    .timeline-event .event-content {
+        transform-style: preserve-3d;
+    }
+}
+
+/* =====================================================
+   MOBILE YEAR MARKER - LEFT SIDE OF TIMELINE
+   Displays when a new year begins in the timeline
+   ===================================================== */
+@media (max-width: 900px) {
+    .mobile-year-marker {
+        position: absolute;
+        left: -60px;
+        top: 0;
+        width: 55px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+    }
+    
+    .mobile-year-marker-year {
+        font-family: 'Courier New', monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--timeline-accent, #c9a55a);
+        background: var(--timeline-bg, #2D3748);
+        padding: 0.35rem 0.5rem;
+        border-radius: 4px;
+        border: 1px solid var(--timeline-line-color, #d4876f);
+        text-align: center;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+    
+    /* Tick mark below year */
+    .mobile-year-marker::after {
+        content: '';
+        width: 2px;
+        height: 20px;
+        background: var(--timeline-line-color, #d4876f);
+        margin-top: 4px;
+    }
+    
+    /* Year badge inside card (for context) */
+    .mobile-year-badge {
+        display: inline-block;
+        background: var(--timeline-line-color, #d4876f);
+        color: #fff;
+        font-family: 'Courier New', monospace;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 3px;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Timeline card entrance animations */
+    .timeline-event {
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .timeline-event.mobile-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .timeline-event:nth-child(1) { transition-delay: 0ms; }
+    .timeline-event:nth-child(2) { transition-delay: 50ms; }
+    .timeline-event:nth-child(3) { transition-delay: 100ms; }
+    .timeline-event:nth-child(4) { transition-delay: 150ms; }
+    .timeline-event:nth-child(5) { transition-delay: 200ms; }
+    
+    /* Event marker animation - scale up but preserve box-shadow */
+    .event-marker {
+        transform: scale(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .timeline-event.mobile-visible .event-marker {
+        transform: scale(1);
+    }
+    
+    .cluster-wrapper .cluster-branches {
+        margin-top: 0.5rem;
+    }
+    
+    .cluster-wrapper .cluster-branches .branch-node + .branch-node {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .year-labels {
+        display: none !important;
+    }
+    
+    /* Pulse animation for year markers when they appear */
+    @keyframes yearMarkerPulse {
+        0% {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    
+    .mobile-year-marker.animate-in {
+        animation: yearMarkerPulse 0.4s ease-out forwards;
+    }
+}
+
+/* Hide year badge on desktop */
+@media (min-width: 901px) {
+    .mobile-year-badge {
+        display: none !important;
+    }
+    
+    .mobile-year-marker {
+        display: none !important;
+    }
+}
+
+/* =====================================================
+   TAP TO EXPAND HINT - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 900px) {
+    .event-content::after {
+        content: 'Tap to expand';
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        font-size: 0.65rem;
+        color: var(--timeline-accent, #c9a55a);
+        opacity: 0.7;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* =====================================================
+   SCROLLYTELLING CARD POLISH - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .scrolly-steps {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    .step {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .step .card {
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    
+    .step .card.is-active {
+        box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+        border-color: var(--color-accent, #63B3ED);
+    }
+    
+    .step .card h3 {
+        font-weight: 600;
+    }
+    
+    .step .card p {
+        color: rgba(255,255,255,0.85);
+    }
+    
+    .step .card {
+        opacity: 0.7;
+        transition: opacity 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .step .card.is-active {
+        opacity: 1;
+    }
+}
+
+/* =====================================================
+   CHART WRAPPER POLISH - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .sticky-graphic {
+        background: var(--color-bg, #2D3748);
+    }
+    
+    .chart-wrapper {
+        background: rgba(26, 32, 44, 0.95);
+        border-radius: 8px;
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .chart-wrapper svg {
+        background: transparent !important;
+    }
+}
+
+/* =====================================================
+   TABLE SCROLL INDICATOR - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .table-wrapper {
+        position: relative;
+    }
+    
+    .table-wrapper::after {
+        content: '← Scroll →';
+        display: block;
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--color-text-muted, #A0AEC0);
+        padding: 0.5rem;
+        background: linear-gradient(
+            to right,
+            transparent,
+            rgba(26, 32, 44, 0.9) 20%,
+            rgba(26, 32, 44, 0.9) 80%,
+            transparent
+        );
+    }
+}
+
+/* =====================================================
+   HAMBURGER MENU ANIMATION - MOBILE ONLY
+   ===================================================== */
+@media (max-width: 768px) {
+    .mobile-menu.is-open .mobile-menu-item {
+        animation: slideInLeft 0.3s ease forwards;
+        opacity: 0;
+    }
+    
+    .mobile-menu.is-open .mobile-menu-item:nth-child(1) { animation-delay: 0.05s; }
+    .mobile-menu.is-open .mobile-menu-item:nth-child(2) { animation-delay: 0.1s; }
+    .mobile-menu.is-open .mobile-menu-item:nth-child(3) { animation-delay: 0.15s; }
+    .mobile-menu.is-open .mobile-menu-item:nth-child(4) { animation-delay: 0.2s; }
+    .mobile-menu.is-open .mobile-menu-item:nth-child(5) { animation-delay: 0.25s; }
+    .mobile-menu.is-open .mobile-menu-item:nth-child(6) { animation-delay: 0.3s; }
+    
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+}

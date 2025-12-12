@@ -1,0 +1,1123 @@
+/* ===============================================
+   1. CSS VARIABLES & RESET
+   =============================================== */
+/* style.css */
+html {
+    font-size: 12px; 
+}
+
+:root {
+    /* Typography */
+    --font-body: Georgia, 'Times New Roman', Times, serif;
+    --font-head: Georgia, 'Times New Roman', Times, serif;
+    
+    --max-width: 1200px;    
+    --wide-width: 900px;    
+    --text-width: 600px;    
+    
+    /* Colors (Unchanged) */
+    --color-bg: #2D3748;           
+    --color-text: #E2E8F0;         
+    --color-text-muted: #A0AEC0;   
+    --color-border: #4A5568;       
+    --color-accent: #63B3ED;       
+    --color-card-bg: rgba(45, 55, 72, 0.95); 
+}
+
+/* Force chart containers to be compact - but NOT scrollytelling charts */
+[id^="chart-section"]:not(.chart-wrapper) {
+    width: 100%;
+    max-width: var(--wide-width);
+    margin: 0 auto;
+    /* This is the key: Constrain height so it doesn't feel "Too Large" */
+    height: auto;
+    max-height: 60vh; /* Graph never exceeds 60% of viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[id^="chart-section"]:not(.chart-wrapper) svg {
+    width: 100%;
+    height: auto; /* Allows aspect ratio to scale naturally */
+    max-height: 60vh;
+    max-width: 100%; /* Prevent overflow */
+}
+
+/* Specific constraints for scrollytelling chart SVGs */
+.chart-wrapper svg {
+    width: 100%;
+    height: auto;
+    display: block; /* Removes any inline spacing */
+}
+
+/* ===============================================
+   SCROLLYTELLING LAYOUT CONSTRAINTS
+   =============================================== */
+[id^="scrolly-section-"] {
+    position: relative;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 8rem auto 4rem auto;
+    padding: 0 20px;
+    overflow: visible; /* Don't clip content */
+    background: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Remove any potential dark bar by ensuring transparent backgrounds */
+[id^="scrolly-section-"]::before,
+[id^="scrolly-section-"]::after {
+    display: none;
+}
+
+.sticky-graphic {
+    position: sticky;
+    top: 10vh; 
+    height: 80vh; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    overflow: visible; /* Don't clip overflowing content */
+    background: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.chart-wrapper {
+    width: 100%;
+    max-width: 900px; 
+    height: auto;
+    min-height: 400px; /* Ensure minimum height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s ease;
+    margin: 0 auto;
+    overflow: visible; /* Ensure nothing is clipped */
+    background: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+/* Ensure chart containers inside wrappers are also not constrained */
+.chart-wrapper > div {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+}
+
+.chart-wrapper.is-zoomed {
+    transform: scale(1.15);
+}
+
+.scrolly-steps {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto; /* Re-enable pointer events for cards */
+}
+
+.step {
+    min-height: 80vh; 
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2rem 0;
+}
+
+.step:first-child {
+    margin-top: 40vh; /* Push first step down so chart is visible */
+}
+
+.step:last-child {
+    margin-bottom: 40vh; /* Add space after last step */
+}
+
+.step .card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    pointer-events: auto;
+}
+
+.step .card.is-active {
+    opacity: 1;
+}
+
+.step .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+}
+
+.step .card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+/* OPTIONAL: If things feel too tight vertically, add a bit more breathing room to sections */
+section {
+    padding: 4rem 0; /* Increases vertical spacing between chart sections */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth;}
+
+body {
+    font-family: var(--font-body);
+    font-size: 21px; 
+    line-height: 1.7; 
+    color: var(--color-text);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Headers Global Styles */
+h1, h2, h3, h4 { 
+    font-family: var(--font-head); 
+    font-weight: 700; 
+    line-height: 1.1; 
+    color: #fff; 
+    margin-bottom: 0.5em;
+    /* Ensure headers are allowed to be full width */
+    max-width: 100%; 
+}
+
+a { color: var(--color-accent); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--color-accent); }
+
+/* ===============================================
+   2. HEADER & HERO 
+   =============================================== */
+.site-header { 
+    padding: 20px 0; 
+    border-bottom: 1px solid var(--color-border); 
+    margin-bottom: 60px; 
+    background: var(--color-header-bg);
+    font-family: sans-serif; 
+}
+
+.header-inner { 
+    max-width: var(--max-width); 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 20px; 
+}
+
+.logo-area { 
+    font-weight: bold; 
+    font-size: 1rem; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.site-nav a { 
+    margin-left: 20px; 
+    font-size: 0.85rem; 
+    color: var(--color-text-muted); 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.site-nav a:hover { color: #fff; }
+
+/* HERO SECTION: WIDE TITLE, NARROW INTRO */
+.hero-section { 
+    text-align: center; 
+    padding: 40px 20px 60px 20px; 
+    /* Use the WIDE width so H1 can expand */
+    max-width: var(--wide-width); 
+    margin: 0 auto; 
+}
+
+.hero-section h1 { 
+    font-size: 3.8rem; 
+    margin-bottom: 25px; 
+    letter-spacing: -1px;
+    max-width: 100%; /* Ensures H1 fills the 900px container */
+}
+
+/* Constrain the 'dek' (subtitle) back to reading width */
+.dek { 
+    font-size: 1.4rem; 
+    color: var(--color-text-muted); 
+    line-height: 1.4;
+    margin-bottom: 30px; 
+    font-style: italic;
+    max-width: var(--text-width); /* 580px */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.series-label { 
+    text-transform: uppercase; 
+    font-family: sans-serif;
+    font-size: 0.75rem; 
+    letter-spacing: 1px; 
+    color: var(--color-accent); 
+    margin-bottom: 15px; 
+    font-weight: bold;
+}
+
+.byline { 
+    font-family: sans-serif;
+    font-size: 0.85rem; 
+    color: var(--color-text-muted); 
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+/* ===============================================
+   3. NARRATIVE BLOCKS (UPDATED)
+   =============================================== */
+.narrative-block { 
+    /* Container is now WIDE (900px) */
+    max-width: var(--wide-width); 
+    margin: 0 auto 80px auto; 
+    padding: 0 10px; 
+}
+
+.narrative-block h2, 
+.narrative-block h3 { 
+    margin-top: 2.5em; 
+    font-size: 2.5rem; /* Larger font to match wider width */
+    color: #fff;
+    width: 100%;
+    max-width: 100%; /* Explicitly allow full width */
+    text-align: center; /* Centered headers usually look best in this layout */
+}
+
+/*  Paragraphs & Lists are forced back to NARROW (580px) */
+.narrative-block p,
+.narrative-block ul,
+.narrative-block ol,
+.narrative-block blockquote { 
+    max-width: var(--text-width); 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em; 
+}
+
+/* Dropcap */
+.narrative-block p:first-of-type::first-letter {
+    float: left;
+    font-size: 3.8rem;
+    line-height: 0.8;
+    padding-right: 10px;
+    font-weight: bold;
+    color: var(--color-accent);
+}
+
+/* LOWER SANDWICH*/
+.narrative-block-bottom { 
+    /* Container is  WIDE (900px) */
+    max-width: var(--wide-width); 
+    margin: 0 auto 80px auto; 
+    padding: 0 10px; 
+}
+
+.narrative-block-bottom h2, 
+.narrative-block-bottom h3 { 
+    margin-top: 2.5em; 
+    font-size: 2.5rem; /* Larger font to match wider width */
+    color: #fff;
+    width: 100%;
+    max-width: 100%; /* Explicitly allow full width */
+    text-align: center; /* Centered headers usually look best in this layout */
+}
+
+/* Paragraphs & Lists are forced back to NARROW (580px) */
+.narrative-block-bottom p,
+.narrative-block-bottom ul,
+.narrative-block-bottom ol,
+.narrative-block-bottom blockquote { 
+    max-width: var(--text-width); 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em; 
+}
+
+
+/* ===============================================
+   MODULAR SECTION LAYOUTS
+   =============================================== */
+
+/* One-column layout for single graphs */
+.section-one-column {
+    max-width: var(--max-width);
+    margin: 0 auto 4rem auto;
+    padding: 0 20px;
+}
+
+/* Two-column layout for side-by-side graphs */
+.section-two-column {
+    max-width: var(--max-width);
+    margin: 0 auto 1rem auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* Graph container - flexible for any chart type */
+.graph-container {
+    width: 100%;
+    min-height: 400px;
+    background: #1A202C;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Caption styling */
+.graph-caption {
+    font-family: sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 10px;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-style: italic;
+}
+
+/* For two-column captions */
+.graph-caption-row {
+    max-width: var(--max-width);
+    margin: 0 auto 3rem auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+/* Responsive: Stack two-column layouts on mobile */
+@media (max-width: 768px) {
+    .section-two-column {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .graph-caption-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+/* OLD Metric Sections - DEPRECATED */
+.metric-section { 
+    padding: 4rem 0; 
+    background: var(--color-section-alt); 
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 4rem;
+}
+
+.metric-section h2 { 
+    text-align: center; 
+    margin-bottom: 3rem; 
+}
+
+.metric-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 4rem; 
+    max-width: var(--max-width); 
+    margin: 0 auto; 
+    padding: 0 20px; 
+    align-items: center; 
+}
+
+.chart-small { 
+    width: 100%; 
+    min-height: 200px; 
+    margin: 1rem 0; 
+}
+
+.map-container { 
+    width: 100%; 
+    height: 400px; 
+    background: #1A202C; 
+    border: 1px solid var(--color-border);
+    border-radius: 4px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.caption {
+    font-family: sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ===============================================
+   4. SCROLLYTELLING ENGINE 
+   =============================================== */
+
+/* Generic scrolly section - can be reused */
+/* Note: Main definitions are in the SCROLLYTELLING LAYOUT CONSTRAINTS section above */
+
+/* Legacy chart-wrapper styles - kept for compatibility but box-shadow removed */
+/*
+.chart-wrapper {
+    width: 600px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform-origin: center center;
+    will-change: transform;
+}
+*/
+
+.scrolly-steps {
+    position: relative;
+    z-index: 10;
+    margin-top: -50vh;
+    padding-bottom: 50vh;
+    pointer-events: none;
+    max-width: 1000px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.step {
+    height: 90vh; 
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.step:nth-child(odd) { justify-content: flex-start; }
+.step:nth-child(even) { justify-content: flex-end; }
+
+.step:last-child {
+    margin-bottom: 0 !important; 
+}
+
+/* CARD STYLING */
+.card {
+    background: var(--color-card-bg);
+    color: var(--color-text);
+    padding: 2rem;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    text-align: left;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    max-width: 380px; 
+    width: 100%;
+}
+
+.card.is-active {
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.card h3 { 
+    margin-bottom: 0.75rem; 
+    font-size: 1.2rem; 
+    font-family: sans-serif; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-accent);
+}
+
+.card p { 
+    font-size: 1rem; 
+    line-height: 1.6; 
+    margin-bottom: 0; 
+    color: #fff;
+}
+
+/* ===============================================
+   5. DATA TABLE SECTION 
+   =============================================== */
+.table-section { 
+    max-width: var(--max-width); 
+    margin: 0 auto 80px auto; 
+    padding: 0 20px; 
+}
+
+.text-container {
+    /* Container is WIDE so headers can expand */
+    max-width: var(--wide-width);
+    margin: 0 auto 2rem auto;
+    text-align: center;
+}
+
+/* Paragraphs constrained inside for article formatting type ish */
+.text-container p {
+    max-width: var(--text-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ensure Headers inside text-container are allowed full width */
+.text-container h1,
+.text-container h2,
+.text-container h3 {
+    max-width: 100%;
+}
+
+.table-controls { 
+    margin-bottom: 1rem; 
+    text-align: right; 
+}
+
+.table-wrapper { 
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-family: sans-serif; 
+    font-size: 0.9rem; 
+    color: var(--color-text);
+}
+
+th { 
+    text-align: left; 
+    background: var(--color-header-bg); 
+    padding: 1rem; 
+    border-bottom: 2px solid var(--color-border); 
+    cursor: pointer; 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.8rem;
+    color: #fff;
+}
+
+td { 
+    padding: 0.75rem 1rem; 
+    border-bottom: 1px solid var(--color-border); 
+}
+
+th:hover { background: #2C3646; }
+
+.btn-secondary {
+    padding: 8px 16px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+.btn-secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+/* ===============================================
+   6. FOOTER
+   =============================================== */
+.site-footer { 
+    background: var(--color-header-bg); 
+    padding: 60px 0; 
+    text-align: center; 
+    border-top: 1px solid var(--color-border); 
+    font-family: sans-serif; 
+    font-size: 0.85rem; 
+    color: var(--color-text-muted); 
+}
+
+/* ===============================================
+   7. (SPLASH SCREEN)
+   =============================================== */
+
+.landing-splash {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* Occupies full viewport height */
+    background: #1F2937; /* Deep dark slate (matches image) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* --- Top Bar --- */
+.splash-top {
+    width: 100%;
+    max-width: var(--max-width);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    font-family: sans-serif;
+}
+
+.splash-logos {
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.splash-search {
+    /* Change background from white to dark gray */
+    background: var(--color-section-alt); 
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    width: 250px;
+}
+
+.splash-search input {
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    width: 100%;
+    font-size: 0.85rem;
+    
+    /* Ensure text input matches dark mode */
+    background: transparent;
+    color: var(--color-text); 
+}
+
+
+.splash-search input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+}
+/* --- Center Content (Grid) --- */
+.splash-center {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The Text Grid: Logo | Title */
+.splash-hero-grid {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    z-index: 1; /* Sits above the graphic */
+}
+
+.splash-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.splash-brand .globe-icon {
+    font-size: 3.5rem;
+    color: #fff;
+    opacity: 0.9;
+}
+
+.splash-brand .brand-name {
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.vertical-divider {
+    width: 4px;
+    height: 100px; /* Tall white bar */
+    background: #fff;
+    border-radius: 2px;
+}
+
+.splash-title {
+    font-family: sans-serif; /* The image uses a clean sans, not the serif body font */
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #fff;
+    max-width: 500px;
+    line-height: 1.2;
+}
+
+/* --- Yellow Banner --- */
+.splash-info-banner {
+    background: #FCEEB5; /* Pale Yellow */
+    color: #1A202C;
+    padding: 25px 40px;
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.splash-logo-icon {
+    /* 1. Increase height to match the 3-line text block (approx 9rem) */
+    height: 9rem; 
+    width: auto;
+
+    /* 2. Update min-dimensions to match new height */
+    min-width: 9rem;
+    min-height: 9rem;
+    
+    /* 3. Ensure high quality for SVG */
+    display: block;
+}
+
+/* --- CTA Button --- */
+.btn-fly-down {
+    background: #fff;
+    color: #1A202C;
+    padding: 15px 35px;
+    border-radius: 4px;
+    font-family: sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, background 0.2s;
+    margin-bottom: 40px;
+    z-index: 2;
+}
+
+.btn-fly-down:hover {
+    transform: translateY(3px); /* Slight press effect */
+    background: #E2E8F0;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* --- Legal Footer --- */
+.splash-legal {
+    max-width: 800px;
+    text-align: center;
+    color: #718096; /* Muted text */
+    font-size: 0.75rem;
+    line-height: 1.5;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .splash-hero-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+    .vertical-divider {
+        width: 80px;
+        height: 4px; /* Horizontal on mobile */
+        margin: 10px 0;
+    }
+    .splash-brand { flex-direction: column; }
+    .splash-title { font-size: 1.8rem; text-align: center; }
+    .splash-info-banner { font-size: 0.95rem; }
+}
+
+
+/* ===============================================
+   GLOSSARY SECTION STYLES (Split Layout)
+   =============================================== */
+.glossary-section {
+    background-color: var(--color-bg); /* Matches site background */
+    /* Force full screen height so Hero is not visible */
+    min-height: 100vh; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 5%; /* 5% padding on sides */
+    position: relative;
+    z-index: 10; /* Ensures it sits cleanly on top */
+}
+
+.glossary-container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: row; /* Side by Side */
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
+}
+
+/* --- Left Side: Typography --- */
+.glossary-left {
+    flex: 1;
+    position: sticky;
+    top: 4rem;
+}
+
+.glossary-big-title {
+    font-family: var(--font-head);
+    font-size: 5rem; /* HUGE text */
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-bottom: 1rem;
+}
+
+.glossary-subtitle {
+    font-family: sans-serif;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+/* --- Right Side: List --- */
+.glossary-right {
+    flex: 1.5; /* Right side takes slightly more space */
+    display: flex;
+    flex-direction: column;
+}
+
+.glossary-list-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between; /* Pushes arrow to far right */
+    padding: 2rem 0;
+    border-top: 1px solid var(--color-border);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* The Last border at bottom */
+.glossary-list-item:last-child {
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Number (01, 02...) */
+.g-num {
+    font-family: monospace;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-right: 2rem;
+    transition: color 0.3s;
+}
+
+/* Title Text */
+.g-text {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    font-weight: 400;
+    flex-grow: 1; /* Takes up middle space */
+}
+
+/* Arrow */
+.g-arrow {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+    color: #63B3ED;
+    font-size: 1.5rem;
+}
+
+/* --- Hover Effects --- */
+.glossary-list-item:hover {
+    padding-left: 15px; /* Indent slightly on hover */
+    color: #63B3ED; /* Light Blue Highlight */
+}
+
+.glossary-list-item:hover .g-num {
+    color: #63B3ED;
+}
+
+.glossary-list-item:hover .g-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 900px) {
+    .glossary-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .glossary-big-title {
+        font-size: 3.5rem;
+    }
+    
+    .glossary-left {
+        position: static; /* Remove sticky on mobile */
+        margin-bottom: 2rem;
+    }
+}
+/* ===============================================
+   SIDEBAR NAVIGATION STYLES
+   =============================================== */
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: #1A202C; /* Very Dark Background */
+    width: 60px; /* Collapsed width */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    overflow: hidden;
+    border-right: 1px solid var(--color-border);
+    
+    /* Hidden by default (until scrolled past glossary) */
+    opacity: 0; 
+    pointer-events: none;
+}
+
+/* When JS adds 'visible', it appears */
+.side-nav.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Expand on Hover */
+.side-nav:hover {
+    width: 280px; 
+}
+
+.side-nav ul {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+}
+
+.side-nav li {
+    width: 100%;
+}
+
+.side-nav a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px; 
+    text-decoration: none;
+    color: var(--color-text-muted);
+    
+    white-space: normal; 
+    
+    transition: color 0.2s;
+    position: relative;
+}
+
+.side-nav a:hover {
+    color: #63B3ED;
+    background: rgba(255,255,255,0.05);
+}
+
+/* The Number (Always Visible) */
+.nav-num {
+    font-family: monospace;
+    color: #63B3ED;
+    font-weight: bold;
+    margin-right: 20px;
+    min-width: 20px;
+}
+
+/* The Title (Visible only on hover/expand) */
+.nav-title {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    
+    /* Formatting for wrapped text */
+    display: block;       /* Ensures it fills space */
+    line-height: 1.2;     /* Tighter spacing for multi-line titles */
+    font-size: 0.9rem;    /* readable size */
+    
+    /* Smooth Animation Trick 
+       This forces the browser to calculate the text layout 
+       as if it's already expanded, preventing "jittery" 
+       reflows while the sidebar opens. */
+    min-width: 180px;     
+}
+
+.side-nav:hover .nav-title {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Tooltip Logic (Appears on right) */
+.side-nav a::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%; /* Push to the right of the navbar */
+    top: 50%;
+    transform: translateY(-50%);
+    background: #63B3ED;
+    color: #1A202C;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    margin-left: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.side-nav a:hover::after {
+    opacity: 1;
+}
+
+/* STATE: Active (Current Section) */
+.side-nav a.active-nav {
+    color: #63B3ED;                       /* Blue text */
+    background: rgba(99, 179, 237, 0.1);  /* Faint blue background */
+    border-left: 3px solid #63B3ED;       /* Optional: A blue bar on the left */
+}
+
+/* Ensure the number stays highlighted too */
+.side-nav a.active-nav .nav-num {
+    color: #63B3ED;
+}
