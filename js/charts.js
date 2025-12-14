@@ -33,10 +33,9 @@
  *   margin.l: 0.14  // Left margin % - increase if left labels cut off
  *   l2BoxW: 0.155   // Right box width % - increase if right labels cut off
  * 
- * NOTE: The Sankey SVG scales to fill its container (width: 100%).
- * The viewBox only changes the internal coordinate system / aspect ratio.
+ * MAX SIZE: Controlled by .section4-sankey-wrapper max-width (default: 1400px)
  * To change ACTUAL display size, modify the CSS for .section4-sankey-wrapper
- * in the injectSection4Styles function (~line 818).
+ * in the injectSection4Styles function (~line 844).
  * 
  * SECTION 5A - PACKED BUBBLE CHART (createChart_Section5A)
  * --------------------------------------------------------
@@ -45,9 +44,10 @@
  * 
  * SECTION 5B - BAR CHART (createChart_Section5B)
  * ----------------------------------------------
- * SIZE CONTROLS at ~line 2290:
+ * SIZE CONTROLS at ~line 2330:
  *   width: 960, height: 580
  *   margin: { top: 80, right: 140, bottom: 120, left: 140 }
+ *   wrapper max-width: 1100px (prevents blowup on large screens)
  * 
  * GLOBAL FONT SIZES (CHART_FONT_SIZES)
  * ------------------------------------
@@ -97,9 +97,9 @@ function createChart_Section2A(containerId, loadedData) {
     // CHOROPLETH SIZE CONTROLS
     // =====================================================
     // Adjust these values to change the map size:
-    var width = 1260;      // SVG width (increase for wider map)
-    var height = 720;      // SVG height (reduced - title/subtitle now outside)
-    var mapScale = 250;    // Map zoom level (increase for bigger countries)
+    var width = 1400;      // SVG width (increase for wider map)
+    var height = 700;      // SVG height (reduced - title/subtitle now outside)
+    var mapScale = 280;    // Map zoom level (increase for bigger countries)
     // =====================================================
     
     // Use real data if provided, otherwise empty object
@@ -182,6 +182,7 @@ function createChart_Section2A(containerId, loadedData) {
         .style("width", "100%")
         .style("height", "auto")
         .style("overflow", "visible")  // Allow countries to bleed outside
+        .style("margin-bottom", "60px")  // Space for caption below Antarctica
         .style("background", "transparent");
     
     // Crime types for tooltip
@@ -743,9 +744,9 @@ var SECTION4_CONFIG = {
     // SANKEY SIZING - HOW IT WORKS
     // =====================================================
     // viewBox sets the INTERNAL coordinate system (aspect ratio)
-    // The SVG scales to fit its container width (100%)
+    // The SVG scales to fit its container width (up to max-width: 1400px)
     // To change ACTUAL display size, adjust CSS for .section4-sankey-wrapper
-    // or #section4-sankey-chart (see injectSection4Styles function ~line 818)
+    // in injectSection4Styles function (~line 844)
     //
     // These settings control PROPORTIONS within the chart:
     // =====================================================
@@ -844,8 +845,9 @@ function injectSection4Styles() {
         background: transparent;
         border-radius: 8px;
         padding: 30px;
-        width: 85%;
-        max-width: 100%;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
     }
     .section4-chart-title {
         text-align: center;
@@ -2041,7 +2043,7 @@ function createChart_Section5A(containerId) {
         .style("overflow", "visible")  // Prevent text clipping
         .attr("font-family", CHART_FONTS.body);
     
-    // Title - centered over bubble area (left portion)
+    // Title - centered over entire chart
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", 35)
@@ -2052,7 +2054,7 @@ function createChart_Section5A(containerId) {
         .attr("fill", "#E2E8F0")
         .text("Investigations and Prosecutions of Serious International Crimes");
     
-    // Subtitle - centered over bubble area
+    // Subtitle - centered over entire chart
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", 60)
@@ -2329,8 +2331,14 @@ function createChart_Section5B(containerId) {
     var height = 580;
     var margin = { top: 80, right: 140, bottom: 120, left: 140 };
     
+    // Create wrapper to constrain max size on large screens
+    var wrapper = container.append("div")
+        .style("width", "100%")
+        .style("max-width", "1100px")
+        .style("margin", "0 auto");
+    
     // Create SVG with viewBox for responsive centering
-    var svg = container.append("svg")
+    var svg = wrapper.append("svg")
         .attr("viewBox", "0 0 " + width + " " + height)
         .attr("preserveAspectRatio", "xMidYMid meet")
         .style("width", "100%")
