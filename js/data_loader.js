@@ -7,7 +7,9 @@
  * 1. DataCounterHub - Centralized counting/processing for Airtable data
  *    (used by charts.js and other modules)
  * 2. DataLoader - Handles loading from Airtable API or CSV fallback
- * 3. createChart_Section2A_WithData - Choropleth rendering with real data
+ * 
+ * NOTE: The choropleth rendering function (createChart_Section2A) has been
+ * moved to charts.js for consistency. This file now calls charts.js functions.
  * 
  * IMPORTANT: 
  * - DataCounterHub is defined HERE and exported globally
@@ -657,6 +659,183 @@ var DataCounterHub = {
                 hasData: summary.some(function(d) { return d.total > 0; })
             }
         };
+    },
+
+    /**
+     * Get jurisdiction sankey data for Section 4 visualization
+     * Processes all UN Member States and returns data structured for Sankey chart
+     * @param {Array} records - Array of Airtable records
+     * @returns {Object} - { enrichedStates: Array, regionData: Object, stats: Object }
+     */
+    getJurisdictionSankeyData: function(records) {
+        var self = this;
+        
+        var unMemberStates = records.filter(function(record) {
+            var status = String(record.Status || record.status || "").trim();
+            return status === "UN Member State";
+        });
+        
+        if (!unMemberStates.length) {
+            console.warn('[DataCounterHub] No UN Member State records found');
+            return { enrichedStates: [], regionData: {}, stats: {} };
+        }
+        
+        var keys = Object.keys(unMemberStates[0] || {});
+        
+        var ujEtjCol = this.COLUMNS.JURISDICTION.UNIVERSAL_EXTRATERRITORIAL;
+        if (keys.indexOf(ujEtjCol) === -1) {
+            ujEtjCol = keys.find(function(k) {
+                return /Jurisdiction\s*[-–]\s*Are there universal or extraterritorial/i.test(k);
+            }) || ujEtjCol;
+        }
+        
+        var jurisdictionCols = {
+            genocideYes: this.COLUMNS.JURISDICTION.GENOCIDE_YES_PRESENCE,
+            genocideNo: this.COLUMNS.JURISDICTION.GENOCIDE_NO_PRESENCE,
+            warCrimesYes: this.COLUMNS.JURISDICTION.WAR_CRIMES_YES_PRESENCE,
+            warCrimesNo: this.COLUMNS.JURISDICTION.WAR_CRIMES_NO_PRESENCE,
+            cahYes: this.COLUMNS.JURISDICTION.CAH_YES_PRESENCE,
+            cahNo: this.COLUMNS.JURISDICTION.CAH_NO_PRESENCE,
+            aggressionYes: this.COLUMNS.JURISDICTION.AGGRESSION_YES_PRESENCE,
+            aggressionNo: this.COLUMNS.JURISDICTION.AGGRESSION_NO_PRESENCE
+        };
+        
+        function parseJurisdictionTypes(record, yesCols, noCols) {
+            var types = {
+                hasAbsoluteUJ: false,
+                hasPresence: false,
+                hasActive: false,
+                hasPassive: false,
+                hasProtective: false,
+                hasTreaty: false
+            };
+            var crimes = [];
+            
+            var allCols = yesCols.concat(noCols);
+            allCols.forEach(function(col) {
+                var val = String(record[col] || "").trim();
+                if (!val || val.toUpperCase() === "N/A") return;
+                
+                var parts = val.split(';').map(function(p) { return p.trim().toLowerCase(); });
+                parts.forEach(function(part) {
+                    if (part.indexOf('uj') !== -1 && part.indexOf('presence') === -1) {
+                        types.hasAbsoluteUJ = true;
+                    }
+                    if (part.indexOf('presence') !== -1) {
+                        types.hasPresence = true;
+                    }
+                    if (part.indexOf('active personality') !== -1 || part.indexOf('active-personality') !== -1) {
+                        types.hasActive = true;
+                    }
+                    if (part.indexOf('passive personality') !== -1 || part.indexOf('passive-personality') !== -1) {
+                        types.hasPassive = true;
+                    }
+                    if (part.indexOf('protective') !== -1) {
+                        types.hasProtective = true;
+                    }
+                    if (part.indexOf('treaty') !== -1 || part.indexOf('section 9') !== -1) {
+                        types.hasTreaty = true;
+                    }
+                });
+            });
+            
+            var crimeCols = [
+                { yes: jurisdictionCols.genocideYes, no: jurisdictionCols.genocideNo, name: 'genocide' },
+                { yes: jurisdictionCols.warCrimesYes, no: jurisdictionCols.warCrimesNo, name: 'war-crimes' },
+                { yes: jurisdictionCols.cahYes, no: jurisdictionCols.cahNo, name: 'cah' },
+                { yes: jurisdictionCols.aggressionYes, no: jurisdictionCols.aggressionNo, name: 'aggression' }
+            ];
+            
+            crimeCols.forEach(function(cc) {
+                var yesVal = String(record[cc.yes] || "").trim();
+                var noVal = String(record[cc.no] || "").trim();
+                if ((yesVal && yesVal.toUpperCase() !== "N/A") || (noVal && noVal.toUpperCase() !== "N/A")) {
+                    crimes.push(cc.name);
+                }
+            });
+            
+            return { types: types, crimes: crimes };
+        }
+        
+        var yesCols = [jurisdictionCols.genocideYes, jurisdictionCols.warCrimesYes, jurisdictionCols.cahYes, jurisdictionCols.aggressionYes];
+        var noCols = [jurisdictionCols.genocideNo, jurisdictionCols.warCrimesNo, jurisdictionCols.cahNo, jurisdictionCols.aggressionNo];
+        
+        var enrichedStates = [];
+        var regionOrder = ['Africa', 'Asia', 'Caribbean', 'Central America', 'Europe', 'Middle East & North Africa', 'North America', 'Oceania', 'South America'];
+        
+        unMemberStates.forEach(function(record) {
+            var countryName = record[self.COLUMNS.IDENTIFIERS.COUNTRY] || record.Country || "Unknown";
+            var regionRaw = record[self.COLUMNS.IDENTIFIERS.REGION] || record.Region || "";
+            var region = self.normalizeRegion(regionRaw);
+            
+            var parsed = parseJurisdictionTypes(record, yesCols, noCols);
+            var types = parsed.types;
+            var crimes = parsed.crimes;
+            
+            var hasBeyondBorders = types.hasAbsoluteUJ || types.hasPresence || 
+                                   types.hasActive || types.hasPassive || 
+                                   types.hasProtective || types.hasTreaty;
+            
+            var typeCount = 0;
+            if (types.hasAbsoluteUJ) typeCount++;
+            if (types.hasPresence) typeCount++;
+            if (types.hasActive) typeCount++;
+            if (types.hasPassive) typeCount++;
+            if (types.hasProtective) typeCount++;
+            if (types.hasTreaty) typeCount++;
+            
+            enrichedStates.push({
+                country: countryName,
+                region: region,
+                hasBeyondBorders: hasBeyondBorders,
+                hasAbsoluteUJ: types.hasAbsoluteUJ,
+                hasPresence: types.hasPresence,
+                hasActive: types.hasActive,
+                hasPassive: types.hasPassive,
+                hasProtective: types.hasProtective,
+                hasTreaty: types.hasTreaty,
+                typeCount: typeCount,
+                crimes: crimes
+            });
+        });
+        
+        var regionDataMap = {};
+        regionOrder.forEach(function(r) {
+            regionDataMap[r] = { withJurisdiction: [], withoutJurisdiction: [] };
+        });
+        
+        enrichedStates.forEach(function(s) {
+            if (regionDataMap[s.region]) {
+                if (s.hasBeyondBorders) {
+                    regionDataMap[s.region].withJurisdiction.push(s.country);
+                } else {
+                    regionDataMap[s.region].withoutJurisdiction.push(s.country);
+                }
+            }
+        });
+        
+        Object.values(regionDataMap).forEach(function(r) {
+            r.withJurisdiction.sort();
+            r.withoutJurisdiction.sort();
+        });
+        
+        var stats = {
+            total: enrichedStates.length,
+            beyondBorders: enrichedStates.filter(function(s) { return s.hasBeyondBorders; }).length,
+            absoluteUJ: enrichedStates.filter(function(s) { return s.hasAbsoluteUJ; }).length,
+            presenceOnly: enrichedStates.filter(function(s) { return s.hasPresence; }).length,
+            activePersonality: enrichedStates.filter(function(s) { return s.hasActive; }).length,
+            passivePersonality: enrichedStates.filter(function(s) { return s.hasPassive; }).length,
+            protectivePrinciple: enrichedStates.filter(function(s) { return s.hasProtective; }).length,
+            treatyObligation: enrichedStates.filter(function(s) { return s.hasTreaty; }).length
+        };
+        
+        return {
+            enrichedStates: enrichedStates,
+            regionData: regionDataMap,
+            regionOrder: regionOrder,
+            stats: stats
+        };
     }
 };
 
@@ -1210,8 +1389,11 @@ async function initChartsWithRealData() {
         window.choroplethData = data;
         
         // Initialize Section 2A choropleth with real data
+        // Now calls createChart_Section2A in charts.js (with data parameter)
         console.log('[Charts] Creating choropleth with real data...');
-        createChart_Section2A_WithData('chart-section-2a', data);
+        if (typeof createChart_Section2A === 'function') {
+            createChart_Section2A('chart-section-2a', data);
+        }
         
         // Initialize other charts
         if (typeof createChart_Section3 === 'function') {
@@ -1219,10 +1401,8 @@ async function initChartsWithRealData() {
         }
         if (typeof createChart_Section4A === 'function') {
             createChart_Section4A('chart-section-4a');
-            createChart_Section4B('chart-section-4b');
-            createChart_Section4C('chart-section-4c');
-            createChart_Section4D('chart-section-4d');
-            createChart_Section4E('chart-section-4e');
+        }
+        if (typeof createChart_Section5A === 'function') {
             createChart_Section5A('chart-section-5a');
             createChart_Section5B('chart-section-5b');
         }
@@ -1241,10 +1421,8 @@ async function initChartsWithRealData() {
         }
         if (typeof createChart_Section4A === 'function') {
             createChart_Section4A('chart-section-4a');
-            createChart_Section4B('chart-section-4b');
-            createChart_Section4C('chart-section-4c');
-            createChart_Section4D('chart-section-4d');
-            createChart_Section4E('chart-section-4e');
+        }
+        if (typeof createChart_Section5A === 'function') {
             createChart_Section5A('chart-section-5a');
             createChart_Section5B('chart-section-5b');
         }
@@ -1252,392 +1430,12 @@ async function initChartsWithRealData() {
 }
 
 
-/**
- * Choropleth with real data - includes title and proper tooltip with circle indicators
- */
-function createChart_Section2A_WithData(containerId, loadedData) {
-    console.log('[Choropleth] Rendering Section 2A with real data');
-    console.log('[Choropleth]   Countries in data:', Object.keys(loadedData.byCountry).length);
-    
-    var container = d3.select('#' + containerId);
-    container.selectAll("*").remove();
-    
-    // Remove any existing tooltips
-    d3.selectAll(".choropleth-tooltip").remove();
-    
-    var width = 960;
-    var height = 560;
-    
-    // Create wrapper
-    var wrapper = container.append("div")
-        .attr("class", "choropleth-wrapper")
-        .style("position", "relative")
-        .style("width", "100%")
-        .style("max-width", "960px")
-        .style("margin", "0 auto");
-    
-    // Search container
-    var searchContainer = wrapper.append("div")
-        .attr("class", "choropleth-search-container")
-        .style("display", "flex")
-        .style("align-items", "center")
-        .style("justify-content", "center")
-        .style("gap", "8px")
-        .style("margin-bottom", "16px")
-        .style("padding", "8px 0");
-    
-    // Search input
-    var searchInput = searchContainer.append("input")
-        .attr("type", "text")
-        .attr("placeholder", "Search countries...")
-        .style("padding", "10px 16px")
-        .style("border", "1px solid #4A5568")
-        .style("border-radius", "24px")
-        .style("background", "rgba(26, 32, 44, 0.95)")
-        .style("color", "#E2E8F0")
-        .style("font-size", "13px")
-        .style("font-family", "sans-serif")
-        .style("width", "260px")
-        .style("outline", "none");
-    
-    // Clear button
-    var clearBtn = searchContainer.append("button")
-        .style("background", "rgba(99, 179, 237, 0.2)")
-        .style("border", "1px solid #63B3ED")
-        .style("border-radius", "50%")
-        .style("width", "32px")
-        .style("height", "32px")
-        .style("color", "#63B3ED")
-        .style("cursor", "pointer")
-        .style("opacity", "0")
-        .style("pointer-events", "none")
-        .html("&times;");
-    
-    var svg = wrapper.append("svg")
-        .attr("viewBox", '0 0 ' + width + ' ' + height)
-        .attr("preserveAspectRatio", "xMidYMid meet")
-        .style("width", "100%")
-        .style("height", "auto")
-        .style("background", "transparent");
-    
-    // Crime types for tooltip
-    var crimeTypes = ["War Crimes", "Genocide", "Crimes Against Humanity", "Crime of Aggression"];
-    
-    // Use real data
-    var countryData = loadedData.byCountry;
-    
-    // Color scale
-    var colorScale = d3.scaleOrdinal()
-        .domain([0, 1, 2, 3, 4])
-        .range(["#d4e6f1", "#a9cce3", "#5dade2", "#2980b9", "#1a5276"]);
-    
-    // Projection
-    var projection = d3.geoNaturalEarth1()
-        .scale(170)
-        .translate([width / 2, height / 2 + 30]);
-    
-    var path = d3.geoPath().projection(projection);
-    
-    // Tooltip
-    var tooltip = d3.select("body").append("div")
-        .attr("class", "choropleth-tooltip")
-        .style("position", "absolute")
-        .style("visibility", "hidden")
-        .style("background", "rgba(26, 32, 44, 0.97)")
-        .style("border", "1px solid #4A5568")
-        .style("border-radius", "8px")
-        .style("padding", "16px 20px")
-        .style("font-family", "sans-serif")
-        .style("font-size", "13px")
-        .style("color", "#E2E8F0")
-        .style("box-shadow", "0 8px 32px rgba(0,0,0,0.5)")
-        .style("pointer-events", "none")
-        .style("z-index", "10000")
-        .style("max-width", "320px");
-    
-    var g = svg.append("g");
-    
-    // ISO numeric to alpha-3 mapping
-    var isoNumericToAlpha3 = {
-        "4": "AFG", "8": "ALB", "12": "DZA", "16": "ASM", "20": "AND",
-        "24": "AGO", "28": "ATG", "31": "AZE", "32": "ARG", "36": "AUS",
-        "40": "AUT", "44": "BHS", "48": "BHR", "50": "BGD", "51": "ARM",
-        "52": "BRB", "56": "BEL", "60": "BMU", "64": "BTN", "68": "BOL",
-        "70": "BIH", "72": "BWA", "76": "BRA", "84": "BLZ", "90": "SLB",
-        "92": "VGB", "96": "BRN", "100": "BGR", "104": "MMR", "108": "BDI",
-        "112": "BLR", "116": "KHM", "120": "CMR", "124": "CAN", "132": "CPV",
-        "136": "CYM", "140": "CAF", "144": "LKA", "148": "TCD", "152": "CHL",
-        "156": "CHN", "158": "TWN", "162": "CXR", "166": "CCK", "170": "COL",
-        "174": "COM", "175": "MYT", "178": "COG", "180": "COD", "184": "COK",
-        "188": "CRI", "191": "HRV", "192": "CUB", "196": "CYP", "203": "CZE",
-        "204": "BEN", "208": "DNK", "212": "DMA", "214": "DOM", "218": "ECU",
-        "222": "SLV", "226": "GNQ", "231": "ETH", "232": "ERI", "233": "EST",
-        "234": "FRO", "238": "FLK", "242": "FJI", "246": "FIN", "248": "ALA",
-        "250": "FRA", "254": "GUF", "258": "PYF", "260": "ATF", "262": "DJI",
-        "266": "GAB", "268": "GEO", "270": "GMB", "275": "PSE", "276": "DEU",
-        "288": "GHA", "292": "GIB", "296": "KIR", "300": "GRC", "304": "GRL",
-        "308": "GRD", "312": "GLP", "316": "GUM", "320": "GTM", "324": "GIN",
-        "328": "GUY", "332": "HTI", "336": "VAT", "340": "HND", "344": "HKG",
-        "348": "HUN", "352": "ISL", "356": "IND", "360": "IDN", "364": "IRN",
-        "368": "IRQ", "372": "IRL", "376": "ISR", "380": "ITA", "384": "CIV",
-        "388": "JAM", "392": "JPN", "398": "KAZ", "400": "JOR", "404": "KEN",
-        "408": "PRK", "410": "KOR", "414": "KWT", "417": "KGZ", "418": "LAO",
-        "422": "LBN", "426": "LSO", "428": "LVA", "430": "LBR", "434": "LBY",
-        "438": "LIE", "440": "LTU", "442": "LUX", "446": "MAC", "450": "MDG",
-        "454": "MWI", "458": "MYS", "462": "MDV", "466": "MLI", "470": "MLT",
-        "474": "MTQ", "478": "MRT", "480": "MUS", "484": "MEX", "492": "MCO",
-        "496": "MNG", "498": "MDA", "499": "MNE", "500": "MSR", "504": "MAR",
-        "508": "MOZ", "512": "OMN", "516": "NAM", "520": "NRU", "524": "NPL",
-        "528": "NLD", "531": "CUW", "533": "ABW", "534": "SXM", "535": "BES",
-        "540": "NCL", "548": "VUT", "554": "NZL", "558": "NIC", "562": "NER",
-        "566": "NGA", "570": "NIU", "574": "NFK", "578": "NOR", "580": "MNP",
-        "581": "UMI", "583": "FSM", "584": "MHL", "585": "PLW", "586": "PAK",
-        "591": "PAN", "598": "PNG", "600": "PRY", "604": "PER", "608": "PHL",
-        "612": "PCN", "616": "POL", "620": "PRT", "624": "GNB", "626": "TLS",
-        "630": "PRI", "634": "QAT", "638": "REU", "642": "ROU", "643": "RUS",
-        "646": "RWA", "652": "BLM", "654": "SHN", "659": "KNA", "660": "AIA",
-        "662": "LCA", "663": "MAF", "666": "SPM", "670": "VCT", "674": "SMR",
-        "678": "STP", "682": "SAU", "686": "SEN", "688": "SRB", "690": "SYC",
-        "694": "SLE", "702": "SGP", "703": "SVK", "704": "VNM", "705": "SVN",
-        "706": "SOM", "710": "ZAF", "716": "ZWE", "724": "ESP", "728": "SSD",
-        "729": "SDN", "732": "ESH", "736": "SDN", "740": "SUR", "744": "SJM",
-        "748": "SWZ", "752": "SWE", "756": "CHE", "760": "SYR", "762": "TJK",
-        "764": "THA", "768": "TGO", "772": "TKL", "776": "TON", "780": "TTO",
-        "784": "ARE", "788": "TUN", "792": "TUR", "795": "TKM", "796": "TCA",
-        "798": "TUV", "800": "UGA", "804": "UKR", "807": "MKD", "818": "EGY",
-        "826": "GBR", "831": "GGY", "832": "JEY", "833": "IMN", "834": "TZA",
-        "840": "USA", "850": "VIR", "854": "BFA", "858": "URY", "860": "UZB",
-        "862": "VEN", "876": "WLF", "882": "WSM", "887": "YEM", "894": "ZMB",
-        "900": "XKX"
-    };
-    
-    function getAlpha3(id) {
-        var strId = String(id);
-        if (isoNumericToAlpha3[strId]) {
-            return isoNumericToAlpha3[strId];
-        }
-        var numericId = String(parseInt(strId, 10));
-        if (isoNumericToAlpha3[numericId]) {
-            return isoNumericToAlpha3[numericId];
-        }
-        return null;
-    }
-    
-    var currentSearchTerm = "";
-    var matchedCountries = new Set();
-    
-    // Load map
-    d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(function(world) {
-        var countries = topojson.feature(world, world.objects.countries);
-        
-        function updateCountryAppearance(searchTerm) {
-            currentSearchTerm = searchTerm.toLowerCase().trim();
-            matchedCountries.clear();
-            
-            if (currentSearchTerm) {
-                Object.keys(countryData).forEach(function(iso) {
-                    var data = countryData[iso];
-                    if (data.name && data.name.toLowerCase().indexOf(currentSearchTerm) !== -1) {
-                        matchedCountries.add(iso);
-                    }
-                });
-            }
-            
-            g.selectAll("path.country")
-                .transition()
-                .duration(300)
-                .attr("fill", function(d) {
-                    var isoAlpha3 = getAlpha3(d.id);
-                    if (!isoAlpha3) return "#2D3748";
-                    
-                    var data = countryData[isoAlpha3];
-                    var baseColor = data ? colorScale(data.count) : "#2D3748";
-                    
-                    if (currentSearchTerm && !matchedCountries.has(isoAlpha3)) {
-                        return "#2D3748";
-                    }
-                    return baseColor;
-                })
-                .attr("opacity", function(d) {
-                    if (!currentSearchTerm) return 1;
-                    var isoAlpha3 = getAlpha3(d.id);
-                    if (!isoAlpha3) return 0.15;
-                    return matchedCountries.has(isoAlpha3) ? 1 : 0.15;
-                });
-        }
-        
-        // Draw countries
-        g.selectAll("path.country")
-            .data(countries.features)
-            .enter()
-            .append("path")
-            .attr("class", "country")
-            .attr("d", path)
-            .attr("fill", function(d) {
-                var isoAlpha3 = getAlpha3(d.id);
-                if (isoAlpha3 && countryData[isoAlpha3]) {
-                    return colorScale(countryData[isoAlpha3].count);
-                }
-                return "#2D3748";
-            })
-            .attr("stroke", "#ffffff")
-            .attr("stroke-width", 0.5)
-            .style("cursor", "pointer")
-            .on("mouseover", function(event, d) {
-                var isoAlpha3 = getAlpha3(d.id);
-                var content = "";
-                
-                // Check if this is Antarctica
-                var isAntarctica = (d.id === "ATA" || d.id === "010" || 
-                    (d.properties && d.properties.name && d.properties.name.toLowerCase().indexOf("antarctica") !== -1));
-                
-                if (isoAlpha3 && countryData[isoAlpha3]) {
-                    var data = countryData[isoAlpha3];
-                    content = '<div style="font-weight: 700; font-size: 16px; margin-bottom: 12px; color: #90CDF4; border-bottom: 1px solid #4A5568; padding-bottom: 10px;">' + data.name + '</div>';
-                    content += '<div style="font-size: 14px; margin-bottom: 12px; color: #A0AEC0;">Criminalizes <strong style="color: #fff; font-size: 18px;">' + data.count + '</strong> of 4 international crimes</div>';
-                    
-                    // Show ALL 4 crime types with filled/empty circles
-                    content += '<div style="display: grid; gap: 8px;">';
-                    crimeTypes.forEach(function(crime) {
-                        var hasCrime = data.crimes && data.crimes.indexOf(crime) !== -1;
-                        // Filled circle for yes, empty circle for no
-                        var circleStyle = hasCrime 
-                            ? 'width: 10px; height: 10px; border-radius: 50%; background: #48BB78; border: 2px solid #48BB78;'
-                            : 'width: 10px; height: 10px; border-radius: 50%; background: transparent; border: 2px solid #718096;';
-                        var textColor = hasCrime ? "#E2E8F0" : "#718096";
-                        content += '<div style="display: flex; align-items: center; gap: 10px;">';
-                        content += '<span style="' + circleStyle + '"></span>';
-                        content += '<span style="color: ' + textColor + ';">' + crime + '</span>';
-                        content += '</div>';
-                    });
-                    content += '</div>';
-                } else if (isAntarctica) {
-                    content = '<div style="font-weight: 700; font-size: 16px; margin-bottom: 8px; color: #90CDF4;">Antarctica</div>';
-                    content += '<div style="color: #718096; font-style: italic;">No data available</div>';
-                } else if (isoAlpha3) {
-                    content = '<div style="font-weight: 700; font-size: 16px; margin-bottom: 8px; color: #90CDF4;">' + isoAlpha3 + '</div>';
-                    content += '<div style="color: #718096; font-style: italic;">No data available</div>';
-                } else {
-                    content = '<div style="color: #718096; font-style: italic;">Unknown territory</div>';
-                }
-                
-                tooltip.html(content)
-                    .style("visibility", "visible");
-                
-                d3.select(this)
-                    .attr("stroke", "#90CDF4")
-                    .attr("stroke-width", 2);
-            })
-            .on("mousemove", function(event) {
-                tooltip
-                    .style("top", (event.pageY - 10) + "px")
-                    .style("left", (event.pageX + 15) + "px");
-            })
-            .on("mouseout", function() {
-                tooltip.style("visibility", "hidden");
-                d3.select(this)
-                    .attr("stroke", "#ffffff")
-                    .attr("stroke-width", 0.5);
-            });
-        
-        // Search functionality
-        searchInput.on("input", function() {
-            var value = this.value;
-            updateCountryAppearance(value);
-            
-            clearBtn
-                .style("opacity", value ? "1" : "0")
-                .style("pointer-events", value ? "auto" : "none");
-        });
-        
-        clearBtn.on("click", function() {
-            searchInput.node().value = "";
-            updateCountryAppearance("");
-            d3.select(this)
-                .style("opacity", "0")
-                .style("pointer-events", "none");
-        });
-    });
-    
-    // Legend
-    var legendX = width - 180;
-    var legendY = 60;
-    var legendItemHeight = 22;
-    
-    var legendGroup = svg.append("g")
-        .attr("class", "legend")
-        .attr("transform", 'translate(' + legendX + ', ' + legendY + ')');
-    
-    legendGroup.append("rect")
-        .attr("x", -12)
-        .attr("y", -35)
-        .attr("width", 160)
-        .attr("height", 160)
-        .attr("fill", "rgba(26, 32, 44, 0.85)")
-        .attr("stroke", "#4A5568")
-        .attr("rx", 6);
-    
-    legendGroup.append("text")
-        .attr("x", 68)
-        .attr("y", -12)
-        .attr("text-anchor", "middle")
-        .style("font-family", "sans-serif")
-        .style("font-size", "11px")
-        .style("font-weight", "600")
-        .style("fill", "#A0AEC0")
-        .style("text-transform", "uppercase")
-        .text("Crimes Criminalized");
-    
-    var legendItems = [
-        { value: 4, label: "4 crimes" },
-        { value: 3, label: "3 crimes" },
-        { value: 2, label: "2 crimes" },
-        { value: 1, label: "1 crime" },
-        { value: 0, label: "0 crimes" }
-    ];
-    
-    legendItems.forEach(function(item, i) {
-        var itemG = legendGroup.append("g")
-            .attr("transform", 'translate(0, ' + (i * legendItemHeight + 5) + ')');
-        
-        itemG.append("rect")
-            .attr("width", 28)
-            .attr("height", 16)
-            .attr("fill", colorScale(item.value))
-            .attr("stroke", "#fff")
-            .attr("stroke-width", 0.5)
-            .attr("rx", 2);
-        
-        itemG.append("text")
-            .attr("x", 38)
-            .attr("y", 12)
-            .style("font-size", "12px")
-            .style("fill", "#E2E8F0")
-            .text(item.label);
-    });
-    
-    // Title
-    var stats = loadedData.stats;
-    svg.append("text")
-        .attr("x", width / 2)
-        .attr("y", 28)
-        .attr("text-anchor", "middle")
-        .style("font-family", "sans-serif")
-        .style("font-size", "18px")
-        .style("font-weight", "700")
-        .style("fill", "#E2E8F0")
-        .text("Criminalization of the Most Serious International Crimes");
-    
-    // Subtitle with stats
-    svg.append("text")
-        .attr("x", width / 2)
-        .attr("y", 48)
-        .attr("text-anchor", "middle")
-        .style("font-family", "sans-serif")
-        .style("font-size", "12px")
-        .style("fill", "#A0AEC0")
-        .text(stats.atLeastOne + ' of ' + stats.total + ' countries criminalize at least one crime');
-}
+// ==============================================
+// CHOROPLETH FUNCTION MOVED TO CHARTS.JS
+// ==============================================
+// The createChart_Section2A function (with data parameter) is now in charts.js
+// data_loader.js calls it via: createChart_Section2A('chart-section-2a', data);
+// ==============================================
 
 
 // ==============================================

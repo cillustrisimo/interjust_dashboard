@@ -11,7 +11,8 @@ html {
     --font-body: Georgia, 'Times New Roman', Times, serif;
     --font-head: Georgia, 'Times New Roman', Times, serif;
     
-    --max-width: 1200px;    
+    /* Layout widths - INCREASED for larger charts */
+    --max-width: 1600px;    /* Increased from 1200px to accommodate larger charts */
     --wide-width: 900px;    
     --text-width: 600px;    
     
@@ -24,24 +25,58 @@ html {
     --color-card-bg: rgba(45, 55, 72, 0.95); 
 }
 
-/* Force chart containers to be compact - but NOT scrollytelling charts */
+/* ===============================================
+   CHART CONTAINER STYLES - UPDATED FOR LARGER CHARTS
+   Removed restrictive max-height and increased max-width
+   to allow charts to display at their full designed size
+   =============================================== */
+
+/* Chart sections - allow full width for larger charts */
 [id^="chart-section"]:not(.chart-wrapper) {
     width: 100%;
-    max-width: var(--wide-width);
+    max-width: 100%; /* Changed from 900px to allow larger charts */
     margin: 0 auto;
-    /* This is the key: Constrain height so it doesn't feel "Too Large" */
     height: auto;
-    max-height: 60vh; /* Graph never exceeds 60% of viewport height */
+    /* Removed max-height: 60vh constraint to allow taller charts */
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible; /* Allow map to bleed outside */
 }
 
 [id^="chart-section"]:not(.chart-wrapper) svg {
     width: 100%;
     height: auto; /* Allows aspect ratio to scale naturally */
-    max-height: 60vh;
-    max-width: 100%; /* Prevent overflow */
+    /* Removed max-height: 60vh to allow larger charts */
+    max-width: 100%;
+    overflow: visible; /* Allow content to bleed */
+}
+
+/* Choropleth map - allow countries to bleed outside container */
+.choropleth-wrapper,
+.choropleth-wrapper svg,
+#chart-section-2a,
+#chart-section-2a > div {
+    overflow: visible !important;
+}
+
+/* Choropleth search bar - ensure clickable above map */
+.choropleth-search-container {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 100;
+}
+
+.choropleth-search-container input,
+.choropleth-search-container button {
+    pointer-events: auto !important;
+}
+
+/* Section 5A bubble chart - prevent text clipping */
+#chart-section-5a,
+#chart-section-5a > div,
+#chart-section-5a svg {
+    overflow: visible !important;
 }
 
 /* Specific constraints for scrollytelling chart SVGs */
@@ -57,7 +92,7 @@ html {
 [id^="scrolly-section-"] {
     position: relative;
     width: 100%;
-    max-width: var(--max-width);
+    max-width: none; /* REMOVED constraint - let scrollytelling sections expand */
     margin: 8rem auto 4rem auto;
     padding: 0 20px;
     overflow: visible; /* Don't clip content */
@@ -91,7 +126,7 @@ html {
 
 .chart-wrapper {
     width: 100%;
-    max-width: 900px; 
+    max-width: none; /* REMOVED constraint - let charts be as large as they want */
     height: auto;
     min-height: 400px; /* Ensure minimum height */
     display: flex;
@@ -360,15 +395,16 @@ a:hover { border-bottom-color: var(--color-accent); }
    =============================================== */
 
 /* One-column layout for single graphs */
+/* One-column layout for single graphs - NO WIDTH CONSTRAINT */
 .section-one-column {
-    max-width: var(--max-width);
+    max-width: none;  /* Removed constraint */
     margin: 0 auto 4rem auto;
     padding: 0 20px;
 }
 
 /* Two-column layout for side-by-side graphs */
 .section-two-column {
-    max-width: var(--max-width);
+    max-width: none;  /* Removed constraint */
     margin: 0 auto 1rem auto;
     padding: 0 20px;
     display: grid;
@@ -499,7 +535,7 @@ a:hover { border-bottom-color: var(--color-accent); }
     margin-top: -50vh;
     padding-bottom: 50vh;
     pointer-events: none;
-    max-width: 1000px; 
+    max-width: none;  /* Removed 1000px constraint */
     margin-left: auto;
     margin-right: auto;
 }

@@ -203,7 +203,7 @@
 
         <!-- Graph 2A: Choropleth Map - Static One Column -->
         <section class="section-one-column">
-            <div class="graph-container" id="chart-section-2a">
+            <div class="graph-container-transparent" id="chart-section-2a">
                 <!-- Choropleth Map is rendered here by charts.js -->
             </div>
              <p class="graph-caption">Figure 2A: Criminalization of the Most Serious International Crimes – <span id="stat-criminalization-at-least-one" class="stat-placeholder">--</span> out of 193 U.N. Member States have criminalized at least one of the four most serious international crimes.</p>
@@ -250,10 +250,9 @@
             </div>
         </section>
 
-
         <!-- ============================================================ -->
         <!-- SECTION 4: HOW STATES PURSUE CRIMES BEYOND THEIR BORDERS -->
-        <!-- Multiple jurisdiction types + Case Studies -->
+        <!-- Interactive Sankey Jurisdiction Visualization -->
         <!-- ============================================================ -->
         
         <section class="narrative-block" id="section-4">
@@ -261,36 +260,19 @@
             <p>States can invoke several types of jurisdiction to investigate and prosecute crimes that were committed outside their own borders. With the exception of absolute universal jurisdiction, each of these bases for jurisdiction relies on the existence of some type of "link" between the prosecuting State and the crime committed, such as the nationality of the alleged perpetrator or victim, or the presence of the alleged perpetrator on the prosecuting State's territory. In order for a State to investigate and prosecute extraterritorial crimes, the State must first pass a law that recognizes one or more of these jurisdictional bases.</p>
         </section>
 
-        <!-- Graph 4A: Scrollytelling - Legal Ability Map -->
-        <section id="scrolly-section-4a">
-            <div class="sticky-graphic">
-                <div class="chart-wrapper" id="chart-section-4a">
-                    <!-- Radial/map chart -->
-                </div>
+        <section class="section-one-column">
+            <div class="graph-container-transparent" id="chart-section-4a">
             </div>
-
-        <div class="scrolly-steps">
-                <div class="step" data-action="show-legal-ability" data-target="chart-section-4a">
-                    <div class="card">
-                        <h3>Legal Ability to Investigate and Prosecute Extraterritorial Crimes</h3>
-                        <p><span id="stat-jurisdiction-any" class="stat-placeholder">--</span> out of 193 U.N. Member States have laws that allow them to investigate and prosecute at least one of the most serious international crimes committed beyond their own borders.</p>
-                    </div>
-                </div>
-
-                <div class="step" data-action="show-absolute" data-target="chart-section-4a">
-                    <div class="card">
-                        <h3>Absolute Universal Jurisdiction</h3>
-                        <p><span id="stat-jurisdiction-absolute" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes, regardless of the nationality of the alleged perpetrator, the nationality of the victim, the location where the offense was committed, or the location of the alleged perpetrator.</p>
-                    </div>
-                </div>
-            </div>
+            <p class="graph-caption">Figure 4 — Click on jurisdiction types to explore details. Hover over regions to highlight flows.</p>
         </section>
+
 
         <section class="narrative-block-lower">
-            <p>Absolute universal jurisdiction is the "purest" form of universal jurisdiction, reflecting the original idea behind the principle that certain crimes are considered to be committed against the international community as a whole.</p>
+            <p>Absolute universal jurisdiction is the "purest" form of universal jurisdiction, reflecting the original idea behind the principle that certain crimes are considered to be committed against the international community as a whole. In many States, laws granting jurisdiction over the most serious international crimes committed abroad are subject to a significant limitation: the suspected perpetrator must be physically present in that State to trigger jurisdiction. This limitation, commonly referred to as "conditional universal jurisdiction,"<sup><a href="#ref-34" class="ref-link">[34]</a></sup> is often motivated by resource constraints which justify focusing on those perpetrators who are actually present on the would-be prosecuting State's territory.</p>
+            <p>Most States exercise jurisdiction over crimes committed by their nationals, regardless of the place of commission. This is commonly referred to as "active personality" jurisdiction. Some States interpret this type of jurisdiction to include alleged perpetrators who are residents, refugees, or stateless persons residing permanently in that State.</p>
         </section>
 
-        <!-- Case Study: Taha al-Jumailly - SIMPLIFIED FORMAT -->
+        <!-- Case Study: Taha al-Jumailly -->
         <section class="case-study-block">
             <div class="case-study-container">
                 <div class="case-study-header">
@@ -305,28 +287,11 @@
             </div>
         </section>
 
-        <!-- Graphs 4B & 4C: Two-column static - Presence & Active Personality Jurisdiction -->
-        <section class="section-two-column">
-            <div class="graph-container" id="chart-section-4b">
-                <!-- Presence jurisdiction chart -->
-            </div>
-            <div class="graph-container" id="chart-section-4c">
-                <!-- Active personality chart -->
-            </div>
-        </section>
-
-   <!-- Graphs 4B & 4C captions -->
-        <div class="graph-caption-row">
-            <p class="graph-caption">Figure 4B: Presence Jurisdiction – <span id="stat-jurisdiction-presence" class="stat-placeholder">--</span> States require perpetrator presence</p>
-            <p class="graph-caption">Figure 4C: Active Personality Jurisdiction – <span id="stat-jurisdiction-active" class="stat-placeholder">--</span> States can prosecute nationals</p>
-        </div>
-
         <section class="narrative-block-lower">
-            <p>In many States, laws granting jurisdiction over the most serious international crimes committed abroad are subject to a significant limitation: the suspected perpetrator must be physically present in that State to trigger jurisdiction. This limitation, commonly referred to as "conditional universal jurisdiction,"<sup><a href="#ref-34" class="ref-link">[34]</a></sup> is often motivated by resource constraints which justify focusing on those perpetrators who are actually present on the would-be prosecuting State's territory.</p>
-            <p>Most States exercise jurisdiction over crimes committed by their nationals, regardless of the place of commission. This is commonly referred to as "active personality" jurisdiction. Some States interpret this type of jurisdiction to include alleged perpetrators who are residents, refugees, or stateless persons residing permanently in that State.</p>
+            <p>Many States exercise jurisdiction over crimes committed against their nationals, regardless of the place of commission. This is commonly referred to as "passive personality" jurisdiction. Some States extend this jurisdiction to victims who are residents, refugees, or stateless persons residing permanently in that State.</p>
         </section>
 
-        <!-- Case Study: Ousman Sonko - SIMPLIFIED FORMAT -->
+        <!-- Case Study: Ousman Sonko -->
         <section class="case-study-block">
             <div class="case-study-container">
                 <div class="case-study-header">
@@ -341,43 +306,12 @@
             </div>
         </section>
 
-        <!-- Graph 4D: Scrollytelling - Passive Personality & Protective Principle -->
-        <section id="scrolly-section-4d">
-            <div class="sticky-graphic">
-                <div class="chart-wrapper" id="chart-section-4d">
-                    <!-- Network/bubble chart -->
-                </div>
-            </div>
-
-           <div class="scrolly-steps">
-                <div class="step" data-action="show-passive" data-target="chart-section-4d">
-                    <div class="card">
-                        <h3>Passive Personality Jurisdiction</h3>
-                        <p><span id="stat-jurisdiction-passive" class="stat-placeholder">--</span> U.N. Member States can exercise some sort of jurisdiction over at least one of the most serious international crimes when a victim of the crime is a national of that State.</p>
-                    </div>
-                </div>
-
-                <div class="step" data-action="show-protective" data-target="chart-section-4d">
-                    <div class="card">
-                        <h3>Protective Principle Jurisdiction</h3>
-                        <p><span id="stat-jurisdiction-protective" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes to protect their own national interest or security.</p>
-                    </div>
-                </div>
-
-                <div class="step" data-action="show-treaty" data-target="chart-section-4d">
-                    <div class="card">
-                        <h3>Treaty-Based Obligation</h3>
-                        <p><span id="stat-jurisdiction-treaty" class="stat-placeholder">--</span> U.N. Member States have an obligation to exercise jurisdiction over certain serious international crimes as a result of international treaties they have ratified.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="narrative-block-lower">
-            <p>Many States exercise jurisdiction over crimes committed against their nationals, regardless of the place of commission. This is commonly referred to as "passive personality" jurisdiction. Some States extend this jurisdiction to victims who are residents, refugees, or stateless persons residing permanently in that State.</p>
+            <p>Many States are required to exercise jurisdiction over crimes committed abroad as an obligation under a treaty. Most relevant for Project Meridian, the 1949 Geneva Conventions, which govern the conduct of war and provide protections for those who are not taking part in hostilities, include an obligation to prosecute suspected war criminals or extradite them to a State that is better placed to prosecute.<sup><a href="#ref-54" class="ref-link">[54]</a></sup> Therefore, any State that has ratified the Geneva Conventions has not only jurisdiction but an obligation to investigate and prosecute "grave breaches" of the Conventions committed in other States.</p>
+            <p>Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as "protective principle" jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries,<sup><a href="#ref-52" class="ref-link">[52]</a></sup> States rarely invoke it to investigate and prosecute such crimes.<sup><a href="#ref-53" class="ref-link">[53]</a></sup></p>
         </section>
 
-        <!-- Case Study: Assad Officials - SIMPLIFIED FORMAT -->
+        <!-- Case Study: Assad Officials -->
         <section class="case-study-block">
             <div class="case-study-container">
                 <div class="case-study-header">
@@ -392,20 +326,7 @@
             </div>
         </section>
 
-        <!-- Graph 4E: Static - Treaty-based obligations -->
-        <section class="section-one-column">
-            <div class="graph-container" id="chart-section-4e">
-                <!-- Stacked bar chart -->
-            </div>
-            <p class="graph-caption">Figure 4E: Treaty-Based Obligations to Exercise Jurisdiction</p>
-        </section>
-
-        <section class="narrative-block-lower">
-            <p>Many States are required to exercise jurisdiction over crimes committed abroad as an obligation under a treaty. Most relevant for Project Meridian, the 1949 Geneva Conventions, which govern the conduct of war and provide protections for those who are not taking part in hostilities, include an obligation to prosecute suspected war criminals or extradite them to a State that is better placed to prosecute.<sup><a href="#ref-54" class="ref-link">[54]</a></sup> Therefore, any State that has ratified the Geneva Conventions has not only jurisdiction but an obligation to investigate and prosecute "grave breaches" of the Conventions committed in other States.</p>
-            <p>Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as "protective principle" jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries,<sup><a href="#ref-52" class="ref-link">[52]</a></sup> States rarely invoke it to investigate and prosecute such crimes.<sup><a href="#ref-53" class="ref-link">[53]</a></sup></p>
-        </section>
-
-        <!-- Case Study: Eshetu Alemu - SIMPLIFIED FORMAT -->
+        <!-- Case Study: Eshetu Alemu -->
         <section class="case-study-block">
             <div class="case-study-container">
                 <div class="case-study-header">
@@ -813,6 +734,7 @@
 
     <!-- d3js for graphs -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
    
     <!-- TopoJSON for choropleth map (fallback) -->
     <script src="https://unpkg.com/topojson-client@3"></script>

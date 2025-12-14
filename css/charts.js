@@ -97,9 +97,9 @@ function createChart_Section2A(containerId, loadedData) {
     // CHOROPLETH SIZE CONTROLS
     // =====================================================
     // Adjust these values to change the map size:
-    var width = 1260;      // SVG width (increase for wider map)
-    var height = 720;      // SVG height (reduced - title/subtitle now outside)
-    var mapScale = 250;    // Map zoom level (increase for bigger countries)
+    var width = 1400;      // SVG width (increase for wider map)
+    var height = 700;      // SVG height (reduced - title/subtitle now outside)
+    var mapScale = 280;    // Map zoom level (increase for bigger countries)
     // =====================================================
     
     // Use real data if provided, otherwise empty object
@@ -844,7 +844,7 @@ function injectSection4Styles() {
         background: transparent;
         border-radius: 8px;
         padding: 30px;
-        width: 85%;
+        width: 100%;
         max-width: 100%;
     }
     .section4-chart-title {
@@ -2043,7 +2043,7 @@ function createChart_Section5A(containerId) {
     
     // Title - centered over bubble area (left portion)
     svg.append("text")
-        .attr("x", width / 2)
+        .attr("x", bubbleAreaWidth / 2)
         .attr("y", 35)
         .attr("text-anchor", "middle")
         .attr("font-size", CHART_FONT_SIZES.title)
@@ -2054,7 +2054,7 @@ function createChart_Section5A(containerId) {
     
     // Subtitle - centered over bubble area
     svg.append("text")
-        .attr("x", width / 2)
+        .attr("x", bubbleAreaWidth / 2)
         .attr("y", 60)
         .attr("text-anchor", "middle")
         .attr("font-size", CHART_FONT_SIZES.subtitle)

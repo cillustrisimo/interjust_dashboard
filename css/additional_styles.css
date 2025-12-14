@@ -536,7 +536,7 @@ sup a.ref-link:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible; /* Changed from hidden to allow larger charts to display fully */
 }
 
 /* Transparent variant - blends with page background */
