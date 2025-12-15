@@ -235,6 +235,21 @@ var PlaceholderFiller = {
             return String(value).toLowerCase().indexOf(searchLower) !== -1;
         }
         
+        // Match data_loader.js logic exactly: split by ';' and check each part
+        function jurisdictionPartContains(value, searchTerm, excludeTerm) {
+            if (!value) return false;
+            var valStr = Array.isArray(value) ? value.join(';') : String(value);
+            var parts = valStr.split(';').map(function(p) { return p.trim().toLowerCase(); });
+            return parts.some(function(part) {
+                if (!part || part === 'n/a') return false;
+                var hasSearch = part.indexOf(searchTerm.toLowerCase()) !== -1;
+                if (excludeTerm) {
+                    return hasSearch && part.indexOf(excludeTerm.toLowerCase()) === -1;
+                }
+                return hasSearch;
+            });
+        }
+        
         // Initialize stats
         var stats = {
             totalCountries: unMembers.length,
@@ -293,41 +308,50 @@ var PlaceholderFiller = {
                 stats.jurisdiction.anyJurisdiction++;
             }
             
-            var hasAbsolute = NO_PRESENCE_COLS.some(function(col) {
-                return hasJurisdictionValue(record[col]);
+            // Match data_loader.js logic exactly for all jurisdiction types:
+            // Absolute UJ: contains 'uj' but NOT 'presence'
+            var hasAbsolute = ALL_JURIS_COLS.some(function(col) {
+                return jurisdictionPartContains(record[col], 'uj', 'presence');
             });
             if (hasAbsolute) {
                 stats.jurisdiction.absoluteUJ++;
             }
             
-            var hasConditional = YES_PRESENCE_COLS.some(function(col) {
-                return hasJurisdictionValue(record[col]);
+            // Presence-based: contains 'presence'
+            var hasConditional = ALL_JURIS_COLS.some(function(col) {
+                return jurisdictionPartContains(record[col], 'presence');
             });
             if (hasConditional) {
                 stats.jurisdiction.presenceRequired++;
             }
             
-            // Check for specific jurisdiction types
+            // Active Personality: contains 'active personality' or 'active-personality'
             var hasActive = ALL_JURIS_COLS.some(function(col) {
-                return jurisdictionContains(record[col], 'active');
+                return jurisdictionPartContains(record[col], 'active personality') || 
+                       jurisdictionPartContains(record[col], 'active-personality');
             });
+            
+            // Passive Personality: contains 'passive personality' or 'passive-personality'
             var hasPassive = ALL_JURIS_COLS.some(function(col) {
-                return jurisdictionContains(record[col], 'passive');
+                return jurisdictionPartContains(record[col], 'passive personality') ||
+                       jurisdictionPartContains(record[col], 'passive-personality');
             });
+            
+            // Protective Principle: contains 'protective'
             var hasProtective = ALL_JURIS_COLS.some(function(col) {
-                return jurisdictionContains(record[col], 'protective');
+                return jurisdictionPartContains(record[col], 'protective');
             });
             
             if (hasActive) stats.jurisdiction.activePersonality++;
             if (hasPassive) stats.jurisdiction.passivePersonality++;
             if (hasProtective) stats.jurisdiction.protectivePrinciple++;
             
-            // Rome Statute (treaty-based obligation)
-            var romeValue = record[COLS.ROME_STATUTE];
-            var romeLower = romeValue ? String(romeValue).toLowerCase() : '';
-            if (romeLower.indexOf('ratification') !== -1 || romeLower.indexOf('accession') !== -1) {
-                stats.jurisdiction.treatyBased++;
-            }
+            // Treaty-based: contains 'treaty' or 'section 9'
+            var hasTreaty = ALL_JURIS_COLS.some(function(col) {
+                return jurisdictionPartContains(record[col], 'treaty') || 
+                       jurisdictionPartContains(record[col], 'section 9');
+            });
+            if (hasTreaty) stats.jurisdiction.treatyBased++;
             
             // Practice - FIXED: Using dynamically found column names
             if (isYes(record[COLS.HAS_CASE])) {
