@@ -317,7 +317,7 @@ var PlaceholderFiller = {
             var hasProtective = ALL_JURIS_COLS.some(function(col) {
                 return jurisdictionContains(record[col], 'protective');
             });
-            
+
             if (hasActive) stats.jurisdiction.activePersonality++;
             if (hasPassive) stats.jurisdiction.passivePersonality++;
             if (hasProtective) stats.jurisdiction.protectivePrinciple++;
