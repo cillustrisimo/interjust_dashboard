@@ -1213,6 +1213,23 @@ function injectSection4Styles() {
         .section4-region-legend { flex-wrap: wrap; gap: 6px; }
         .section4-region-box { font-size: 10px; padding: 4px 8px; }
     }
+        .section4-explore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #4299E1 0%, #3182CE 100%);
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+.section4-explore-link:hover {
+    background: linear-gradient(135deg, #63B3ED 0%, #4299E1 100%);
+    transform: translateY(-1px);
+}
     `;
     
     var styleEl = document.createElement('style');
@@ -1285,7 +1302,7 @@ function injectSection4Modal() {
     </div>
     <div id="section4-region-tooltip" class="section4-region-tooltip" style="display:none;"></div>
     `;
-    
+
     var container = document.createElement('div');
     container.innerHTML = modalHtml;
     document.body.appendChild(container);

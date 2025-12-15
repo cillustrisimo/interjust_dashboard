@@ -769,66 +769,76 @@ var SECTION4_CONFIG = {
         'Absolute UJ': {
             title: 'Absolute Universal Jurisdiction',
             description: 'Pure universal jurisdiction without any required nexus to the prosecuting state',
-            overview: 'Absolute Universal Jurisdiction represents the most comprehensive form of extraterritorial criminal jurisdiction. States with this form can prosecute serious international crimes regardless of where the crime occurred or the nationality of those involved.',
-            highlight: 'This form of jurisdiction reflects the principle that certain crimes are of such gravity that they offend the international community as a whole, and any state may act on behalf of that community.',
+            overview: '<span id="stat-jurisdiction-absolute" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes, regardless of the nationality of the alleged perpetrator, the nationality of the victim, the location where the offense was committed, or the location of the alleged perpetrator.',
+            highlight: 'Absolute universal jurisdiction is the "purest" form of universal jurisdiction, reflecting the original idea behind the principle that certain crimes are considered to be committed against the international community as a whole.',
             caseStudy: {
-                title: 'Taha al-Jumailly - Germany (2021)',
-                text: 'In November 2021, a German court convicted Iraqi ISIS member Taha al-Jumailly of genocide, crimes against humanity, and war crimes against the Yazidi people in Iraq. He was found guilty of enslaving a Yazidi woman and her 5-year-old daughter, whom he chained outside during extreme heat, causing the child\'s death.',
+                title: 'Case Study: Former ISIS Member Taha al-Jumailly Prosecuted in Germany for Genocide, Crimes against Humanity, and War Crimes Committed Against Yazidi Women in Iraq',
+                text: '<p>Taha al-Jumailly is an Iraqi national and former ISIS member who committed genocide, crimes against humanity, and war crimes through his enslavement and abuse of a Yazidi woman and her daughter.<sup><a href="#ref-28" class="ref-link">[28]</a></sup> Along with his wife, Jennifer Wenisch, a German national who was later convicted of crimes against humanity and war crimes, al-Jumailly held the Yazidi woman and her daughter in inhuman conditions at his home in Fallujah during the summer of 2015.<sup><a href="#ref-29" class="ref-link">[29]</a></sup> The German Federal Court of Justice issued an arrest warrant for al-Jumailly in April 2019, based on a structural investigation into crimes committed against the Yazidi by ISIS in Syria and Iraq that German authorities had opened in 2014.<sup><a href="#ref-30" class="ref-link">[30]</a></sup> Greek authorities arrested al-Jumailly based on the European Arrest Warrant in May 2019, and extradited him to Germany in October.<sup><a href="#ref-31" class="ref-link">[31]</a></sup> The Higher Regional Court of Frankfurt am Main convicted al-Jumailly of genocide, crimes against humanity, and war crimes and sentenced him to life imprisonment in November 2021.<sup><a href="#ref-32" class="ref-link">[32]</a></sup> Al-Jumailly\'s genocide conviction was the first worldwide of an ISIS member.<sup><a href="#ref-33" class="ref-link">[33]</a></sup></p>',
                 significance: 'This case marked the first worldwide conviction of an ISIS member for genocide against the Yazidi people, demonstrating how universal jurisdiction can address atrocities even when the perpetrator has no connection to the prosecuting state.',
                 links: [
-                    { name: 'Trial International Database', url: 'https://trialinternational.org/' },
-                    { name: 'ECCHR Documentation', url: 'https://www.ecchr.eu/' }
+                    { name: 'Trial International', url: 'https://ujim.trialinternational.org/latest-post/taha-aj/' },
+                    { name: 'Eurojust Database', url: 'https://www.eurojust.europa.eu/judicial-cooperation/practitioner-networks/genocide-prosecution-network/national-jurisprudence?country_of_trial=Germany&country_of_crime=Iraq&key_terms=Yazidi' }
                 ]
             }
         },
         'Presence-based': {
             title: 'Presence-Based Jurisdiction',
             description: 'Jurisdiction requiring the alleged perpetrator to be present in the prosecuting state',
-            overview: 'Presence-based (or conditional) universal jurisdiction allows states to prosecute international crimes only when the alleged perpetrator is physically present on their territory. This represents a more limited but practical approach to universal jurisdiction.',
-            highlight: 'Many European countries and other states use this model, which balances the desire to combat impunity with practical enforcement considerations.',
+            overview: '<span id="stat-jurisdiction-presence" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes if the alleged perpetrator is physically present in the State, even if neither the perpetrator nor victim are nationals of that State.',
+            highlight: 'In many States, laws granting jurisdiction over the most serious international crimes committed abroad are subject to a significant limitation: the suspected perpetrator must be physically present in that State to trigger jurisdiction. This limitation, which is commonly referred to as "conditional universal jurisdiction," is often motivated by resource constraints which justify focusing on those perpetrators who are actually present on the would-be prosecuting State\'s territory.',
             caseStudy: {
-                title: 'Ousman Sonko - Switzerland (Ongoing)',
-                text: 'Former Gambian Interior Minister Ousman Sonko was arrested in Switzerland in 2017 after fleeing The Gambia following the change in government. He is accused of crimes against humanity for his role in the brutal repression of political opponents during Yahya Jammeh\'s regime.',
-                significance: 'Sonko was the highest-ranking official to be prosecuted under universal jurisdiction in Europe at the time of his arrest, highlighting how presence-based jurisdiction can still reach high-level perpetrators who seek refuge abroad.',
+                title: 'Case Study: Former Gambian Interior Minister Ousman Sonko Prosecuted in Switzerland for Crimes Committed in The Gambia During the Regime of Yahya Jammeh',
+                text: '<p>Ousman Sonko is a Gambian national who committed crimes against humanity in several roles under the regime of Yahya Jammeh, who led The Gambia from 1996-2017.<sup><a href="#ref-35" class="ref-link">[35]</a></sup> Sonko left the Gambia in September 2016.<sup><a href="#ref-36" class="ref-link">[36]</a></sup> Trial International filed a criminal complaint with prosecutors in Switzerland in January 2017, after it became aware of Sonko\'s presence in country.<sup><a href="#ref-37" class="ref-link">[37]</a></sup> Switzerland\'s Office of the Attorney General then opened what would become a six-year investigation which involved multiple trips to The Gambia to collect evidence and hear witness testimony.<sup><a href="#ref-38" class="ref-link">[38]</a></sup> In 2021, The Gambia\'s Truth, Reconciliation, and Reparations Commission recommended that Sonko be prosecuted for killings and acts of torture and sexual violence committed between 2000 and 2016.<sup><a href="#ref-39" class="ref-link">[39]</a></sup> The Federal Criminal Court of Bellinzona convicted Sonko of crimes against humanity and sentenced him to 20 years\' imprisonment in May 2024.<sup><a href="#ref-40" class="ref-link">[40]</a></sup> Having previously served as The Gambia\'s Minister of the Interior, Sonko is to date the highest-ranking State official prosecuted by a European court under the principle of universal jurisdiction.<sup><a href="#ref-41" class="ref-link">[41]</a></sup></p>',
+                significance: 'Sonko is the highest-ranking State official prosecuted by a European court under universal jurisdiction, demonstrating how presence-based jurisdiction can reach high-level perpetrators who seek refuge abroad.',
                 links: [
-                    { name: 'Trial International Database', url: 'https://trialinternational.org/' }
+                    { name: 'Trial International', url: 'https://ujim.trialinternational.org/latest-post/ousman-sonko/' }
                 ]
             }
         },
         'Active Personality': {
             title: 'Active Personality Jurisdiction',
             description: 'Jurisdiction based on the nationality of the alleged perpetrator',
-            overview: 'Active personality jurisdiction allows a state to prosecute its own nationals for crimes committed abroad. This is one of the most widely accepted bases for extraterritorial jurisdiction in international law.',
-            highlight: 'This form of jurisdiction ensures that nationals cannot escape justice simply by committing crimes outside their home country. It is particularly important for addressing crimes by military personnel or government officials acting abroad.',
+            overview: '<span id="stat-jurisdiction-active" class="stat-placeholder">--</span> U.N. Member States can exercise some sort of jurisdiction over at least one of the most serious international crimes if the alleged perpetrator is a national of that State.',
+            highlight: 'Most States exercise jurisdiction over crimes committed by their nationals, regardless of the place of commission. This is commonly referred to as "active personality" jurisdiction. Some States interpret this type of jurisdiction to include alleged perpetrators who are residents, refugees, or stateless persons residing permanently in that State.',
             caseStudy: {
-                title: 'Eshetu Alemu - Netherlands (2017)',
-                text: 'Dual Ethiopian-Dutch national Eshetu Alemu was prosecuted in the Netherlands for war crimes committed during Ethiopia\'s "Red Terror" campaign in the 1970s, when he served as a local official in the Derg military regime.',
+                title: 'Case Study: Dual Ethiopian and Dutch National Eshetu Alemu Prosecuted in the Netherlands for International Crimes Committed in Ethiopia',
+                text: '<p>Eshetu Alemu is a dual Ethiopian and Dutch national who committed war crimes as a member of the communist military regime, the "Derg", that ruled Ethiopia from 1974-91.<sup><a href="#ref-42" class="ref-link">[42]</a></sup> Alemu settled in the Netherlands in 1990, a year prior to the Derg\'s collapse, and obtained Dutch citizenship in 1998.<sup><a href="#ref-43" class="ref-link">[43]</a></sup> Also in 1998, a Dutch magazine published an investigative piece linking Alemu to war crimes in Ethiopia.<sup><a href="#ref-44" class="ref-link">[44]</a></sup> Based on the magazine article, the Dutch National Investigative Service\'s International Crimes Unit opened what would become a four-year investigation into Alemu in 2009 that involved cooperation with Ethiopia\'s Special Prosecutor\'s Office.<sup><a href="#ref-45" class="ref-link">[45]</a></sup> Dutch police arrested Alemu in September 2015, and The Hague District Court convicted him of war crimes and sentenced him to life imprisonment in December 2017.<sup><a href="#ref-46" class="ref-link">[46]</a></sup> Alemu\'s case is to date the only prosecution abroad for international crimes committed in Ethiopia.</p>',
                 significance: 'This case demonstrates how active personality jurisdiction can close impunity gaps decades after atrocities occurred, when perpetrators later acquire nationality in countries with strong accountability mechanisms.',
                 links: [
-                    { name: 'Trial International Database', url: 'https://trialinternational.org/' }
+                    { name: 'Trial International', url: 'https://ujim.trialinternational.org/latest-post/eshetu-alemu/' },
+                    { name: 'Eurojust Database', url: 'https://www.eurojust.europa.eu/judicial-cooperation/practitioner-networks/genocide-prosecution-network/national-jurisprudence?country_of_trial=Netherlands&country_of_crime=Ethiopia' }
                 ]
             }
         },
         'Passive Personality': {
             title: 'Passive Personality Jurisdiction',
             description: 'Jurisdiction based on the nationality of the victim',
-            overview: 'Passive personality jurisdiction allows states to prosecute crimes where their nationals are victims, regardless of where the crime occurred or the nationality of the perpetrator.',
-            highlight: 'This provides another avenue for states to protect their citizens from international crimes and ensures that perpetrators cannot escape justice simply because they targeted foreign nationals.',
-            caseStudy: { title: '', text: '', significance: '', links: [] }
+            overview: '<span id="stat-jurisdiction-passive" class="stat-placeholder">--</span> U.N. Member States can exercise some sort of jurisdiction over at least one of the most serious international crimes when a victim of the crime is a national of that State.',
+            highlight: 'Many States exercise jurisdiction over crimes committed against their nationals, regardless of the place of commission. This is commonly referred to as "passive personality" jurisdiction. Some States extend this jurisdiction to victims who are residents, refugees, or stateless persons residing permanently in that State.',
+            caseStudy: {
+                title: 'Case Study: Assad Regime Officials Prosecuted in Absentia in France for the Arrest, Detention, and Disappearance of Dual French and Syrian Nationals in Damascus',
+                text: '<p>Ali Mamlouk, Jamil Hassan, and Abdel Salam Mahmoud are all Syrian nationals and former high-ranking officials in the Assad regime who were connected to the November 2013 arrest, detention, and disappearance of dual French and Syrian nationals Patrick and Mazen Dabbagh in Damascus.<sup><a href="#ref-47" class="ref-link">[47]</a></sup> Obeida Dabbagh, a family member of the disappeared, filed a complaint at the Paris Tribunal with the International Federation for Human Rights and one of its French affiliates in October 2016.<sup><a href="#ref-48" class="ref-link">[48]</a></sup> Judges from France\'s specialized unit for the prosecution of international crimes issued international arrest warrants for the three suspects in October 2018, and they completed their investigation in March 2022.<sup><a href="#ref-49" class="ref-link">[49]</a></sup> The Paris Criminal Court convicted Mamlouk, Hassan, and Mahmoud in absentia for complicity in crimes against humanity and war crimes and sentenced them to life imprisonment in May 2024.<sup><a href="#ref-50" class="ref-link">[50]</a></sup> In its ruling, the Court held that functional immunities for State officials do not apply in serious international crimes cases.<sup><a href="#ref-51" class="ref-link">[51]</a></sup></p>',
+                significance: 'This case demonstrates how passive personality jurisdiction enables States to pursue justice when their own nationals are victimized abroad, even when perpetrators remain in their home countries.',
+                links: [
+                    { name: 'Trial International - Mamlouk', url: 'https://ujim.trialinternational.org/latest-post/ali-mamluk/' },
+                    { name: 'Trial International - Hassan', url: 'https://ujim.trialinternational.org/latest-post/jamil-hassan/' },
+                    { name: 'Trial International - Mahmoud', url: 'https://ujim.trialinternational.org/latest-post/abdel-salam-mahmoud/' }
+                ]
+            }
         },
         'Protective Principle': {
             title: 'Protective Principle',
             description: 'Jurisdiction to protect state interests',
-            overview: 'The protective principle allows states to exercise jurisdiction over crimes that threaten their fundamental security interests, even when committed abroad.',
-            highlight: 'While traditionally applied to crimes like espionage or counterfeiting, some states have extended this principle to certain international crimes that threaten international peace and security.',
-            caseStudy: { title: '', text: '', significance: '', links: [] }
+            overview: '<span id="stat-jurisdiction-protective" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes to protect their own national interest or security.',
+            highlight: 'Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as "protective principle" jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries, States rarely invoke it to investigate and prosecute such crimes.',
+            caseStudy: null
         },
         'Treaty Obligations': {
-            title: 'Treaty Obligations',
+            title: 'Treaty-Based Obligation',
             description: 'Jurisdiction arising from international treaty commitments',
-            overview: 'Many states have jurisdiction obligations arising from their ratification of international treaties such as the Geneva Conventions, the Torture Convention, or the Rome Statute of the ICC.',
-            highlight: 'Treaty-based jurisdiction creates an international network of accountability, obligating states to either prosecute or extradite perpetrators of certain crimes found on their territory.',
-            caseStudy: { title: '', text: '', significance: '', links: [] }
+            overview: '<span id="stat-jurisdiction-treaty" class="stat-placeholder">--</span> U.N. Member States have an obligation to exercise jurisdiction over certain serious international crimes as a result of international treaties they have ratified.',
+            highlight: 'Many States are required to exercise jurisdiction over crimes committed abroad as an obligation under a treaty. Most relevant for Project Meridian, the 1949 Geneva Conventions, which govern the conduct of war and provide protections for those who are not taking part in hostilities, include an obligation to prosecute suspected war criminals or extradite them to a State that is better placed to prosecute. Therefore, any State that has ratified the Geneva Conventions has not only jurisdiction but an obligation to investigate and prosecute "grave breaches" of the Conventions committed in other States.',
+            caseStudy: null
         }
     }
 };
@@ -1021,6 +1031,7 @@ function injectSection4Styles() {
         padding: 20px 30px;
         text-align: center;
         min-width: 140px;
+        margin-right: 60px;
     }
     .section4-key-stat-number {
         font-family: Georgia, 'Times New Roman', serif;
@@ -1282,6 +1293,9 @@ function injectSection4Modal() {
                 <div class="section4-data-source">
                     Data source: <a href="https://projectmeridian.org/" target="_blank">Project Meridian</a>
                 </div>
+                <a href="https://projectmeridian.org/" target="_blank" class="section4-explore-link">
+        Explore the Global Mapping Tool →
+    </a>
             </div>
         </div>
     </div>
@@ -1310,16 +1324,24 @@ function openSection4Modal(jurisdictionType, count) {
     document.getElementById('section4-modal-title').textContent = info.title;
     document.getElementById('section4-modal-description').textContent = info.description;
     document.getElementById('section4-modal-count').textContent = count;
-    document.getElementById('section4-modal-overview-text').textContent = info.overview;
-    document.getElementById('section4-modal-highlight-text').textContent = info.highlight;
+    document.getElementById('section4-modal-overview-text').innerHTML = info.overview;
+document.getElementById('section4-modal-highlight-text').innerHTML = info.highlight;
     
     var countries = getSection4CountriesForJurisdiction(jurisdictionType);
     renderSection4RegionalBreakdown(countries, count);
     renderSection4CountriesAccordion(countries);
     
+    // Handle case study tab
+    var caseStudyTab = document.querySelector('.section4-tab:nth-child(3)');
+    
     if (info.caseStudy && info.caseStudy.title) {
+        // Enable case study tab
+        caseStudyTab.disabled = false;
+        caseStudyTab.style.opacity = '1';
+        caseStudyTab.style.cursor = 'pointer';
+        
         document.getElementById('section4-case-study-title').textContent = info.caseStudy.title;
-        document.getElementById('section4-case-study-text').textContent = info.caseStudy.text;
+        document.getElementById('section4-case-study-text').innerHTML = info.caseStudy.text;
         document.getElementById('section4-case-study-significance').textContent = info.caseStudy.significance;
         
         var linksContainer = document.getElementById('section4-database-links');
@@ -1331,11 +1353,26 @@ function openSection4Modal(jurisdictionType, count) {
                 '<line x1="10" y1="14" x2="21" y2="3"></line>' +
                 '</svg>' + link.name + '</a>';
         }).join('');
+    } else {
+        // Disable case study tab for jurisdiction types without case studies
+        caseStudyTab.disabled = true;
+        caseStudyTab.style.opacity = '0.4';
+        caseStudyTab.style.cursor = 'not-allowed';
+        
+        document.getElementById('section4-case-study-title').textContent = 'No Case Study Available';
+        document.getElementById('section4-case-study-text').innerHTML = '<p>There has not been a core international crimes conviction based on this type of jurisdiction to date.</p>';
+        document.getElementById('section4-case-study-significance').textContent = '';
+        document.getElementById('section4-database-links').innerHTML = '';
     }
     
     switchSection4Tab('overview', document.querySelector('.section4-tab'));
     document.getElementById('section4-modal-overlay').classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    if (typeof PlaceholderFiller !== 'undefined' && PlaceholderFiller.stats) {
+        PlaceholderFiller.fillAllPlaceholders(PlaceholderFiller.stats);
+    }
+    
 }
 
 function closeSection4Modal() {
