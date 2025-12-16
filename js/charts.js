@@ -724,21 +724,22 @@ var SECTION4_CONFIG = {
         'Middle East & North Africa', 'North America', 'Oceania', 'South America'
     ],
     regionColors: {
-        'Africa': '#e76f51',
-        'Asia': '#f4a261',
-        'Caribbean': '#e9c46a',
-        'Central America': '#8ac926',
-        'Europe': '#2a9d8f',
-        'Middle East & North Africa': '#264653',
-        'North America': '#457b9d',
-        'Oceania': '#9d4edd',
-        'South America': '#f72585'
-    },
+  'Africa': '#FF6B6B',
+  'Asia': '#FFA94D',
+  'Caribbean': '#BE4BDB',
+  'Central America': '#69DB7C',
+  'Europe': '#38D9A9',
+  'Middle East & North Africa': '#4DABF7',
+  'North America': '#845EF7',
+  'Oceania': '#F783AC',
+  'South America': '#FFD43B'
+},
+
     nodeColors: {
-        layer0: '#0b2239',
-        withJurisdiction: '#1d4e89',
-        withoutJurisdiction: '#9e3a3a',
-        layer2: '#3b82f6'
+        layer0: '#1d4e89',
+        withJurisdiction: '#1a5276',
+        withoutJurisdiction: '#FF4500',
+        layer2: '#63B3ED'
     },
     // =====================================================
     // SANKEY SIZING - HOW IT WORKS
@@ -769,7 +770,7 @@ var SECTION4_CONFIG = {
         'Absolute UJ': {
             title: 'Absolute Universal Jurisdiction',
             description: 'Pure universal jurisdiction without any required nexus to the prosecuting state',
-            overview: '<span id="stat-jurisdiction-absolute" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes, regardless of the nationality of the alleged perpetrator, the nationality of the victim, the location where the offense was committed, or the location of the alleged perpetrator.',
+            overview: '<span id="stat-jurisdiction-absolute-modal" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes, regardless of the nationality of the alleged perpetrator, the nationality of the victim, the location where the offense was committed, or the location of the alleged perpetrator.',
             highlight: 'Absolute universal jurisdiction is the "purest" form of universal jurisdiction, reflecting the original idea behind the principle that certain crimes are considered to be committed against the international community as a whole.',
             caseStudy: {
                 title: 'Case Study: Former ISIS Member Taha al-Jumailly Prosecuted in Germany for Genocide, Crimes against Humanity, and War Crimes Committed Against Yazidi Women in Iraq',
@@ -785,7 +786,7 @@ var SECTION4_CONFIG = {
             title: 'Presence-Based Jurisdiction',
             description: 'Jurisdiction requiring the alleged perpetrator to be present in the prosecuting state',
             overview: '<span id="stat-jurisdiction-presence" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes if the alleged perpetrator is physically present in the State, even if neither the perpetrator nor victim are nationals of that State.',
-            highlight: 'In many States, laws granting jurisdiction over the most serious international crimes committed abroad are subject to a significant limitation: the suspected perpetrator must be physically present in that State to trigger jurisdiction. This limitation, which is commonly referred to as "conditional universal jurisdiction," is often motivated by resource constraints which justify focusing on those perpetrators who are actually present on the would-be prosecuting State\'s territory.',
+            highlight: 'In many States, laws granting jurisdiction over the most serious international crimes committed abroad are subject to a significant limitation: the suspected perpetrator must be physically present in that State to trigger jurisdiction. This limitation, which is commonly referred to as "conditional universal jurisdiction,"<sup><a href="#ref-34" class="ref-link">[34]</a></sup> is often motivated by resource constraints which justify focusing on those perpetrators who are actually present on the would-be prosecuting State\'s territory.',
             caseStudy: {
                 title: 'Case Study: Former Gambian Interior Minister Ousman Sonko Prosecuted in Switzerland for Crimes Committed in The Gambia During the Regime of Yahya Jammeh',
                 text: '<p>Ousman Sonko is a Gambian national who committed crimes against humanity in several roles under the regime of Yahya Jammeh, who led The Gambia from 1996-2017.<sup><a href="#ref-35" class="ref-link">[35]</a></sup> Sonko left the Gambia in September 2016.<sup><a href="#ref-36" class="ref-link">[36]</a></sup> Trial International filed a criminal complaint with prosecutors in Switzerland in January 2017, after it became aware of Sonko\'s presence in country.<sup><a href="#ref-37" class="ref-link">[37]</a></sup> Switzerland\'s Office of the Attorney General then opened what would become a six-year investigation which involved multiple trips to The Gambia to collect evidence and hear witness testimony.<sup><a href="#ref-38" class="ref-link">[38]</a></sup> In 2021, The Gambia\'s Truth, Reconciliation, and Reparations Commission recommended that Sonko be prosecuted for killings and acts of torture and sexual violence committed between 2000 and 2016.<sup><a href="#ref-39" class="ref-link">[39]</a></sup> The Federal Criminal Court of Bellinzona convicted Sonko of crimes against humanity and sentenced him to 20 years\' imprisonment in May 2024.<sup><a href="#ref-40" class="ref-link">[40]</a></sup> Having previously served as The Gambia\'s Minister of the Interior, Sonko is to date the highest-ranking State official prosecuted by a European court under the principle of universal jurisdiction.<sup><a href="#ref-41" class="ref-link">[41]</a></sup></p>',
@@ -829,15 +830,15 @@ var SECTION4_CONFIG = {
         'Protective Principle': {
             title: 'Protective Principle',
             description: 'Jurisdiction to protect state interests',
-            overview: '<span id="stat-jurisdiction-protective" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes to protect their own national interest or security.',
-            highlight: 'Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as "protective principle" jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries, States rarely invoke it to investigate and prosecute such crimes.',
+            overview: '<span id="stat-jurisdiction-protective" class="stat-placeholder">--</span> U.N. Member States can exercise protective principle jurisdiction over at least one core international crime to protect national security or national interests.',
+highlight: 'Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as “protective principle” jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries<sup><a href="#ref-52" class="ref-link">[52]</a></sup>, States rarely invoke it to investigate and prosecute such crimes<sup><a href="#ref-53" class="ref-link">[53]</a></sup>. In practice: <span id="stat-jurisdiction-protective-no-presence" class="stat-placeholder">--</span> states provide for protective jurisdiction even when the alleged perpetrator is not present, while <span id="stat-jurisdiction-protective-presence-only" class="stat-placeholder">--</span> recognize it only when the alleged perpetrator is present. "Presence" refers to whether the alleged perpetrator must be physically present on the state\'s territory to enable jurisdiction.',
             caseStudy: null
         },
         'Treaty Obligations': {
             title: 'Treaty-Based Obligation',
             description: 'Jurisdiction arising from international treaty commitments',
             overview: '<span id="stat-jurisdiction-treaty" class="stat-placeholder">--</span> U.N. Member States have an obligation to exercise jurisdiction over certain serious international crimes as a result of international treaties they have ratified.',
-            highlight: 'Many States are required to exercise jurisdiction over crimes committed abroad as an obligation under a treaty. Most relevant for Project Meridian, the 1949 Geneva Conventions, which govern the conduct of war and provide protections for those who are not taking part in hostilities, include an obligation to prosecute suspected war criminals or extradite them to a State that is better placed to prosecute. Therefore, any State that has ratified the Geneva Conventions has not only jurisdiction but an obligation to investigate and prosecute "grave breaches" of the Conventions committed in other States.',
+            highlight: 'Many States are required to exercise jurisdiction over crimes committed abroad as an obligation under a treaty. Most relevant for Project Meridian, the 1949 Geneva Conventions, which govern the conduct of war and provide protections for those who are not taking part in hostilities, include an obligation to prosecute suspected war criminals or extradite them to a State that is better placed to prosecute<sup><a href="#ref-54" class="ref-link">[54]</a></sup>. Therefore, any State that has ratified the Geneva Conventions has not only jurisdiction but an obligation to investigate and prosecute "grave breaches" of the Conventions committed in other States.',
             caseStudy: null
         }
     }
@@ -874,8 +875,18 @@ function injectSection4Styles() {
         font-family: Georgia, 'Times New Roman', serif;
         font-size: clamp(1rem, 1.8vw, 1.2rem);
         color: #A0AEC0;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
     }
+
+    .section4-chart-instructions {
+        margin: 4px 0 14px 0;
+        text-align: center;
+        font-size: clamp(1rem, 1.8vw, 1.2rem);
+        color: #A0AEC0;
+        opacity: 0.95;
+        margin-bottom: 20px;
+    }
+
     .section4-stats-row {
         display: flex;
         flex-wrap: wrap;
@@ -964,10 +975,31 @@ function injectSection4Styles() {
         line-height: 1.5;
     }
     .section4-layer2-clickable {
-        cursor: pointer;
-        transition: filter 0.15s ease;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+}
+.section4-layer2-clickable:hover { 
+    filter: brightness(1.15); 
+}
+
+/* Pulse ring animation for Layer 2 nodes */
+.section4-pulse-ring {
+    pointer-events: none;
+    fill: none;
+    stroke: #63B3ED;
+    animation: sankeyPulse 2s ease-in-out infinite;
+}
+
+@keyframes sankeyPulse {
+    0%, 100% { 
+        stroke-width: 0;
+        stroke-opacity: 0.8;
     }
-    .section4-layer2-clickable:hover { filter: brightness(1.15); }
+    50% { 
+        stroke-width: 16px;
+        stroke-opacity: 0;
+    }
+}
     
     /* Modal Styles */
     .section4-modal-overlay {
@@ -1048,24 +1080,29 @@ function injectSection4Styles() {
         margin-top: 8px;
     }
     .section4-close-btn {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: none;
-        border: none;
-        color: #A0AEC0;
-        font-size: 32px;
-        cursor: pointer;
-        padding: 5px;
-        line-height: 1;
-        transition: color 0.2s;
-    }
-    .section4-close-btn:hover { color: #E2E8F0; }
-    .section4-tabs {
-        display: flex;
-        background: #2D3748;
-        border-bottom: 1px solid rgba(74, 85, 104, 0.5);
-    }
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-muted, #A0AEC0);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.section4-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: rotate(90deg);
+}
     .section4-tab {
         flex: 1;
         padding: 16px 24px;
@@ -1256,7 +1293,7 @@ function injectSection4Modal() {
                         <div class="section4-key-stat-label">UN Member States</div>
                     </div>
                 </div>
-                <button class="section4-close-btn" onclick="closeSection4Modal()">×</button>
+                <button class="section4-close-btn" aria-label="Close" onclick="closeSection4Modal()">&times;</button>
             </div>
             <div class="section4-tabs">
                 <button class="section4-tab active" onclick="switchSection4Tab('overview', this)">Overview</button>
@@ -1651,7 +1688,9 @@ function renderSection4Layer2(container, nodes, fonts, l2BoxW, vbW, vbH) {
         
         var g = container.append('g').attr('class', 'section4-layer2-clickable')
             .attr('transform', 'translate(' + node.x0 + ',' + boxY + ')').attr('data-jurisdiction', node.name);
-        
+        // Pulse ring (behind the box)
+        g.append('rect').attr('class', 'section4-pulse-ring').attr('width', l2BoxW).attr('height', boxHeight).attr('rx', 4);
+        // Main box (on top)    
         g.append('rect').attr('width', l2BoxW).attr('height', boxHeight)
             .attr('fill', SECTION4_CONFIG.nodeColors.layer2).attr('stroke', '#4A5568').attr('stroke-width', 1).attr('rx', 4);
         g.append('text').attr('x', vbW * 0.016).attr('y', boxHeight / 2).attr('dy', '0.35em')
@@ -1693,21 +1732,35 @@ function highlightSection4JurisdictionLinks(jurisdictionType, highlight) {
 }
 
 function highlightSection4RegionLinks(region, highlight) {
-    if (!Section4SankeyState.linkGroup) return;
-    
-    Section4SankeyState.linkGroup.selectAll('path').each(function(link) {
-        var el = d3.select(this);
-        var isMatch = link.region === region;
-        
-        if (highlight) {
-            el.classed('link-highlight', isMatch).classed('link-fade', link.region && !isMatch);
-            if (isMatch) el.attr('stroke', SECTION4_CONFIG.regionColors[region]);
-        } else {
-            el.classed('link-highlight', false).classed('link-fade', false);
-            el.attr('stroke', 'url(#' + link.gradientId + ')');
-        }
-    });
+  if (!Section4SankeyState.linkGroup) return;
+
+  Section4SankeyState.linkGroup.selectAll('path').each(function(link) {
+    var el = d3.select(this);
+    var isMatch = link.region === region;
+
+    // base width (same logic you used when rendering: Math.max(1, d.width))
+    var baseW = Math.max(1, link.width || 1);
+
+    if (highlight) {
+      el.classed('link-highlight', isMatch)
+        .classed('link-fade', link.region && !isMatch);
+
+      if (isMatch) {
+        // Option A: subtle bump + hard cap
+        var highlightW = Math.min(baseW * 1.5, baseW + 0.6, 3);
+
+        el.attr('stroke', SECTION4_CONFIG.regionColors[region])
+          .attr('stroke-width', highlightW);
+      }
+    } else {
+      el.classed('link-highlight', false).classed('link-fade', false);
+      el.attr('stroke', 'url(#' + link.gradientId + ')')
+        .attr('stroke-width', baseW); // reset cleanly
+    }
+  });
 }
+
+
 
 function renderSection4RegionLegend(legendEl) {
     var tooltip = document.getElementById('section4-region-tooltip');
@@ -1895,14 +1948,19 @@ function createChart_Section4A(containerId) {
     
     var title = document.createElement('h3');
     title.className = 'section4-chart-title';
-    title.textContent = 'Jurisdiction Types for Extraterritorial Crimes';
+    title.textContent = 'Legal Ability to Investigate and Prosecute Extraterritorial Crimes';
     wrapper.appendChild(title);
     
     var subtitle = document.createElement('p');
     subtitle.className = 'section4-chart-subtitle';
-    subtitle.textContent = 'How UN Member States exercise legal authority over international crimes committed abroad';
+    subtitle.textContent = 'How UN Member States exercise legal authority over international crimes committed abroad.'
     wrapper.appendChild(subtitle);
     
+    var instructions = document.createElement('p');
+instructions.className = 'section4-chart-instructions';
+instructions.textContent = 'Click on jurisdiction types to explore in detail. Hover over regions to highlight flows.';
+wrapper.appendChild(instructions);
+
     var statsRow = document.createElement('div');
     statsRow.className = 'section4-stats-row';
     statsRow.innerHTML = '<span>Total UN Member States: <strong>' + stats.total + '</strong></span>' +

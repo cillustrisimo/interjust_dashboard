@@ -269,6 +269,8 @@ var PlaceholderFiller = {
                 activePersonality: 0,
                 passivePersonality: 0,
                 protectivePrinciple: 0,
+                protectiveNoPresence: 0,
+protectivePresenceOnly: 0,
                 treatyBased: 0
             },
             practice: {
@@ -341,10 +343,20 @@ var PlaceholderFiller = {
             var hasProtective = ALL_JURIS_COLS.some(function(col) {
                 return jurisdictionPartContains(record[col], 'protective');
             });
-            
+
+// Breakdown for Protective Principle clarification
+var hasProtectiveNo = NO_PRESENCE_COLS.some(function(col) {
+    return jurisdictionPartContains(record[col], 'protective');
+});
+var hasProtectiveYesOnly = YES_PRESENCE_COLS.some(function(col) {
+    return jurisdictionPartContains(record[col], 'protective');
+}) && !hasProtectiveNo;
+
             if (hasActive) stats.jurisdiction.activePersonality++;
             if (hasPassive) stats.jurisdiction.passivePersonality++;
             if (hasProtective) stats.jurisdiction.protectivePrinciple++;
+            if (hasProtectiveNo) stats.jurisdiction.protectiveNoPresence++;
+if (hasProtectiveYesOnly) stats.jurisdiction.protectivePresenceOnly++;
             
             // Treaty-based: contains 'treaty' or 'section 9'
             var hasTreaty = ALL_JURIS_COLS.some(function(col) {
@@ -391,10 +403,13 @@ var PlaceholderFiller = {
             { id: 'stat-command-responsibility', value: stats.commandResponsibility },
             { id: 'stat-jurisdiction-any', value: stats.jurisdiction.anyJurisdiction },
             { id: 'stat-jurisdiction-absolute', value: stats.jurisdiction.absoluteUJ },
+            { id: 'stat-jurisdiction-absolute-modal', value: stats.jurisdiction.absoluteUJ },
             { id: 'stat-jurisdiction-presence', value: stats.jurisdiction.presenceRequired },
             { id: 'stat-jurisdiction-active', value: stats.jurisdiction.activePersonality },
             { id: 'stat-jurisdiction-passive', value: stats.jurisdiction.passivePersonality },
             { id: 'stat-jurisdiction-protective', value: stats.jurisdiction.protectivePrinciple },
+            { id: 'stat-jurisdiction-protective-no-presence', value: stats.jurisdiction.protectiveNoPresence },
+{ id: 'stat-jurisdiction-protective-presence-only', value: stats.jurisdiction.protectivePresenceOnly },
             { id: 'stat-jurisdiction-treaty', value: stats.jurisdiction.treatyBased },
             { id: 'stat-cases-launched', value: stats.practice.hasLaunchedCase },
             { id: 'stat-jurisdiction-for-gap', value: stats.jurisdiction.anyJurisdiction },
