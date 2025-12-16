@@ -831,7 +831,7 @@ var SECTION4_CONFIG = {
             title: 'Protective Principle',
             description: 'Jurisdiction to protect state interests',
             overview: '<span id="stat-jurisdiction-protective" class="stat-placeholder">--</span> U.N. Member States can exercise protective principle jurisdiction over at least one core international crime to protect national security or national interests.',
-highlight: 'Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as “protective principle” jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries<sup><a href="#ref-52" class="ref-link">[52]</a></sup>, States rarely invoke it to investigate and prosecute such crimes<sup><a href="#ref-53" class="ref-link">[53]</a></sup>. In practice: <span id="stat-jurisdiction-protective-no-presence" class="stat-placeholder">--</span> states provide for protective jurisdiction even when the alleged perpetrator is not present, while <span id="stat-jurisdiction-protective-presence-only" class="stat-placeholder">--</span> recognize it only when the alleged perpetrator is present. "Presence" refers to whether the alleged perpetrator must be physically present on the state\'s territory to enable jurisdiction.',
+            highlight: 'Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as “protective principle” jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries<sup><a href="#ref-52" class="ref-link">[52]</a></sup>, States rarely invoke it to investigate and prosecute such crimes<sup><a href="#ref-53" class="ref-link">[53]</a></sup>. In practice: <span id="stat-jurisdiction-protective-no-presence" class="stat-placeholder">--</span> states provide for protective jurisdiction even when the alleged perpetrator is not present, while <span id="stat-jurisdiction-protective-presence-only" class="stat-placeholder">--</span> recognize it only when the alleged perpetrator is present. "Presence" refers to whether the alleged perpetrator must be physically present on the state\'s territory to enable jurisdiction.',
             caseStudy: null
         },
         'Treaty Obligations': {
@@ -977,20 +977,20 @@ function injectSection4Styles() {
     .section4-layer2-clickable {
     cursor: pointer;
     transition: filter 0.15s ease;
-}
-.section4-layer2-clickable:hover { 
+    }
+    .section4-layer2-clickable:hover { 
     filter: brightness(1.15); 
-}
+    }
 
-/* Pulse ring animation for Layer 2 nodes */
-.section4-pulse-ring {
+    /* Pulse ring animation for Layer 2 nodes */
+    .section4-pulse-ring {
     pointer-events: none;
     fill: none;
     stroke: #63B3ED;
     animation: sankeyPulse 2s ease-in-out infinite;
-}
+    }
 
-@keyframes sankeyPulse {
+    @keyframes sankeyPulse {
     0%, 100% { 
         stroke-width: 0;
         stroke-opacity: 0.8;
@@ -999,7 +999,7 @@ function injectSection4Styles() {
         stroke-width: 16px;
         stroke-opacity: 0;
     }
-}
+    }
     
     /* Modal Styles */
     .section4-modal-overlay {
@@ -1272,7 +1272,7 @@ function injectSection4Styles() {
     Section4SankeyState.stylesInjected = true;
 }
 
-function injectSection4Modal() {
+    function injectSection4Modal() {
     if (Section4SankeyState.modalInjected) return;
     if (document.getElementById('section4-modal-overlay')) {
         Section4SankeyState.modalInjected = true;
@@ -1362,7 +1362,7 @@ function openSection4Modal(jurisdictionType, count) {
     document.getElementById('section4-modal-description').textContent = info.description;
     document.getElementById('section4-modal-count').textContent = count;
     document.getElementById('section4-modal-overview-text').innerHTML = info.overview;
-document.getElementById('section4-modal-highlight-text').innerHTML = info.highlight;
+    document.getElementById('section4-modal-highlight-text').innerHTML = info.highlight;
     
     var countries = getSection4CountriesForJurisdiction(jurisdictionType);
     renderSection4RegionalBreakdown(countries, count);
@@ -1390,7 +1390,7 @@ document.getElementById('section4-modal-highlight-text').innerHTML = info.highli
                 '<line x1="10" y1="14" x2="21" y2="3"></line>' +
                 '</svg>' + link.name + '</a>';
         }).join('');
-    } else {
+        } else {
         // Disable case study tab for jurisdiction types without case studies
         caseStudyTab.disabled = true;
         caseStudyTab.style.opacity = '0.4';
@@ -1416,7 +1416,7 @@ function closeSection4Modal() {
     document.getElementById('section4-modal-overlay').classList.remove('active');
     document.body.style.overflow = '';
 }
-window.closeSection4Modal = closeSection4Modal;
+    window.closeSection4Modal = closeSection4Modal;
 
 function switchSection4Tab(tabId, button) {
     document.querySelectorAll('.section4-tab-panel').forEach(function(p) { p.classList.remove('active'); });
@@ -1424,12 +1424,12 @@ function switchSection4Tab(tabId, button) {
     document.getElementById('section4-' + tabId).classList.add('active');
     button.classList.add('active');
 }
-window.switchSection4Tab = switchSection4Tab;
+    window.switchSection4Tab = switchSection4Tab;
 
 function toggleSection4Accordion(header) {
     header.parentElement.classList.toggle('open');
 }
-window.toggleSection4Accordion = toggleSection4Accordion;
+    window.toggleSection4Accordion = toggleSection4Accordion;
 
 function getSection4CountriesForJurisdiction(jurisdictionType) {
     var propMap = {
@@ -1738,7 +1738,7 @@ function highlightSection4RegionLinks(region, highlight) {
     var el = d3.select(this);
     var isMatch = link.region === region;
 
-    // base width (same logic you used when rendering: Math.max(1, d.width))
+    // base width (same logic used when rendering: Math.max(1, d.width))
     var baseW = Math.max(1, link.width || 1);
 
     if (highlight) {
@@ -1746,7 +1746,7 @@ function highlightSection4RegionLinks(region, highlight) {
         .classed('link-fade', link.region && !isMatch);
 
       if (isMatch) {
-        // Option A: subtle bump + hard cap
+        // Subtle bump + hard cap (enhancing visibility without overly distorting)
         var highlightW = Math.min(baseW * 1.5, baseW + 0.6, 3);
 
         el.attr('stroke', SECTION4_CONFIG.regionColors[region])
@@ -1957,9 +1957,9 @@ function createChart_Section4A(containerId) {
     wrapper.appendChild(subtitle);
     
     var instructions = document.createElement('p');
-instructions.className = 'section4-chart-instructions';
-instructions.textContent = 'Click on jurisdiction types to explore in detail. Hover over regions to highlight flows.';
-wrapper.appendChild(instructions);
+    instructions.className = 'section4-chart-instructions';
+    instructions.textContent = 'Click on jurisdiction types to explore in detail. Hover over regions to highlight flows.';
+    wrapper.appendChild(instructions);
 
     var statsRow = document.createElement('div');
     statsRow.className = 'section4-stats-row';
@@ -2357,9 +2357,8 @@ function createChart_Section5A(containerId) {
 
 /* ===============================================
    SECTION 5B: SPECIALIZED UNITS BAR CHART
-   FIXED: Title, subtitle, axes with numbers, legend, centered
    =============================================== */
-function createChart_Section5B(containerId) {
+    function createChart_Section5B(containerId) {
     console.log('[Charts] Rendering Section 5B - Specialized Units Bar Chart');
     
     var container = d3.select('#' + containerId);

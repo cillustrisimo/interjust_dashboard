@@ -176,7 +176,6 @@ var PlaceholderFiller = {
                 /^Rome Statute.*Has the country signed or ratified.*\??\s*$/i
             ]) || 'Rome Statute of the International Criminal Court - Has the country signed or ratified the Rome Statute?',
             
-            // FIXED: This column name had a trailing space causing lookup failures
             HAS_CASE: self.findColumn(keys, [
                 /^Jurisprudence\s*[-–]\s*Has the country had a UJ or ETJ case\??\s*$/i
             ]) || 'Jurisprudence - Has the country had a UJ or ETJ case?',
@@ -344,19 +343,19 @@ protectivePresenceOnly: 0,
                 return jurisdictionPartContains(record[col], 'protective');
             });
 
-// Breakdown for Protective Principle clarification
-var hasProtectiveNo = NO_PRESENCE_COLS.some(function(col) {
-    return jurisdictionPartContains(record[col], 'protective');
-});
-var hasProtectiveYesOnly = YES_PRESENCE_COLS.some(function(col) {
-    return jurisdictionPartContains(record[col], 'protective');
-}) && !hasProtectiveNo;
+            // Breakdown for Protective Principle clarification
+            var hasProtectiveNo = NO_PRESENCE_COLS.some(function(col) {
+                return jurisdictionPartContains(record[col], 'protective');
+            });
+            var hasProtectiveYesOnly = YES_PRESENCE_COLS.some(function(col) {
+                return jurisdictionPartContains(record[col], 'protective');
+            }) && !hasProtectiveNo;
 
             if (hasActive) stats.jurisdiction.activePersonality++;
             if (hasPassive) stats.jurisdiction.passivePersonality++;
             if (hasProtective) stats.jurisdiction.protectivePrinciple++;
             if (hasProtectiveNo) stats.jurisdiction.protectiveNoPresence++;
-if (hasProtectiveYesOnly) stats.jurisdiction.protectivePresenceOnly++;
+            if (hasProtectiveYesOnly) stats.jurisdiction.protectivePresenceOnly++;
             
             // Treaty-based: contains 'treaty' or 'section 9'
             var hasTreaty = ALL_JURIS_COLS.some(function(col) {
@@ -365,7 +364,7 @@ if (hasProtectiveYesOnly) stats.jurisdiction.protectivePresenceOnly++;
             });
             if (hasTreaty) stats.jurisdiction.treatyBased++;
             
-            // Practice - FIXED: Using dynamically found column names
+            // Practice - Using dynamically found column names
             if (isYes(record[COLS.HAS_CASE])) {
                 stats.practice.hasLaunchedCase++;
             }
