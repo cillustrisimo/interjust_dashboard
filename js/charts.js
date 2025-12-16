@@ -632,7 +632,7 @@ function createChart_Section3(containerId) {
             .text(d.region);
     });
 
-    // Legend at bottom - RESTORED
+    // Legend at bottom 
     const legendY = height - 30;
     const legendX = width / 2 - 180;
 

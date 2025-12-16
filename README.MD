@@ -17,18 +17,6 @@ https://cillustrisimo.github.io/interjust_dashboard
 
 ---
 
-## Local Development
-
-To run locally, start a simple HTTP server from the project root:
-
-```bash
-python3 -m http.server
-```
-
-Then navigate to `http://localhost:8000` in your browser.
-
----
-
 ## Project Structure
 
 ```
@@ -130,8 +118,8 @@ interjust_dashboard/
 | Section | Chart Type | Description |
 |---------|------------|-------------|
 | 2A | Choropleth Map | Criminalization of international crimes by country |
-| 3 | Stacked Bar | Command responsibility provisions by region |
-| 4A-4E | Bar Charts | Jurisdiction analysis across crime types |
+| 3 | Glasses Chart | Command responsibility provisions by region |
+| 4 | Sankey Graph | Interactive Sankey with jurisdiction analysis across crime types |
 | 5A | Packed Bubbles | UJ/ETJ cases by country and region |
 | 5B | Mirrored Bar | Specialized investigation units by region |
 
@@ -142,9 +130,13 @@ Additional features include interactive case study globes and scrollytelling nar
 
 ## Notes
 
-This is an early draft. Features and data are subject to change as the project develops.
+This is a draft. Features and data are subject to change as the project develops.
 
 
 All text is from InterJust. The platform itself was developed by the Responsibility Lab
 
+As a note: For our convenience, when working locally, we stored the API key in a JS file:
+- `js/config.js` as `CONFIG.INTERJUST_API_KEY`
+
+This build does not contain config.js 
 

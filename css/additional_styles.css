@@ -3,15 +3,6 @@
    Case Studies, References, Closing Section
    =============================================== */
 
-/* ===============================================
-   CONTINUOUS GRADIENT FLOW: Landing → TOC → Hero
-   
-   Creates one seamless transition across three sections:
-   - Landing: #1F2937 (darker slate)
-   - Glossary/TOC: transitioning...
-   - Hero: #2D3748 (standard page bg - transition complete)
-   =============================================== */
-
 .landing-splash {
     position: relative;
 }
@@ -79,11 +70,7 @@
 }
 
 /* ===============================================
-   DROPCAP STYLING - SELECTIVE APPLICATION
-   
-   
-   We want dropcaps ONLY when p follows an h2/h3.
-   
+   DROPCAP STYLING 
    =============================================== */
 
 /* Remove dropcap from paragraphs that are first-child (no h2/h3 before them) */

@@ -8,9 +8,6 @@
  *    (used by charts.js and other modules)
  * 2. DataLoader - Handles loading from Airtable API or CSV fallback
  * 
- * NOTE: The choropleth rendering function (createChart_Section2A) has been
- * moved to charts.js for consistency. This file now calls charts.js functions.
- * 
  * IMPORTANT: 
  * - DataCounterHub is defined HERE and exported globally
  * - charts.js should NOT define its own DataCounterHub
@@ -241,7 +238,7 @@ var DataCounterHub = {
     },
     
     /**
-     * Clear the cache (useful when data is updated)
+     * Clear the cache 
      */
     clearCache: function() {
         this._cache = {};
@@ -849,7 +846,7 @@ window.DataCounterHub = DataCounterHub;
 
 const DataLoader = {
     // ==============================================
-    // CONFIGURATION - MUST MATCH ORIGINAL VALUES
+    // CONFIGURATION 
     // ==============================================
     config: {
         airtable: {
@@ -1030,14 +1027,6 @@ const DataLoader = {
     // AIRTABLE DATA FETCHING
     // ==============================================
 
-    /**
-     * Fetch data with smart fallback chain:
-     * 1. Use preload for instant rendering
-     * 2. Update from Airtable API in background (self-healing)
-     * 3. If API fails, keep preload data
-     * 4. If no preload, try API directly
-     * 5. If API fails and no preload, use CSV
-     */
     fetchAirtableData: async function() {
         var self = this;
         
