@@ -4,8 +4,8 @@
 
 :root {
     /* TIMELINE-SPECIFIC VARIABLES */
-    --timeline-bg: #2D3748;
-    --timeline-bg-secondary: #283141;
+    --timeline-bg: #203341;
+    --timeline-bg-secondary: #1A2B38;
     --timeline-text: #E2E8F0;
     --timeline-text-secondary: #A0AEC0;
     
@@ -567,7 +567,7 @@
     width: 100%;
     max-width: 450px;
     max-height: 80vh;
-    background: #2D3748;
+    background: #203341;
     border: 2px solid var(--timeline-line-color);
     border-radius: 8px;
     box-shadow: 0 25px 80px rgba(0,0,0,0.95);

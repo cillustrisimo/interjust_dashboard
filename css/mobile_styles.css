@@ -76,11 +76,11 @@
         display: flex;
         align-items: baseline;
         justify-content: space-between;
-        border-top: 1px solid var(--color-border, #4A5568);
+        border-top: 1px solid var(--color-border, #3A4A58);
     }
     
     .glossary-list-item:last-child {
-        border-bottom: 1px solid var(--color-border, #4A5568);
+        border-bottom: 1px solid var(--color-border, #3A4A58);
     }
     
     .g-text {
@@ -120,8 +120,8 @@
         left: 0;
         right: 0;
         z-index: 9999;
-        background: var(--color-header-bg, #1A202C);
-        border-bottom: 1px solid var(--color-border, #2D3748);
+        background: var(--color-header-bg, #0A1722);
+        border-bottom: 1px solid var(--color-border, #203341);
         padding: 12px 15px;
         justify-content: space-between;
         align-items: center;
@@ -200,7 +200,7 @@
         bottom: auto;
         max-height: calc(100vh - 55px);
         overflow-y: auto;
-        background: rgba(26, 32, 44, 0.98);
+        background: rgba(10, 23, 34, 0.98);
         backdrop-filter: blur(10px);
         z-index: 9998;
         padding: 0 20px 15px 20px;
@@ -378,8 +378,8 @@
         min-width: 150px;
         margin: 0;
         padding: 1rem;
-        background: var(--color-card-bg, rgba(26, 32, 44, 0.95));
-        border: 1px solid var(--color-border, #2D3748);
+        background: var(--color-card-bg, rgba(10, 23, 34, 0.95));
+        border: 1px solid var(--color-border, #203341);
         border-radius: 8px;
         backdrop-filter: blur(10px);
         pointer-events: auto;
@@ -515,11 +515,11 @@
         top: 1.2rem;
         width: 14px;
         height: 14px;
-        background: var(--timeline-bg, #2D3748);
+        background: var(--timeline-bg, #203341);
         border: 3px solid var(--timeline-line-color, #d4876f);
         border-radius: 50%;
         z-index: 2;
-        box-shadow: 0 0 0 4px var(--timeline-bg, #2D3748);
+        box-shadow: 0 0 0 4px var(--timeline-bg, #203341);
     }
     
     /* Connecting line from dot to card */
@@ -947,7 +947,7 @@
         font-size: 0.8rem;
         font-weight: 700;
         color: var(--timeline-accent, #c9a55a);
-        background: var(--timeline-bg, #2D3748);
+        background: var(--timeline-bg, #203341);
         padding: 0.35rem 0.5rem;
         border-radius: 4px;
         border: 1px solid var(--timeline-line-color, #d4876f);
@@ -1117,11 +1117,11 @@
    ===================================================== */
 @media (max-width: 768px) {
     .sticky-graphic {
-        background: var(--color-bg, #2D3748);
+        background: var(--color-bg, #203341);
     }
     
     .chart-wrapper {
-        background: rgba(26, 32, 44, 0.95);
+        background: rgba(10, 23, 34, 0.95);
         border-radius: 8px;
         padding: 10px;
         border: 1px solid rgba(255,255,255,0.05);
@@ -1150,8 +1150,8 @@
         background: linear-gradient(
             to right,
             transparent,
-            rgba(26, 32, 44, 0.9) 20%,
-            rgba(26, 32, 44, 0.9) 80%,
+            rgba(10, 23, 34, 0.9) 20%,
+            rgba(10, 23, 34, 0.9) 80%,
             transparent
         );
     }

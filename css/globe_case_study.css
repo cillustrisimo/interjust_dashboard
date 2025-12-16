@@ -193,8 +193,8 @@
     width: 90%;
     max-width: 600px;
     max-height: 85vh;
-    background: linear-gradient(180deg, #2D3748 0%, #1A202C 100%);
-    border: 1px solid var(--color-border, #4A5568);
+    background: linear-gradient(180deg, #203341 0%, #0A1722 100%);
+    border: 1px solid var(--color-border, #3A4A58);
     border-radius: 16px;
     box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
     z-index: 9999;

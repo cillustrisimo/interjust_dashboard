@@ -17,8 +17,8 @@
     height: 250px;
     background: linear-gradient(180deg, 
         transparent 0%,
-        rgba(34, 42, 54, 0.5) 50%,
-        #232A38 100%);
+        rgba(16, 33, 46, 0.5) 50%,
+        #152431 100%);
     z-index: 1;
     pointer-events: none;
 }
@@ -35,12 +35,12 @@
 .glossary-section {
     position: relative;
     background: linear-gradient(180deg,
-        #232A38 0%,
-        #272F3D 20%,
-        #2A3342 40%,
-        #2C3645 60%,
-        #2D3748 80%,
-        #2D3748 100%) !important;
+        #152431 0%,
+        #182938 20%,
+        #1B2D3C 40%,
+        #1D303E 60%,
+        #203341 80%,
+        #203341 100%) !important;
 }
 
 /* Remove the ::before pseudo-element, using bg gradient instead */
@@ -152,16 +152,16 @@
 }
 
 .case-study-container {
-    background: rgba(26, 32, 44, 0.6);
-    border: 1px solid var(--color-border, #4A5568);
+    background: rgba(16, 33, 46, 0.6);
+    border: 1px solid var(--color-border, #3A4A58);
     border-radius: 8px;
     overflow: hidden;
 }
 
 .case-study-header {
     padding: 1.5rem 2rem;
-    border-bottom: 1px solid var(--color-border, #4A5568);
-    background: rgba(26, 32, 44, 0.8);
+    border-bottom: 1px solid var(--color-border, #3A4A58);
+    background: rgba(16, 33, 46, 0.8);
 }
 
 .case-study-label {
@@ -213,14 +213,15 @@
 
 .references-section {
     background: linear-gradient(180deg, 
-        var(--color-bg, #2D3748) 0%, 
-        #232B38 15%,
-        #1E2530 25%,
-        #1A202C 35%,
-        #1A202C 100%);
+        var(--color-bg, #203341) 0%, 
+        #1B2D3C 15%,
+        #162736 25%,
+        #11202D 35%,
+        #0A1722 50%,
+        #0A1722 100%);
     padding: 5rem 20px;
     margin-top: 4rem;
-    border-top: 2px solid var(--color-border, #4A5568);
+    border-top: 2px solid var(--color-border, #3A4A58);
 }
 
 .references-section .text-container {
@@ -491,10 +492,10 @@ sup a.ref-link:hover {
    =============================================== */
 
 .site-footer {
-    background: #1A202C;
+    background: #0A1722;
     padding: 3rem 20px;
     text-align: center;
-    border-top: 1px solid var(--color-border, #4A5568);
+    border-top: 1px solid var(--color-border, #3A4A58);
 }
 
 .footer-inner {
@@ -516,8 +517,8 @@ sup a.ref-link:hover {
 .graph-container {
     width: 100%;
     min-height: 400px;
-    background: #1A202C;
-    border: 1px solid var(--color-border, #4A5568);
+    background: #0F1E2A;
+    border: 1px solid var(--color-border, #3A4A58);
     border-radius: 4px;
     padding: 20px;
     display: flex;
