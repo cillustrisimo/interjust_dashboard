@@ -3,12 +3,11 @@
  * ==================================================
  * Fills statistic placeholders in the DOM.
  * 
- *   TWO-PHASE LOADING:
+ * Steps:
  * 1. INSTANT: Fill placeholders from cached STATS_SNAPSHOT
  * 2. BACKGROUND: Calculate live stats from Airtable
  * 3. SYNC: If live differs from cache, update DOM and cache
  * 
- * FIXED: Added robust column name matching to handle trailing spaces
  * ==================================================
  */
 

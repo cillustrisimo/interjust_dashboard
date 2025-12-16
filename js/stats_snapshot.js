@@ -1,7 +1,7 @@
 /**
  * STATS_SNAPSHOT.JS
  * ==================================================
- * Self-updating statistics cache.
+ * Self-updating statistics cache (for placeholder fills).
  * 1. On load: Returns cached stats from localStorage (instant)
  * 2. Falls back to hardcoded defaults if no cache exists
  * 3. When PlaceholderFiller calculates live stats, it calls

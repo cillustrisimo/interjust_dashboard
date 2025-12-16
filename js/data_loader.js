@@ -1431,14 +1431,6 @@ async function initChartsWithRealData() {
 
 
 // ==============================================
-// CHOROPLETH FUNCTION MOVED TO CHARTS.JS
-// ==============================================
-// The createChart_Section2A function (with data parameter) is now in charts.js
-// data_loader.js calls it via: createChart_Section2A('chart-section-2a', data);
-// ==============================================
-
-
-// ==============================================
 // AUTO-INITIALIZATION
 // ==============================================
 

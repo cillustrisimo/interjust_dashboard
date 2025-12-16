@@ -11,12 +11,12 @@ html {
     --font-body: Georgia, 'Times New Roman', Times, serif;
     --font-head: Georgia, 'Times New Roman', Times, serif;
     
-    /* Layout widths - INCREASED for larger charts */
-    --max-width: 1600px;    /* Increased from 1200px to accommodate larger charts */
+    /* Layout widths */
+    --max-width: 1600px;    
     --wide-width: 900px;    
     --text-width: 600px;    
     
-    /* Colors (Unchanged) */
+    /* Colors */
     --color-bg: #2D3748;           
     --color-text: #E2E8F0;         
     --color-text-muted: #A0AEC0;   
@@ -26,33 +26,29 @@ html {
 }
 
 /* ===============================================
-   CHART CONTAINER STYLES - UPDATED FOR LARGER CHARTS
-   Removed restrictive max-height and increased max-width
-   to allow charts to display at their full designed size
+   CHART CONTAINER STYLES
    =============================================== */
 
-/* Chart sections - allow full width for larger charts */
+/* Chart sections  */
 [id^="chart-section"]:not(.chart-wrapper) {
     width: 100%;
-    max-width: 100%; /* Changed from 900px to allow larger charts */
+    max-width: 100%; 
     margin: 0 auto;
     height: auto;
-    /* Removed max-height: 60vh constraint to allow taller charts */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible; /* Allow map to bleed outside */
+    overflow: visible; /*we do this to let graphs bleed outside*/
 }
 
 [id^="chart-section"]:not(.chart-wrapper) svg {
     width: 100%;
-    height: auto; /* Allows aspect ratio to scale naturally */
-    /* Removed max-height: 60vh to allow larger charts */
+    height: auto; 
     max-width: 100%;
-    overflow: visible; /* Allow content to bleed */
+    overflow: visible; /* same as above */
 }
 
-/* Choropleth map - allow countries to bleed outside container */
+/* bleeding for chloropleth, extra redundancy because was glitched otherwise */
 .choropleth-wrapper,
 .choropleth-wrapper svg,
 #chart-section-2a,
@@ -72,7 +68,7 @@ html {
     pointer-events: auto !important;
 }
 
-/* Section 5A bubble chart - prevent text clipping */
+/* Section 5A bubble chart */
 #chart-section-5a,
 #chart-section-5a > div,
 #chart-section-5a svg {
@@ -92,17 +88,17 @@ html {
 [id^="scrolly-section-"] {
     position: relative;
     width: 100%;
-    max-width: none; /* REMOVED constraint - let scrollytelling sections expand */
+    max-width: none; 
     margin: 8rem auto 4rem auto;
     padding: 0 20px;
-    overflow: visible; /* Don't clip content */
+    overflow: visible; 
     background: transparent;
     background-color: transparent;
     border: none;
     box-shadow: none;
 }
 
-/* Remove any potential dark bar by ensuring transparent backgrounds */
+/* ensure transparent backgrounds */
 [id^="scrolly-section-"]::before,
 [id^="scrolly-section-"]::after {
     display: none;
@@ -117,7 +113,7 @@ html {
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    overflow: visible; /* Don't clip overflowing content */
+    overflow: visible; 
     background: transparent;
     background-color: transparent;
     border: none;
@@ -126,7 +122,7 @@ html {
 
 .chart-wrapper {
     width: 100%;
-    max-width: none; /* REMOVED constraint - let charts be as large as they want */
+    max-width: none; 
     height: auto;
     min-height: 400px; /* Ensure minimum height */
     display: flex;
@@ -205,7 +201,7 @@ html {
     line-height: 1.6;
     color: var(--color-text);
 }
-/* OPTIONAL: If things feel too tight vertically, add a bit more breathing room to sections */
+
 section {
     padding: 4rem 0; /* Increases vertical spacing between chart sections */
 }
@@ -320,10 +316,9 @@ a:hover { border-bottom-color: var(--color-accent); }
 }
 
 /* ===============================================
-   3. NARRATIVE BLOCKS (UPDATED)
+   3. NARRATIVE BLOCKS 
    =============================================== */
 .narrative-block { 
-    /* Container is now WIDE (900px) */
     max-width: var(--wide-width); 
     margin: 0 auto 80px auto; 
     padding: 0 10px; 
@@ -339,7 +334,7 @@ a:hover { border-bottom-color: var(--color-accent); }
     text-align: center; /* Centered headers usually look best in this layout */
 }
 
-/*  Paragraphs & Lists are forced back to NARROW (580px) */
+/*  Paragraphs & Lists are made narrow */
 .narrative-block p,
 .narrative-block ul,
 .narrative-block ol,
@@ -360,7 +355,7 @@ a:hover { border-bottom-color: var(--color-accent); }
     color: var(--color-accent);
 }
 
-/* LOWER SANDWICH*/
+/* LOWER SANDWICH TEXT*/
 .narrative-block-bottom { 
     /* Container is  WIDE (900px) */
     max-width: var(--wide-width); 
@@ -378,7 +373,7 @@ a:hover { border-bottom-color: var(--color-accent); }
     text-align: center; /* Centered headers usually look best in this layout */
 }
 
-/* Paragraphs & Lists are forced back to NARROW (580px) */
+/* Paragraphs & Lists are forced back to narrow size (for lower sandwich narrative block*/
 .narrative-block-bottom p,
 .narrative-block-bottom ul,
 .narrative-block-bottom ol,
@@ -395,16 +390,16 @@ a:hover { border-bottom-color: var(--color-accent); }
    =============================================== */
 
 /* One-column layout for single graphs */
-/* One-column layout for single graphs - NO WIDTH CONSTRAINT */
+/* One-column layout for single graphs  */
 .section-one-column {
-    max-width: none;  /* Removed constraint */
+    max-width: none;  
     margin: 0 auto 4rem auto;
     padding: 0 20px;
 }
 
 /* Two-column layout for side-by-side graphs */
 .section-two-column {
-    max-width: none;  /* Removed constraint */
+    max-width: none;  
     margin: 0 auto 1rem auto;
     padding: 0 20px;
     display: grid;
@@ -413,7 +408,7 @@ a:hover { border-bottom-color: var(--color-accent); }
     align-items: start;
 }
 
-/* Graph container - flexible for any chart type */
+/* Graph container */
 .graph-container {
     width: 100%;
     min-height: 400px;
@@ -515,7 +510,7 @@ a:hover { border-bottom-color: var(--color-accent); }
 /* Generic scrolly section - can be reused */
 /* Note: Main definitions are in the SCROLLYTELLING LAYOUT CONSTRAINTS section above */
 
-/* Legacy chart-wrapper styles - kept for compatibility but box-shadow removed */
+/* Legacy chart-wrapper styles - kept for compatibility  */
 /*
 .chart-wrapper {
     width: 600px;
@@ -535,7 +530,7 @@ a:hover { border-bottom-color: var(--color-accent); }
     margin-top: -50vh;
     padding-bottom: 50vh;
     pointer-events: none;
-    max-width: none;  /* Removed 1000px constraint */
+    max-width: none;  
     margin-left: auto;
     margin-right: auto;
 }
@@ -590,7 +585,7 @@ a:hover { border-bottom-color: var(--color-accent); }
 }
 
 /* ===============================================
-   5. DATA TABLE SECTION 
+   5. DATA TABLE SECTION (DEPRECATED), kept just cause
    =============================================== */
 .table-section { 
     max-width: var(--max-width); 
@@ -599,7 +594,6 @@ a:hover { border-bottom-color: var(--color-accent); }
 }
 
 .text-container {
-    /* Container is WIDE so headers can expand */
     max-width: var(--wide-width);
     margin: 0 auto 2rem auto;
     text-align: center;
@@ -724,7 +718,6 @@ th:hover { background: #2C3646; }
 }
 
 .splash-search {
-    /* Change background from white to dark gray */
     background: var(--color-section-alt); 
     border: 1px solid var(--color-border);
     border-radius: 4px;
@@ -800,7 +793,7 @@ th:hover { background: #2C3646; }
 }
 
 .splash-title {
-    font-family: sans-serif; /* The image uses a clean sans, not the serif body font */
+    font-family: sans-serif; 
     font-weight: 700;
     font-size: 2.5rem;
     color: #fff;
@@ -1110,10 +1103,6 @@ th:hover { background: #2C3646; }
     line-height: 1.2;     /* Tighter spacing for multi-line titles */
     font-size: 0.9rem;    /* readable size */
     
-    /* Smooth Animation Trick 
-       This forces the browser to calculate the text layout 
-       as if it's already expanded, preventing "jittery" 
-       reflows while the sidebar opens. */
     min-width: 180px;     
 }
 
@@ -1150,7 +1139,7 @@ th:hover { background: #2C3646; }
 .side-nav a.active-nav {
     color: #63B3ED;                       /* Blue text */
     background: rgba(99, 179, 237, 0.1);  /* Faint blue background */
-    border-left: 3px solid #63B3ED;       /* Optional: A blue bar on the left */
+    border-left: 3px solid #63B3ED;       
 }
 
 /* Ensure the number stays highlighted too */

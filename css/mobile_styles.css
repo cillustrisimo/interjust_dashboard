@@ -50,7 +50,7 @@
 }
 
 /* =====================================================
-   TABLE OF CONTENTS - FULL WIDTH LINES (MOBILE)
+   TABLE OF CONTENTS
    ===================================================== */
 @media (max-width: 900px) {
     .glossary-section {
@@ -679,8 +679,7 @@
 }
 
 /* =====================================================
-   HIDE READ MORE BUTTON - MOBILE ONLY
-   (Keep it on desktop for existing behavior)
+   HIDE READ MORE BUTTON 
    ===================================================== */
 @media (max-width: 900px) {
     .read-more-btn {
@@ -689,7 +688,7 @@
 }
 
 /* =====================================================
-   GRAPH CONTAINERS - MOBILE ONLY
+   GRAPH CONTAINERS 
    ===================================================== */
 @media (max-width: 768px) {
     .section-one-column {
@@ -733,7 +732,7 @@
 }
 
 /* =====================================================
-   DATA TABLE - MOBILE ONLY
+   DATA TABLE 
    ===================================================== */
 @media (max-width: 768px) {
     .table-section {
@@ -878,11 +877,7 @@
 }
 
 /* =====================================================
-   MOBILE ENHANCEMENTS 
-   ===================================================== */
-
-/* =====================================================
-   FLIP ANIMATION - MOBILE ONLY
+   CARD FLIP ANIMATION - MOBILE ONLY
    ===================================================== */
 @media (max-width: 900px) {
     #card-modal-overlay {

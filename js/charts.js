@@ -589,14 +589,14 @@ function createChart_Section3(containerId) {
             .append("path")
             .attr("d", `M${tl},${yTop} L${bl},${yBottom} L${br},${yBottom} L${tr},${yTop} Z`);
 
-        // Glass outline - ORIGINAL STYLE: light stroke color
+        // Glass outline 
         svg.append("path")
             .attr("d", `M${tl},${yTop} L${bl},${yBottom} L${br},${yBottom} L${tr},${yTop}`)
             .attr("fill", "none")
             .attr("stroke", "#E2E8F0")
             .attr("stroke-width", 1.5);
 
-        // Water fill - ORIGINAL COLOR: #6fb8ff (lighter blue)
+        // Water fill
         const fillHeight = glassHeight * (d.pctYes || 0);
         const fillY = yBottom - fillHeight;
 
