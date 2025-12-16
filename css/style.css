@@ -156,35 +156,36 @@ html {
 .scrolly-steps {
     position: relative;
     z-index: 2;
-    pointer-events: auto; /* Re-enable pointer events for cards */
+    pointer-events: auto;
 }
 
 .step {
     min-height: 80vh; 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     padding: 2rem 0;
 }
 
 .step:first-child {
-    margin-top: 40vh; /* Push first step down so chart is visible */
+    margin-top: 40vh;
 }
 
 .step:last-child {
-    margin-bottom: 40vh; /* Add space after last step */
+    margin-bottom: 40vh;
 }
 
 .step .card {
     background: var(--color-card-bg);
     border: 1px solid var(--color-border);
     border-radius: 8px;
-    padding: 2rem;
-    max-width: 400px;
+    padding: 1.5rem;
+    max-width: 300px;
     backdrop-filter: blur(10px);
     opacity: 0.5;
     transition: opacity 0.3s ease;
     pointer-events: auto;
+    margin-left: 100px;
 }
 
 .step .card.is-active {
@@ -819,15 +820,14 @@ th:hover { background: #2C3646; }
 }
 
 .splash-logo-icon {
-    /* 1. Increase height to match the 3-line text block (approx 9rem) */
+    /* Increase height to match the 3-line text block (approx 9rem) */
     height: 9rem; 
     width: auto;
 
-    /* 2. Update min-dimensions to match height */
     min-width: 9rem;
     min-height: 9rem;
     
-    /* 3. Ensure high quality for SVG */
+    /* Ensure high quality for SVG */
     display: block;
 }
 
