@@ -522,6 +522,11 @@ function createChart_Section3(containerId) {
         data = calculateCommandResponsibilityByRegion(records);
     }
 
+    // Sort regions by proportion (highest to lowest)
+    data.sort(function(a, b) {
+        return (b.pctYes || 0) - (a.pctYes || 0);
+    });
+
     // =====================================================
     // SECTION 3 SIZE CONTROLS
     // =====================================================
@@ -2128,7 +2133,26 @@ function createChart_Section5A(containerId) {
         .style("width", "100%")
         .style("max-width", width + "px")
         .style("margin", "0 auto")
-        .style("overflow", "visible");  // Prevent clipping
+        .style("overflow", "visible")
+        .style("position", "relative");  // For tooltip positioning
+    
+    // Custom HTML tooltip for scrollytelling compatibility
+    var tooltip = wrapper.append("div")
+        .attr("class", "section5a-tooltip")
+        .style("position", "absolute")
+        .style("pointer-events", "none")
+        .style("background", "rgba(26, 32, 44, 0.95)")
+        .style("border", "1px solid #4A5568")
+        .style("border-radius", "6px")
+        .style("padding", "10px 14px")
+        .style("font-family", CHART_FONTS.body)
+        .style("font-size", "13px")
+        .style("color", "#E2E8F0")
+        .style("box-shadow", "0 4px 12px rgba(0,0,0,0.4)")
+        .style("z-index", "1000")
+        .style("opacity", "0")
+        .style("transition", "opacity 0.15s ease")
+        .style("white-space", "nowrap");
     
     var svg = wrapper.append("svg")
         .attr("viewBox", "0 0 " + width + " " + height)
@@ -2206,16 +2230,50 @@ function createChart_Section5A(containerId) {
         .attr("stroke", function(d) { 
             return d.data.hasCase ? "#111827" : color(d.data.regionPretty); 
         })
-        .attr("stroke-width", function(d) { return d.data.hasCase ? 1.5 : 1; });
-    
-    countryG.append("title")
-        .text(function(d) {
-            var base = d.data.name + "\nRegion: " + d.data.regionPretty;
+        .attr("stroke-width", function(d) { return d.data.hasCase ? 1.5 : 1; })
+        .style("pointer-events", "auto")
+        .style("cursor", "pointer")
+        .on("mouseenter", function(event, d) {
+            // Build tooltip content
+            var content = "<strong>" + d.data.name + "</strong><br/>";
+            content += "<span style='color:#A0AEC0'>Region:</span> " + d.data.regionPretty + "<br/>";
             if (d.data.hasCase) {
-                return base + "\n" + d.data.cases + " " + (d.data.cases === 1 ? "case" : "cases");
+                content += "<span style='color:#68D391'>" + d.data.cases + " " + (d.data.cases === 1 ? "case" : "cases") + "</span>";
             } else {
-                return base + "\n0 cases";
+                content += "<span style='color:#718096'>0 cases</span>";
             }
+            
+            tooltip.html(content);
+            
+            // Get position relative to wrapper
+            var svgNode = svg.node();
+            var wrapperNode = wrapper.node();
+            var rect = svgNode.getBoundingClientRect();
+            
+            // Calculate scale factor (viewBox vs actual size)
+            var scale = rect.width / width;
+            
+            // Position tooltip near the bubble
+            var tooltipX = (d.x + 20) * scale + 20;
+            var tooltipY = (d.y + 75) * scale - 10;
+            
+            tooltip
+                .style("left", tooltipX + "px")
+                .style("top", tooltipY + "px")
+                .style("opacity", "1");
+            
+            // Highlight the bubble
+            d3.select(this)
+                .attr("stroke", "#FFFFFF")
+                .attr("stroke-width", 2.5);
+        })
+        .on("mouseleave", function(event, d) {
+            tooltip.style("opacity", "0");
+            
+            // Restore original stroke
+            d3.select(this)
+                .attr("stroke", d.data.hasCase ? "#111827" : color(d.data.regionPretty))
+                .attr("stroke-width", d.data.hasCase ? 1.5 : 1);
         });
     
     // =====================================================

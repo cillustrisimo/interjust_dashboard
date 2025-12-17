@@ -1,6 +1,6 @@
 /**
  * SCRIPTS.JS 
- * Logic for Scrollytelling (Focus/Zoom) and Smooth Scroll
+ * Logic for Scrollytelling (Focus/Zoom), footnotes, and Smooth Scroll
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -150,6 +150,123 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    /* ===============================================
+       FOOTNOTE SPRING-BACK FUNCTIONALITY
+       When a user clicks a footnote, they go to the reference.
+       Clicking the reference row brings them back to the text.
+       =============================================== */
+    
+    // Track the last clicked footnote for spring-back
+    let lastClickedFootnote = null;
+    
+    // --- STEP 1: Add unique IDs to all footnote links ---
+    const footnoteLinks = document.querySelectorAll('a.ref-link');
+    
+    footnoteLinks.forEach((link) => {
+        // Extract the reference number from the href (e.g., "#ref-5" -> "5")
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#ref-')) {
+            const refNum = href.replace('#ref-', '');
+            // Create a unique ID for this footnote link
+            const footnoteId = `footnote-${refNum}`;
+            
+            // Add ID to the parent <sup> element or the link itself
+            const supElement = link.closest('sup');
+            if (supElement) {
+                supElement.setAttribute('id', footnoteId);
+            } else {
+                link.setAttribute('id', footnoteId);
+            }
+        }
+    });
+    
+    // --- STEP 2: Track when footnotes are clicked ---
+    footnoteLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#ref-')) {
+                const refNum = href.replace('#ref-', '');
+                lastClickedFootnote = `footnote-${refNum}`;
+                
+                // Add a data attribute to the target reference to show it's "active"
+                const targetRef = document.getElementById(`ref-${refNum}`);
+                if (targetRef) {
+                    // Remove active state from any other reference
+                    document.querySelectorAll('.reference-item.has-return').forEach(item => {
+                        item.classList.remove('has-return');
+                    });
+                    // Mark this reference as having a return target
+                    targetRef.classList.add('has-return');
+                }
+            }
+        });
+    });
+    
+    // --- STEP 3: Make reference items clickable for spring-back ---
+    const referenceItems = document.querySelectorAll('.reference-item[id^="ref-"]');
+    
+    referenceItems.forEach((refItem) => {
+        // Add cursor pointer and clickable styling
+        refItem.style.cursor = 'pointer';
+        
+        // Add click handler for spring-back
+        refItem.addEventListener('click', (e) => {
+            // Don't trigger if clicking on an actual link within the reference
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+                return;
+            }
+            
+            // Get the reference number from the ID
+            const refId = refItem.getAttribute('id');
+            const refNum = refId.replace('ref-', '');
+            const footnoteId = `footnote-${refNum}`;
+            
+            // Find the corresponding footnote in the text
+            const footnoteElement = document.getElementById(footnoteId);
+            
+            if (footnoteElement) {
+                e.preventDefault();
+                
+                // Smooth scroll to the footnote
+                footnoteElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+                
+                // Add highlight animation to the footnote
+                footnoteElement.classList.add('footnote-highlight');
+                setTimeout(() => {
+                    footnoteElement.classList.remove('footnote-highlight');
+                }, 2000);
+                
+                // Clear the active state
+                refItem.classList.remove('has-return');
+                lastClickedFootnote = null;
+            }
+        });
+        
+        // Add a return arrow indicator on hover (via title attribute)
+        refItem.setAttribute('title', 'Click to return to text');
+    });
+    
+    // --- STEP 4: Add keyboard accessibility for references ---
+    referenceItems.forEach((refItem) => {
+        // Make reference items focusable
+        refItem.setAttribute('tabindex', '0');
+        refItem.setAttribute('role', 'button');
+        refItem.setAttribute('aria-label', 'Click to return to footnote in text');
+        
+        // Handle Enter/Space key press
+        refItem.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                refItem.click();
+            }
+        });
+    });
+    
+    console.log('[Footnotes] Spring-back functionality initialized');
 
     /* ===============================================
        MOBILE HAMBURGER MENU

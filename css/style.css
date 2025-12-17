@@ -1147,3 +1147,88 @@ th:hover { background: #2C3646; }
 .side-nav a.active-nav .nav-num {
     color: #63B3ED;
 }
+
+/* ===============================================
+   8. FOOTNOTE SPRING-BACK STYLES
+   Allows users to click reference items to return
+   to the footnote location in the text
+   =============================================== */
+
+/* Make reference items look clickable */
+.reference-item[id^="ref-"] {
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+/* Hover state for reference items */
+.reference-item[id^="ref-"]:hover {
+    background: rgba(99, 179, 237, 0.08);
+}
+
+/* Add a subtle return arrow on hover */
+.reference-item[id^="ref-"]::before {
+    content: '↩';
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: var(--color-accent, #63B3ED);
+    font-size: 1.2rem;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.reference-item[id^="ref-"]:hover::before {
+    opacity: 0.7;
+}
+
+/* Active state when user just came from this footnote */
+.reference-item.has-return {
+    background: rgba(99, 179, 237, 0.12);
+}
+
+.reference-item.has-return::before {
+    opacity: 1;
+}
+
+/* Highlight animation when returning to footnote in text */
+@keyframes footnoteHighlight {
+    0% {
+        background-color: rgba(99, 179, 237, 0.4);
+        border-radius: 3px;
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+sup.footnote-highlight,
+a.ref-link.footnote-highlight {
+    animation: footnoteHighlight 2s ease-out;
+}
+
+/* Ensure footnotes can be scrolled to with offset */
+sup[id^="footnote-"] {
+    scroll-margin-top: 40vh;
+}
+
+/* Focus styles for keyboard navigation */
+.reference-item[id^="ref-"]:focus {
+    outline: 2px solid var(--color-accent, #63B3ED);
+    outline-offset: 2px;
+    background: rgba(99, 179, 237, 0.08);
+}
+
+.reference-item[id^="ref-"]:focus::before {
+    opacity: 0.7;
+}
+
+/* Mobile adjustments for footnote spring-back */
+@media (max-width: 768px) {
+    .reference-item[id^="ref-"]::before {
+        right: 0.75rem;
+        font-size: 1rem;
+    }
+}
