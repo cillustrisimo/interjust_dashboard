@@ -75,6 +75,42 @@ const CHART_FONT_SIZES = {
     tooltip: 14
 };
 
+// Project Meridian link button for charts
+function appendMeridianButton(container) {
+    var btn = container.append("a")
+        .attr("href", "https://projectmeridian.org/")
+        .attr("target", "_blank")
+        .attr("rel", "noopener noreferrer")
+        .style("display", "inline-block")
+        .style("margin-top", "12px")
+        .style("padding", "6px 14px")
+        .style("font-family", CHART_FONTS.body)
+        .style("font-size", "12px")
+        .style("color", "#A0AEC0")
+        .style("text-decoration", "none")
+        .style("border", "1px solid rgba(160, 174, 192, 0.3)")
+        .style("border-radius", "4px")
+        .style("background", "rgba(26, 32, 44, 0.5)")
+        .style("transition", "all 0.2s ease")
+        .style("pointer-events", "auto")
+        .style("cursor", "pointer")
+        .text("Explore more in Project Meridian →");
+    
+    btn.on("mouseenter", function() {
+        d3.select(this)
+            .style("color", "#63B3ED")
+            .style("border-color", "rgba(99, 179, 237, 0.5)")
+            .style("background", "rgba(99, 179, 237, 0.1)");
+    }).on("mouseleave", function() {
+        d3.select(this)
+            .style("color", "#A0AEC0")
+            .style("border-color", "rgba(160, 174, 192, 0.3)")
+            .style("background", "rgba(26, 32, 44, 0.5)");
+    });
+    
+    return btn;
+}
+
 
 /* ===============================================
    SECTION 2A: SCROLLYTELLING - Choropleth Map
@@ -470,6 +506,11 @@ function createChart_Section2A(containerId, loadedData) {
             .text(item.label);
     });
     
+    // Project Meridian link
+    wrapper.append("div")
+        .style("text-align", "center")
+        .call(appendMeridianButton);
+    
     // Title and subtitle are now HTML elements above the SVG (see wrapper creation above)
 }
 
@@ -539,12 +580,15 @@ function createChart_Section3(containerId) {
     const marginSide = 45;     // ~90% of original 50
     // =====================================================
 
-    const svg = container.append("svg")
-        .attr("viewBox", `0 0 ${width} ${height}`)
+    const wrapper = container.append("div")
         .style("width", "100%")
         .style("max-width", width + "px")
+        .style("margin", "0 auto");
+
+    const svg = wrapper.append("svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .style("width", "100%")
         .style("height", "auto")
-        .style("margin", "0 auto")
         .style("display", "block")
         .attr("font-family", CHART_FONTS.body);
 
@@ -657,6 +701,11 @@ function createChart_Section3(containerId) {
         .attr("font-family", CHART_FONTS.body)
         .attr("fill", "#E2E8F0")
         .text("Share of countries with command/superior responsibility");
+    
+    // Project Meridian link
+    wrapper.append("div")
+        .style("text-align", "center")
+        .call(appendMeridianButton);
 }
 
 // Fallback calculation function
@@ -1981,6 +2030,29 @@ function createChart_Section4A(containerId) {
     legendEl.className = 'section4-region-legend';
     wrapper.appendChild(legendEl);
     
+    // Project Meridian link
+    var meridianDiv = document.createElement('div');
+    meridianDiv.style.textAlign = 'center';
+    meridianDiv.style.marginTop = '16px';
+    var meridianLink = document.createElement('a');
+    meridianLink.href = 'https://projectmeridian.org/';
+    meridianLink.target = '_blank';
+    meridianLink.rel = 'noopener noreferrer';
+    meridianLink.textContent = 'Explore more in Project Meridian →';
+    meridianLink.style.cssText = 'display:inline-block;padding:6px 14px;font-family:Georgia,serif;font-size:12px;color:#A0AEC0;text-decoration:none;border:1px solid rgba(160,174,192,0.3);border-radius:4px;background:rgba(26,32,44,0.5);transition:all 0.2s ease;pointer-events:auto;cursor:pointer;';
+    meridianLink.onmouseenter = function() {
+        this.style.color = '#63B3ED';
+        this.style.borderColor = 'rgba(99,179,237,0.5)';
+        this.style.background = 'rgba(99,179,237,0.1)';
+    };
+    meridianLink.onmouseleave = function() {
+        this.style.color = '#A0AEC0';
+        this.style.borderColor = 'rgba(160,174,192,0.3)';
+        this.style.background = 'rgba(26,32,44,0.5)';
+    };
+    meridianDiv.appendChild(meridianLink);
+    wrapper.appendChild(meridianDiv);
+    
     container.appendChild(wrapper);
     
     var sankeyData = buildSection4SankeyData(processed);
@@ -2711,6 +2783,11 @@ function createChart_Section5A(containerId) {
         .attr("font-family", CHART_FONTS.body)
         .attr("fill", "#E2E8F0")
         .text("Countries without specialized unit");
+    
+    // Project Meridian link
+    wrapper.append("div")
+        .style("text-align", "center")
+        .call(appendMeridianButton);
     
     console.log('[Charts] Section 5B rendered:', totalWithUnit, 'states with specialized units');
 }
