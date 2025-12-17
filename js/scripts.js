@@ -143,6 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const href = this.getAttribute('href');
             if (!href || href === '#') return;
             
+            // Skip smooth scroll for footnote links - handled separately
+            if (this.classList.contains('ref-link')) return;
+            
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
@@ -152,26 +155,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ===============================================
-       FOOTNOTE SPRING-BACK FUNCTIONALITY
-       When a user clicks a footnote, they go to the reference.
-       Clicking the reference row brings them back to the text.
+       FOOTNOTE BIDIRECTIONAL NAVIGATION
+       Footnotes link to references, references link back to footnotes.
+       Handles modal interactions for footnotes inside case study modals.
        =============================================== */
     
-    // Track the last clicked footnote for spring-back
+    // Track the last clicked footnote for spring-back styling
     let lastClickedFootnote = null;
     
-    // --- STEP 1: Add unique IDs to all footnote links ---
+    // --- Build a map of which footnotes exist in which modal ---
+    function buildModalFootnoteMap() {
+        const map = {};
+        if (typeof CaseStudyGlobes !== 'undefined' && CaseStudyGlobes.caseStudies) {
+            CaseStudyGlobes.caseStudies.forEach((caseStudy, index) => {
+                const matches = caseStudy.content.match(/href="#ref-(\d+)"/g);
+                if (matches) {
+                    matches.forEach(match => {
+                        const refNum = match.match(/ref-(\d+)/)[1];
+                        map[refNum] = index;
+                    });
+                }
+            });
+        }
+        return map;
+    }
+    
+    const modalFootnoteMap = buildModalFootnoteMap();
+    
+    // --- STEP 1: Add unique IDs to all footnote links in main document ---
     const footnoteLinks = document.querySelectorAll('a.ref-link');
     
     footnoteLinks.forEach((link) => {
-        // Extract the reference number from the href (e.g., "#ref-5" -> "5")
         const href = link.getAttribute('href');
         if (href && href.startsWith('#ref-')) {
             const refNum = href.replace('#ref-', '');
-            // Create a unique ID for this footnote link
             const footnoteId = `footnote-${refNum}`;
             
-            // Add ID to the parent <sup> element or the link itself
             const supElement = link.closest('sup');
             if (supElement) {
                 supElement.setAttribute('id', footnoteId);
@@ -181,15 +200,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // --- STEP 2: Track when footnotes are clicked ---
+    // --- STEP 2: Handle footnote clicks (text -> reference) ---
     footnoteLinks.forEach((link) => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
             if (href && href.startsWith('#ref-')) {
+                e.preventDefault();
                 const refNum = href.replace('#ref-', '');
                 lastClickedFootnote = `footnote-${refNum}`;
                 
-                // Add a data attribute to the target reference to show it's "active"
+                // Check if footnote is inside a modal - close modal first
+                const modal = link.closest('.case-study-modal');
+                if (modal && modal.classList.contains('active')) {
+                    if (typeof CaseStudyGlobes !== 'undefined') {
+                        CaseStudyGlobes.closeModal();
+                    }
+                }
+                
                 const targetRef = document.getElementById(`ref-${refNum}`);
                 if (targetRef) {
                     // Remove active state from any other reference
@@ -198,66 +225,106 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     // Mark this reference as having a return target
                     targetRef.classList.add('has-return');
+                    
+                    // Smooth scroll to reference
+                    setTimeout(() => {
+                        targetRef.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 100);
                 }
             }
         });
     });
     
-    // --- STEP 3: Make reference items clickable for spring-back ---
+    // --- STEP 3: Handle reference clicks (reference -> footnote) ---
     const referenceItems = document.querySelectorAll('.reference-item[id^="ref-"]');
     
     referenceItems.forEach((refItem) => {
-        // Add cursor pointer and clickable styling
         refItem.style.cursor = 'pointer';
         
-        // Add click handler for spring-back
         refItem.addEventListener('click', (e) => {
             // Don't trigger if clicking on an actual link within the reference
             if (e.target.tagName === 'A' || e.target.closest('a')) {
                 return;
             }
             
-            // Get the reference number from the ID
             const refId = refItem.getAttribute('id');
             const refNum = refId.replace('ref-', '');
             const footnoteId = `footnote-${refNum}`;
             
-            // Find the corresponding footnote in the text
+            // Check if this footnote exists in a modal
+            if (modalFootnoteMap.hasOwnProperty(refNum)) {
+                e.preventDefault();
+                const modalIndex = modalFootnoteMap[refNum];
+                
+                // Find the trigger card for this modal and scroll to it
+                const triggerCard = document.querySelector(`.globe-case-study-trigger[data-case-study-index="${modalIndex}"]`);
+                
+                if (triggerCard) {
+                    triggerCard.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                    
+                    // After scrolling to card, open the modal and highlight footnote
+                    setTimeout(() => {
+                        if (typeof CaseStudyGlobes !== 'undefined') {
+                            CaseStudyGlobes.openModal(modalIndex);
+                            
+                            setTimeout(() => {
+                                const modalText = document.querySelector('.modal-text');
+                                if (modalText) {
+                                    const modalFootnote = modalText.querySelector(`a[href="#ref-${refNum}"]`);
+                                    if (modalFootnote) {
+                                        const supElement = modalFootnote.closest('sup') || modalFootnote;
+                                        supElement.classList.add('footnote-highlight');
+                                        setTimeout(() => {
+                                            supElement.classList.remove('footnote-highlight');
+                                        }, 2000);
+                                    }
+                                }
+                            }, 400);
+                        }
+                    }, 600);
+                }
+                
+                refItem.classList.remove('has-return');
+                lastClickedFootnote = null;
+                return;
+            }
+            
+            // Footnote is in main document
             const footnoteElement = document.getElementById(footnoteId);
             
             if (footnoteElement) {
                 e.preventDefault();
                 
-                // Smooth scroll to the footnote
                 footnoteElement.scrollIntoView({ 
                     behavior: 'smooth', 
                     block: 'center' 
                 });
                 
-                // Add highlight animation to the footnote
                 footnoteElement.classList.add('footnote-highlight');
                 setTimeout(() => {
                     footnoteElement.classList.remove('footnote-highlight');
                 }, 2000);
                 
-                // Clear the active state
                 refItem.classList.remove('has-return');
                 lastClickedFootnote = null;
             }
         });
         
-        // Add a return arrow indicator on hover (via title attribute)
-        refItem.setAttribute('title', 'Click to return to text');
+        refItem.setAttribute('title', 'Click to go to footnote in text');
     });
     
     // --- STEP 4: Add keyboard accessibility for references ---
     referenceItems.forEach((refItem) => {
-        // Make reference items focusable
         refItem.setAttribute('tabindex', '0');
         refItem.setAttribute('role', 'button');
-        refItem.setAttribute('aria-label', 'Click to return to footnote in text');
+        refItem.setAttribute('aria-label', 'Click to go to footnote in text');
         
-        // Handle Enter/Space key press
         refItem.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -266,7 +333,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    console.log('[Footnotes] Spring-back functionality initialized');
+    // --- STEP 5: Handle footnotes inside modals via event delegation ---
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a.ref-link');
+        if (!link) return;
+        
+        const modal = link.closest('.case-study-modal');
+        if (!modal || !modal.classList.contains('active')) return;
+        
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#ref-')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const refNum = href.replace('#ref-', '');
+            
+            if (typeof CaseStudyGlobes !== 'undefined') {
+                CaseStudyGlobes.closeModal();
+            }
+            
+            const targetRef = document.getElementById(`ref-${refNum}`);
+            if (targetRef) {
+                document.querySelectorAll('.reference-item.has-return').forEach(item => {
+                    item.classList.remove('has-return');
+                });
+                targetRef.classList.add('has-return');
+                
+                setTimeout(() => {
+                    targetRef.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, 300);
+            }
+        }
+    });
+    
+    console.log('[Footnotes] Bidirectional navigation initialized');
 
     /* ===============================================
        MOBILE HAMBURGER MENU
