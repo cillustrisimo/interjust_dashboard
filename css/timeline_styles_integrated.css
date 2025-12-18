@@ -642,13 +642,13 @@
 }
 
 .modal-card-content .card-hidden-content {
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-card-content .event-description {
-    font-size: 1rem;
+    font-size: 1.2rem;
     line-height: 1.6;
 }
 
