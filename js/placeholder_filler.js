@@ -393,6 +393,9 @@ protectivePresenceOnly: 0,
      * Fill all placeholders in the DOM
      */
     fillAllPlaceholders: function(stats) {
+       // Cache stats for later use
+        PlaceholderFiller._cachedStats = stats;
+
         var placeholders = [
             { id: 'stat-intro-jurisdiction', value: stats.jurisdiction.anyJurisdiction },
             { id: 'stat-criminalization-at-least-one', value: stats.criminalization.atLeastOne },
@@ -407,7 +410,7 @@ protectivePresenceOnly: 0,
             { id: 'stat-jurisdiction-passive', value: stats.jurisdiction.passivePersonality },
             { id: 'stat-jurisdiction-protective', value: stats.jurisdiction.protectivePrinciple },
             { id: 'stat-jurisdiction-protective-no-presence', value: stats.jurisdiction.protectiveNoPresence },
-{ id: 'stat-jurisdiction-protective-presence-only', value: stats.jurisdiction.protectivePresenceOnly },
+            { id: 'stat-jurisdiction-protective-presence-only', value: stats.jurisdiction.protectivePresenceOnly },
             { id: 'stat-jurisdiction-treaty', value: stats.jurisdiction.treatyBased },
             { id: 'stat-cases-launched', value: stats.practice.hasLaunchedCase },
             { id: 'stat-jurisdiction-for-gap', value: stats.jurisdiction.anyJurisdiction },
