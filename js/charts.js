@@ -815,65 +815,58 @@ var SECTION4_CONFIG = {
     nodePad: 0.001,
     // l2BoxW: Width of Layer 2 jurisdiction boxes as percentage of viewBox width
     // Increase this if right-side labels ("Passive Personality") are cut off
-    l2BoxW: 0.155,
+    l2BoxW: 0.177,
     // l2Pad: Vertical padding between Layer 2 boxes
     l2Pad: 0.022,
     // l1Gap: Gap between Layer 1 groups (with/without jurisdiction)
     l1Gap: 0.035,
+
     jurisdictionInfo: {
-        'Absolute UJ': {
+        'Absolute Universal Jurisdiction': {
             title: 'Absolute Universal Jurisdiction',
-            description: 'Pure universal jurisdiction without any required nexus to the prosecuting state',
             overview: '<span id="stat-jurisdiction-absolute-modal" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes, regardless of the nationality of the alleged perpetrator, the nationality of the victim, the location where the offense was committed, or the location of the alleged perpetrator.',
             highlight: 'Absolute universal jurisdiction is the "purest" form of universal jurisdiction, reflecting the original idea behind the principle that certain crimes are considered to be committed against the international community as a whole.',
             caseStudy: {
-                title: 'Case Study: Former ISIS Member Taha al-Jumailly Prosecuted in Germany for Genocide, Crimes against Humanity, and War Crimes Committed Against Yazidi Women in Iraq',
+                title: 'Former ISIS Member Taha al-Jumailly Prosecuted in Germany for Genocide, Crimes against Humanity, and War Crimes Committed Against Yazidi Women in Iraq',
                 text: '<p>Taha al-Jumailly is an Iraqi national and former ISIS member who committed genocide, crimes against humanity, and war crimes through his enslavement and abuse of a Yazidi woman and her daughter.<sup><a href="#ref-28" class="ref-link">[28]</a></sup> Along with his wife, Jennifer Wenisch, a German national who was later convicted of crimes against humanity and war crimes, al-Jumailly held the Yazidi woman and her daughter in inhuman conditions at his home in Fallujah during the summer of 2015.<sup><a href="#ref-29" class="ref-link">[29]</a></sup> The German Federal Court of Justice issued an arrest warrant for al-Jumailly in April 2019, based on a structural investigation into crimes committed against the Yazidi by ISIS in Syria and Iraq that German authorities had opened in 2014.<sup><a href="#ref-30" class="ref-link">[30]</a></sup> Greek authorities arrested al-Jumailly based on the European Arrest Warrant in May 2019, and extradited him to Germany in October.<sup><a href="#ref-31" class="ref-link">[31]</a></sup> The Higher Regional Court of Frankfurt am Main convicted al-Jumailly of genocide, crimes against humanity, and war crimes and sentenced him to life imprisonment in November 2021.<sup><a href="#ref-32" class="ref-link">[32]</a></sup> Al-Jumailly\'s genocide conviction was the first worldwide of an ISIS member.<sup><a href="#ref-33" class="ref-link">[33]</a></sup></p>',
-                significance: 'This case marked the first worldwide conviction of an ISIS member for genocide against the Yazidi people, demonstrating how universal jurisdiction can address atrocities even when the perpetrator has no connection to the prosecuting state.',
                 links: [
                     { name: 'Trial International', url: 'https://ujim.trialinternational.org/latest-post/taha-aj/' },
                     { name: 'Eurojust Database', url: 'https://www.eurojust.europa.eu/judicial-cooperation/practitioner-networks/genocide-prosecution-network/national-jurisprudence?country_of_trial=Germany&country_of_crime=Iraq&key_terms=Yazidi' }
                 ]
             }
         },
-        'Presence-based': {
-            title: 'Presence-Based Jurisdiction',
-            description: 'Jurisdiction requiring the alleged perpetrator to be present in the prosecuting state',
+        'Presence Jurisdiction': {
+            title: 'Presence Jurisdiction',
             overview: '<span id="stat-jurisdiction-presence" class="stat-placeholder">--</span> U.N. Member States can exercise jurisdiction over at least one of the most serious international crimes if the alleged perpetrator is physically present in the State, even if neither the perpetrator nor victim are nationals of that State.',
             highlight: 'In many States, laws granting jurisdiction over the most serious international crimes committed abroad are subject to a significant limitation: the suspected perpetrator must be physically present in that State to trigger jurisdiction. This limitation, which is commonly referred to as "conditional universal jurisdiction,"<sup><a href="#ref-34" class="ref-link">[34]</a></sup> is often motivated by resource constraints which justify focusing on those perpetrators who are actually present on the would-be prosecuting State\'s territory.',
             caseStudy: {
-                title: 'Case Study: Former Gambian Interior Minister Ousman Sonko Prosecuted in Switzerland for Crimes Committed in The Gambia During the Regime of Yahya Jammeh',
+                title: 'Former Gambian Interior Minister Ousman Sonko Prosecuted in Switzerland for Crimes Committed in The Gambia During the Regime of Yahya Jammeh',
                 text: '<p>Ousman Sonko is a Gambian national who committed crimes against humanity in several roles under the regime of Yahya Jammeh, who led The Gambia from 1996-2017.<sup><a href="#ref-35" class="ref-link">[35]</a></sup> Sonko left the Gambia in September 2016.<sup><a href="#ref-36" class="ref-link">[36]</a></sup> Trial International filed a criminal complaint with prosecutors in Switzerland in January 2017, after it became aware of Sonko\'s presence in country.<sup><a href="#ref-37" class="ref-link">[37]</a></sup> Switzerland\'s Office of the Attorney General then opened what would become a six-year investigation which involved multiple trips to The Gambia to collect evidence and hear witness testimony.<sup><a href="#ref-38" class="ref-link">[38]</a></sup> In 2021, The Gambia\'s Truth, Reconciliation, and Reparations Commission recommended that Sonko be prosecuted for killings and acts of torture and sexual violence committed between 2000 and 2016.<sup><a href="#ref-39" class="ref-link">[39]</a></sup> The Federal Criminal Court of Bellinzona convicted Sonko of crimes against humanity and sentenced him to 20 years\' imprisonment in May 2024.<sup><a href="#ref-40" class="ref-link">[40]</a></sup> Having previously served as The Gambia\'s Minister of the Interior, Sonko is to date the highest-ranking State official prosecuted by a European court under the principle of universal jurisdiction.<sup><a href="#ref-41" class="ref-link">[41]</a></sup></p>',
-                significance: 'Sonko is the highest-ranking State official prosecuted by a European court under universal jurisdiction, demonstrating how presence-based jurisdiction can reach high-level perpetrators who seek refuge abroad.',
                 links: [
                     { name: 'Trial International', url: 'https://ujim.trialinternational.org/latest-post/ousman-sonko/' }
                 ]
             }
         },
-        'Active Personality': {
+        'Active Personality Jurisdiction': {
             title: 'Active Personality Jurisdiction',
-            description: 'Jurisdiction based on the nationality of the alleged perpetrator',
             overview: '<span id="stat-jurisdiction-active" class="stat-placeholder">--</span> U.N. Member States can exercise some sort of jurisdiction over at least one of the most serious international crimes if the alleged perpetrator is a national of that State.',
             highlight: 'Most States exercise jurisdiction over crimes committed by their nationals, regardless of the place of commission. This is commonly referred to as "active personality" jurisdiction. Some States interpret this type of jurisdiction to include alleged perpetrators who are residents, refugees, or stateless persons residing permanently in that State.',
             caseStudy: {
-                title: 'Case Study: Dual Ethiopian and Dutch National Eshetu Alemu Prosecuted in the Netherlands for International Crimes Committed in Ethiopia',
+                title: 'Dual Ethiopian and Dutch National Eshetu Alemu Prosecuted in the Netherlands for International Crimes Committed in Ethiopia',
                 text: '<p>Eshetu Alemu is a dual Ethiopian and Dutch national who committed war crimes as a member of the communist military regime, the "Derg", that ruled Ethiopia from 1974-91.<sup><a href="#ref-42" class="ref-link">[42]</a></sup> Alemu settled in the Netherlands in 1990, a year prior to the Derg\'s collapse, and obtained Dutch citizenship in 1998.<sup><a href="#ref-43" class="ref-link">[43]</a></sup> Also in 1998, a Dutch magazine published an investigative piece linking Alemu to war crimes in Ethiopia.<sup><a href="#ref-44" class="ref-link">[44]</a></sup> Based on the magazine article, the Dutch National Investigative Service\'s International Crimes Unit opened what would become a four-year investigation into Alemu in 2009 that involved cooperation with Ethiopia\'s Special Prosecutor\'s Office.<sup><a href="#ref-45" class="ref-link">[45]</a></sup> Dutch police arrested Alemu in September 2015, and The Hague District Court convicted him of war crimes and sentenced him to life imprisonment in December 2017.<sup><a href="#ref-46" class="ref-link">[46]</a></sup> Alemu\'s case is to date the only prosecution abroad for international crimes committed in Ethiopia.</p>',
-                significance: 'This case demonstrates how active personality jurisdiction can close impunity gaps decades after atrocities occurred, when perpetrators later acquire nationality in countries with strong accountability mechanisms.',
                 links: [
                     { name: 'Trial International', url: 'https://ujim.trialinternational.org/latest-post/eshetu-alemu/' },
                     { name: 'Eurojust Database', url: 'https://www.eurojust.europa.eu/judicial-cooperation/practitioner-networks/genocide-prosecution-network/national-jurisprudence?country_of_trial=Netherlands&country_of_crime=Ethiopia' }
                 ]
             }
         },
-        'Passive Personality': {
+        'Passive Personality Jurisdiction': {
             title: 'Passive Personality Jurisdiction',
-            description: 'Jurisdiction based on the nationality of the victim',
             overview: '<span id="stat-jurisdiction-passive" class="stat-placeholder">--</span> U.N. Member States can exercise some sort of jurisdiction over at least one of the most serious international crimes when a victim of the crime is a national of that State.',
             highlight: 'Many States exercise jurisdiction over crimes committed against their nationals, regardless of the place of commission. This is commonly referred to as "passive personality" jurisdiction. Some States extend this jurisdiction to victims who are residents, refugees, or stateless persons residing permanently in that State.',
             caseStudy: {
-                title: 'Case Study: Assad Regime Officials Prosecuted in Absentia in France for the Arrest, Detention, and Disappearance of Dual French and Syrian Nationals in Damascus',
+                title: 'Assad Regime Officials Prosecuted in Absentia in France for the Arrest, Detention, and Disappearance of Dual French and Syrian Nationals in Damascus',
                 text: '<p>Ali Mamlouk, Jamil Hassan, and Abdel Salam Mahmoud are all Syrian nationals and former high-ranking officials in the Assad regime who were connected to the November 2013 arrest, detention, and disappearance of dual French and Syrian nationals Patrick and Mazen Dabbagh in Damascus.<sup><a href="#ref-47" class="ref-link">[47]</a></sup> Obeida Dabbagh, a family member of the disappeared, filed a complaint at the Paris Tribunal with the International Federation for Human Rights and one of its French affiliates in October 2016.<sup><a href="#ref-48" class="ref-link">[48]</a></sup> Judges from France\'s specialized unit for the prosecution of international crimes issued international arrest warrants for the three suspects in October 2018, and they completed their investigation in March 2022.<sup><a href="#ref-49" class="ref-link">[49]</a></sup> The Paris Criminal Court convicted Mamlouk, Hassan, and Mahmoud in absentia for complicity in crimes against humanity and war crimes and sentenced them to life imprisonment in May 2024.<sup><a href="#ref-50" class="ref-link">[50]</a></sup> In its ruling, the Court held that functional immunities for State officials do not apply in serious international crimes cases.<sup><a href="#ref-51" class="ref-link">[51]</a></sup></p>',
-                significance: 'This case demonstrates how passive personality jurisdiction enables States to pursue justice when their own nationals are victimized abroad, even when perpetrators remain in their home countries.',
                 links: [
                     { name: 'Trial International - Mamlouk', url: 'https://ujim.trialinternational.org/latest-post/ali-mamluk/' },
                     { name: 'Trial International - Hassan', url: 'https://ujim.trialinternational.org/latest-post/jamil-hassan/' },
@@ -881,18 +874,16 @@ var SECTION4_CONFIG = {
                 ]
             }
         },
-        'Protective Principle': {
-            title: 'Protective Principle',
-            description: 'Jurisdiction to protect state interests',
+        'Protective Principle Jurisdiction': {
+            title: 'Protective Principle Jurisdiction',
             overview: '<span id="stat-jurisdiction-protective" class="stat-placeholder">--</span> U.N. Member States can exercise protective principle jurisdiction over at least one core international crime to protect national security or national interests.',
-            highlight: 'Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as “protective principle” jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries<sup><a href="#ref-52" class="ref-link">[52]</a></sup>, States rarely invoke it to investigate and prosecute such crimes<sup><a href="#ref-53" class="ref-link">[53]</a></sup>. In practice: <span id="stat-jurisdiction-protective-no-presence" class="stat-placeholder">--</span> states provide for protective jurisdiction even when the alleged perpetrator is not present, while <span id="stat-jurisdiction-protective-presence-only" class="stat-placeholder">--</span> recognize it only when the alleged perpetrator is present. "Presence" refers to whether the alleged perpetrator must be physically present on the state\'s territory to enable jurisdiction.',
+            highlight: 'Some States can exercise jurisdiction over crimes that affect their sovereignty, security, or national interest, or simply over crimes that they consider to be committed against their country. This is commonly referred to as “protective principle” jurisdiction. While this type of jurisdiction could in theory extend to the most serious international crimes which are seen to affect the interests of all countries<sup><a href="#ref-52" class="ref-link">[52]</a></sup>, States rarely invoke it to investigate and prosecute such crimes<sup><a href="#ref-53" class="ref-link">[53]</a></sup>.',
             caseStudy: null
         },
-        'Treaty Obligations': {
-            title: 'Treaty-Based Obligation',
-            description: 'Jurisdiction arising from international treaty commitments',
+        'Treaty-Based Obligation to Exercise Jurisdiction': {
+            title: 'Treaty-Based Obligation to Exercise Jurisdiction',
             overview: '<span id="stat-jurisdiction-treaty" class="stat-placeholder">--</span> U.N. Member States have an obligation to exercise jurisdiction over certain serious international crimes as a result of international treaties they have ratified.',
-            highlight: 'Many States are required to exercise jurisdiction over crimes committed abroad as an obligation under a treaty. Most relevant for Project Meridian, the 1949 Geneva Conventions, which govern the conduct of war and provide protections for those who are not taking part in hostilities, include an obligation to prosecute suspected war criminals or extradite them to a State that is better placed to prosecute<sup><a href="#ref-54" class="ref-link">[54]</a></sup>. Therefore, any State that has ratified the Geneva Conventions has not only jurisdiction but an obligation to investigate and prosecute "grave breaches" of the Conventions committed in other States.',
+            highlight: 'Many States are required to exercise jurisdiction over crimes committed abroad as an obligation under a treaty. Most relevant for Project Meridian, the 1949 Geneva Conventions, which govern the conduct of war and provide protections for those who are not taking part in hostilities, include an obligation to prosecute suspected war criminals or extradite them to a State that is better placed to prosecute.<sup><a href="#ref-54" class="ref-link">[54]</a></sup> Therefore, any State that has ratified the Geneva Conventions has not only jurisdiction but an obligation to investigate and prosecute "grave breaches" of the Conventions committed in other States.',
             caseStudy: null
         }
     }
@@ -914,55 +905,7 @@ function injectSection4Styles() {
         max-width: 1400px;
         margin: 0 auto;
     }
-    .section4-chart-title {
-        text-align: center;
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: 2.2rem;
-        font-weight: 700;
-        color: #E2E8F0;
-        margin-bottom: 12px;
-        letter-spacing: -0.5px;
-        line-height: 1.2;
-    }
-    .section4-chart-subtitle {
-        text-align: center;
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: clamp(1rem, 1.8vw, 1.2rem);
-        color: #A0AEC0;
-        margin-bottom: 12px;
-    }
 
-    .section4-chart-instructions {
-        margin: 4px 0 14px 0;
-        text-align: center;
-        font-size: clamp(1rem, 1.8vw, 1.2rem);
-        color: #A0AEC0;
-        opacity: 0.95;
-        margin-bottom: 20px;
-    }
-
-    .section4-stats-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 16px;
-        margin-bottom: 24px;
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: clamp(1rem, 1.5vw, 1.1rem);
-        color: #A0AEC0;
-    }
-    .section4-stats-row span {
-        padding: 8px 16px;
-        border-radius: 999px;
-        background: rgba(45, 55, 72, 0.7);
-        border: 1px solid rgba(74, 85, 104, 0.5);
-    }
-    .section4-stats-row strong { font-weight: 600; color: #E2E8F0; }
-    #section4-sankey-chart {
-        width: 100%;
-        aspect-ratio: 13 / 8;
-        min-height: 500px;
-    }
     #section4-sankey-chart svg {
         display: block;
         width: 100%;
@@ -1056,6 +999,7 @@ function injectSection4Styles() {
     }
     
     /* Modal Styles */
+
     .section4-modal-overlay {
         position: fixed;
         top: 0;
@@ -1086,30 +1030,27 @@ function injectSection4Styles() {
     }
     .section4-card-header {
         background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%);
-        padding: 30px;
+        padding: 22px 30px;   /* reduce top/bottom only */
         position: relative;
         border-bottom: 1px solid rgba(74, 85, 104, 0.5);
     }
     .section4-card-header-content {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
     }
-    .section4-card-title-section { flex: 1; padding-right: 20px; }
+    .section4-card-title-section { 
+        flex: 1; 
+        padding-right: 20px; /* optional spacing from stat box */ 
+    }
     .section4-card-title {
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: 28px;
-        font-weight: 700;
-        color: #E2E8F0;
-        margin: 0 0 8px 0;
+        font-size: 24px;   /* try 24 first; if still big, 22 */
+        line-height: 1.15;
+        text-align: left;
+        margin: 0;
         line-height: 1.2;
     }
-    .section4-card-description {
-        font-family: Georgia, 'Times New Roman', serif;
-        color: #A0AEC0;
-        font-size: 14px;
-        margin: 0;
-    }
+
     .section4-key-stat {
         background: rgba(66, 153, 225, 0.15);
         border: 1px solid rgba(66, 153, 225, 0.3);
@@ -1118,6 +1059,7 @@ function injectSection4Styles() {
         text-align: center;
         min-width: 140px;
         margin-right: 60px;
+        margin-left: 20px;
     }
     .section4-key-stat-number {
         font-family: Georgia, 'Times New Roman', serif;
@@ -1340,7 +1282,6 @@ function injectSection4Styles() {
                 <div class="section4-card-header-content">
                     <div class="section4-card-title-section">
                         <h1 class="section4-card-title" id="section4-modal-title">Jurisdiction Type</h1>
-                        <p class="section4-card-description" id="section4-modal-description">Description</p>
                     </div>
                     <div class="section4-key-stat">
                         <div class="section4-key-stat-number" id="section4-modal-count">0</div>
@@ -1351,7 +1292,7 @@ function injectSection4Styles() {
             </div>
             <div class="section4-tabs">
                 <button class="section4-tab active" onclick="switchSection4Tab('overview', this)">Overview</button>
-                <button class="section4-tab" onclick="switchSection4Tab('countries', this)">Countries</button>
+                <button class="section4-tab" onclick="switchSection4Tab('countries', this)">States</button>
                 <button class="section4-tab" onclick="switchSection4Tab('case-study', this)">Case Study</button>
             </div>
             <div class="section4-card-content">
@@ -1371,9 +1312,6 @@ function injectSection4Styles() {
                 <div id="section4-case-study" class="section4-tab-panel">
                     <h2 class="section4-case-study-title" id="section4-case-study-title">Case Study</h2>
                     <p class="section4-case-study-text" id="section4-case-study-text">Text</p>
-                    <div class="section4-case-study-significance">
-                        <p id="section4-case-study-significance">Significance</p>
-                    </div>
                     <div class="section4-database-links">
                         <div class="section4-database-links-title">Database Links</div>
                         <div class="section4-database-link-list" id="section4-database-links"></div>
@@ -1413,7 +1351,6 @@ function openSection4Modal(jurisdictionType, count) {
     if (!info) return;
     
     document.getElementById('section4-modal-title').textContent = info.title;
-    document.getElementById('section4-modal-description').textContent = info.description;
     document.getElementById('section4-modal-count').textContent = count;
     document.getElementById('section4-modal-overview-text').innerHTML = info.overview;
     document.getElementById('section4-modal-highlight-text').innerHTML = info.highlight;
@@ -1433,7 +1370,6 @@ function openSection4Modal(jurisdictionType, count) {
         
         document.getElementById('section4-case-study-title').textContent = info.caseStudy.title;
         document.getElementById('section4-case-study-text').innerHTML = info.caseStudy.text;
-        document.getElementById('section4-case-study-significance').textContent = info.caseStudy.significance;
         
         var linksContainer = document.getElementById('section4-database-links');
         linksContainer.innerHTML = info.caseStudy.links.map(function(link) {
@@ -1452,7 +1388,6 @@ function openSection4Modal(jurisdictionType, count) {
         
         document.getElementById('section4-case-study-title').textContent = 'No Case Study Available';
         document.getElementById('section4-case-study-text').innerHTML = '<p>There has not been a core international crimes conviction based on this type of jurisdiction to date.</p>';
-        document.getElementById('section4-case-study-significance').textContent = '';
         document.getElementById('section4-database-links').innerHTML = '';
     }
     
@@ -1487,12 +1422,12 @@ function toggleSection4Accordion(header) {
 
 function getSection4CountriesForJurisdiction(jurisdictionType) {
     var propMap = {
-        'Absolute UJ': 'hasAbsoluteUJ',
-        'Presence-based': 'hasPresence',
-        'Active Personality': 'hasActive',
-        'Passive Personality': 'hasPassive',
-        'Protective Principle': 'hasProtective',
-        'Treaty Obligations': 'hasTreaty'
+        'Absolute Universal Jurisdiction': 'hasAbsoluteUJ',
+        'Presence Jurisdiction': 'hasPresence',
+        'Active Personality Jurisdiction': 'hasActive',
+        'Passive Personality Jurisdiction': 'hasPassive',
+        'Protective Principle Jurisdiction': 'hasProtective',
+        'Treaty-Based Obligation to Exercise Jurisdiction': 'hasTreaty'
     };
     
     var prop = propMap[jurisdictionType];
@@ -1519,13 +1454,13 @@ function renderSection4RegionalBreakdown(countries, total) {
     container.innerHTML = sorted.map(function(item, i) {
         var region = item[0], count = item[1];
         var pct = ((count / total) * 100).toFixed(1);
-        var widthPct = (count / maxCount) * 100;
+        var widthPct = (count / total) * 100;
         var color = colors[Math.min(i, colors.length - 1)];
         
         return '<div class="section4-region-bar-item">' +
             '<div class="section4-region-bar-header">' +
             '<span class="section4-region-bar-name">' + region + '</span>' +
-            '<span class="section4-region-bar-count">' + count + ' ' + (count === 1 ? 'country' : 'countries') + '</span>' +
+            '<span class="section4-region-bar-count">' + count + ' ' + (count === 1 ? 'State' : 'States') + '</span>' +
             '</div>' +
             '<div class="section4-region-bar-track">' +
             '<div class="section4-region-bar-fill" style="width: ' + widthPct + '%; background: ' + color + ';">' +
@@ -1603,18 +1538,18 @@ function buildSection4SankeyData(processed) {
     });
     
     var IDX_ABS = nodes.length;
-    nodes.push({ name: 'Absolute UJ', layer: 2, displayValue: stats.absoluteUJ, isLayer2: true });
+    nodes.push({ name: 'Absolute Universal Jurisdiction', layer: 2, displayValue: stats.absoluteUJ, isLayer2: true });
     var IDX_PRES = nodes.length;
-    nodes.push({ name: 'Presence-based', layer: 2, displayValue: stats.presenceOnly, isLayer2: true });
+    nodes.push({ name: 'Presence Jurisdiction', layer: 2, displayValue: stats.presenceOnly, isLayer2: true });
     var IDX_ACTIVE = nodes.length;
-    nodes.push({ name: 'Active Personality', layer: 2, displayValue: stats.activePersonality, isLayer2: true });
+    nodes.push({ name: 'Active Personality Jurisdiction', layer: 2, displayValue: stats.activePersonality, isLayer2: true });
     var IDX_PASSIVE = nodes.length;
-    nodes.push({ name: 'Passive Personality', layer: 2, displayValue: stats.passivePersonality, isLayer2: true });
+    nodes.push({ name: 'Passive Personality Jurisdiction', layer: 2, displayValue: stats.passivePersonality, isLayer2: true });
     var IDX_PROT = nodes.length;
-    nodes.push({ name: 'Protective Principle', layer: 2, displayValue: stats.protectivePrinciple, isLayer2: true });
+    nodes.push({ name: 'Protective Principle Jurisdiction', layer: 2, displayValue: stats.protectivePrinciple, isLayer2: true });
     var IDX_TREATY = nodes.length;
-    nodes.push({ name: 'Treaty Obligations', layer: 2, displayValue: stats.treatyObligation, isLayer2: true });
-    
+    nodes.push({ name: 'Treaty-Based Obligation to Exercise Jurisdiction', layer: 2, displayValue: stats.treatyObligation, isLayer2: true });
+
     withoutJurisdiction.forEach(function(state, i) {
         links.push({ source: IDX_ALL, target: WITHOUT_START + i, value: 1, country: state.country, region: state.region, linkType: 'without' });
     });
@@ -1624,12 +1559,12 @@ function buildSection4SankeyData(processed) {
     });
     
     var typeMap = [
-        ['hasAbsoluteUJ', IDX_ABS, 'Absolute UJ'],
-        ['hasPresence', IDX_PRES, 'Presence-based'],
-        ['hasActive', IDX_ACTIVE, 'Active Personality'],
-        ['hasPassive', IDX_PASSIVE, 'Passive Personality'],
-        ['hasProtective', IDX_PROT, 'Protective Principle'],
-        ['hasTreaty', IDX_TREATY, 'Treaty Obligations']
+        ['hasAbsoluteUJ', IDX_ABS, 'Absolute Universal Jurisdiction'],
+        ['hasPresence', IDX_PRES, 'Presence Jurisdiction'],
+        ['hasActive', IDX_ACTIVE, 'Active Personality Jurisdiction'],
+        ['hasPassive', IDX_PASSIVE, 'Passive Personality Jurisdiction'],
+        ['hasProtective', IDX_PROT, 'Protective Principle Jurisdiction'],
+        ['hasTreaty', IDX_TREATY, 'Treaty-Based Obligation to Exercise Jurisdiction']
     ];
     
     withJurisdiction.forEach(function(state, i) {
@@ -1713,7 +1648,7 @@ function renderSection4Layer1Overlays(container, nodes, stats, fonts, vbW, vbH) 
             .text(stats.total - stats.beyondBorders);
         container.append('text').attr('x', x0 + (x1 - x0) / 2).attr('y', minY - vbH * 0.025).attr('text-anchor', 'middle')
             .attr('fill', '#A0AEC0').attr('font-size', fonts.small).attr('font-weight', '500')
-            .attr('font-family', CHART_FONTS.body).text('UN Member States Without Jurisdiction');
+            .attr('font-family', CHART_FONTS.body).text('UN Member States Without Any Form of Jurisdiction Over Extraterritorial Crimes.');
     }
     
     var withNodes = nodes.filter(function(n) { return n.isWithJurisdiction; });
@@ -1730,7 +1665,7 @@ function renderSection4Layer1Overlays(container, nodes, stats, fonts, vbW, vbH) 
             .text(stats.beyondBorders);
         container.append('text').attr('x', x0 + (x1 - x0) / 2).attr('y', maxY + vbH * 0.028).attr('text-anchor', 'middle')
             .attr('fill', '#A0AEC0').attr('font-size', fonts.small).attr('font-weight', '500')
-            .attr('font-family', CHART_FONTS.body).text('UN Member States With Jurisdiction');
+            .attr('font-family', CHART_FONTS.body).text('UN Member States With At Least One Form of Jurisdiction Over Extraterritorial Crimes.');
     }
 }
 
@@ -1751,11 +1686,29 @@ function renderSection4Layer2(container, nodes, fonts, l2BoxW, vbW, vbH) {
             .attr('text-anchor', 'middle').attr('fill', '#E2E8F0').attr('font-weight', '700').attr('font-size', fonts.base)
             .attr('font-family', CHART_FONTS.body)
             .text(node.displayValue);
-        g.append('text').attr('x', vbW * 0.036).attr('y', boxHeight / 2).attr('dy', '0.35em')
-            .attr('text-anchor', 'start').attr('fill', '#E2E8F0').attr('font-size', fonts.label).attr('font-weight', '500')
-            .attr('font-family', CHART_FONTS.body)
-            .text(node.name);
-        
+        // Label using foreignObject for better text wrapping        
+        g.append('foreignObject')
+  .attr('x', vbW * 0.036)
+  .attr('y', 0)
+  .attr('width', l2BoxW - vbW * 0.05)
+  .attr('height', boxHeight)
+  .append('xhtml:div')
+  .style('height', '100%')
+  .style('width', '100%')
+  .style('display', 'flex')
+  .style('align-items', 'center')
+  .style('justify-content', 'flex-start')   // mimic text-anchor: start
+  .style('text-align', 'left')
+  .style('font-family', CHART_FONTS.body)
+  .style('font-size', fonts.base)
+  .style('font-weight', '500')
+  .style('color', '#E2E8F0')
+  .style('line-height', '1.2')
+  .style('white-space', 'normal')
+  .style('word-break', 'break-word')
+  .text(node.name);
+
+        // Interaction handlers
         g.on('mouseenter', function() { highlightSection4JurisdictionLinks(node.name, true); })
          .on('mouseleave', function() { highlightSection4JurisdictionLinks(node.name, false); })
          .on('click', function() { openSection4Modal(node.name, node.displayValue); });
@@ -1998,34 +1951,34 @@ function createChart_Section4A(containerId) {
     var stats = processed.stats;
     
     var wrapper = document.createElement('div');
-    wrapper.className = 'section4-sankey-wrapper';
-    
+    wrapper.className = 'section4-sankey-wrapper narrative-block-lower';
+
     var title = document.createElement('h3');
-    title.className = 'section4-chart-title';
+    title.style.textAlign = 'center';
+    title.style.fontFamily = CHART_FONTS.title;
+    title.style.fontSize = CHART_FONT_SIZES.title + 'px';
+    title.style.fontWeight = '700';
+    title.style.color = '#E2E8F0';
+    title.style.margin = '0 0 8px 0';
     title.textContent = 'Legal Ability to Investigate and Prosecute Extraterritorial Crimes';
     wrapper.appendChild(title);
-    
-    var subtitle = document.createElement('p');
-    subtitle.className = 'section4-chart-subtitle';
-    subtitle.textContent = 'How UN Member States exercise legal authority over international crimes committed abroad.'
-    wrapper.appendChild(subtitle);
-    
-    var instructions = document.createElement('p');
-    instructions.className = 'section4-chart-instructions';
-    instructions.textContent = 'Click on jurisdiction types to explore in detail. Hover over regions to highlight flows.';
-    wrapper.appendChild(instructions);
 
-    var statsRow = document.createElement('div');
-    statsRow.className = 'section4-stats-row';
-    statsRow.innerHTML = '<span>Total UN Member States: <strong>' + stats.total + '</strong></span>' +
-        '<span>With Jurisdiction: <strong>' + stats.beyondBorders + '</strong></span>' +
-        '<span>Without Jurisdiction: <strong>' + (stats.total - stats.beyondBorders) + '</strong></span>';
-    wrapper.appendChild(statsRow);
-    
+    var subtitle = document.createElement('p');
+    subtitle.innerHTML = stats.beyondBorders + ' U.N. Member States have laws that allow them to investigate and prosecute at least one of the most serious international crimes committed beyond their own borders.';
+    wrapper.appendChild(subtitle);
+
+    var instructions1 = document.createElement('p');
+    instructions1.textContent = 'Click on the light blue boxes in the visualization below to learn more about each type of jurisdiction States can use to investigate and prosecute extraterritorial crimes, including which States recognize that type of jurisdiction over the most serious international crimes.';
+    wrapper.appendChild(instructions1);
+
+    var instructions2 = document.createElement('p');
+    instructions2.textContent = 'Hover over each geographic region to see more details about the jurisdictions in that area.';
+    wrapper.appendChild(instructions2);
+
     var chartContainer = document.createElement('div');
     chartContainer.id = 'section4-sankey-chart';
     wrapper.appendChild(chartContainer);
-    
+
     var legendEl = document.createElement('div');
     legendEl.className = 'section4-region-legend';
     wrapper.appendChild(legendEl);
